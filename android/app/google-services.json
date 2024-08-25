@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1057163177680",
+    "project_id": "quakkomesh",
+    "storage_bucket": "quakkomesh.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057163177680:android:820c841d09ed86dd3d38d5",
+        "android_client_info": {
+          "package_name": "com.moharam.quokka_mesh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6ruJRfrXdAjToK5yxL8b_dAZMmN9dffE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
