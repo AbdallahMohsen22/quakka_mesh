@@ -10,6 +10,7 @@ import '../../features/login/login_screen.dart';
 import '../../features/auth/register.dart';
 import '../../features/home/home_screen.dart';
 import '../../features/login/cubit/login_cubit.dart';
+import '../../features/on_bording/on_boarding.dart';
 import '../../features/splash/splash_screen.dart';
 import '../../injection.dart';
 
@@ -27,6 +28,11 @@ class AppRouter {
       case Routes.splashScreen:
         return MaterialPageRoute(
           builder: (_) => const SplashScreen(),
+        );
+
+      case Routes.onBoardingScreen:
+        return MaterialPageRoute(
+          builder: (_) => const OnBoardingPage(),
         );
 
       case Routes.loginScreen:
