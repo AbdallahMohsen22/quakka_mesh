@@ -47,7 +47,7 @@ class GuakkoApp extends StatelessWidget {
               child: MaterialApp(
               
                 builder: DevicePreview.appBuilder,
-                title: "Boyo3 App",
+                title: "Quakka Mesh App",
                 theme: appTheme(),
                 supportedLocales: S.delegate.supportedLocales,
                 localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
@@ -65,7 +65,7 @@ class GuakkoApp extends StatelessWidget {
                     : const Locale('en'), //Locale(settingsProvider.currentLang),
               
                 debugShowCheckedModeBanner: false,
-                initialRoute: Routes.splashScreen,
+                initialRoute: Routes.onBoardingScreen,
                 onGenerateRoute: appRouter.generateRoute,
                 navigatorKey: navigatorKey,
                 routes: {
