@@ -105,7 +105,7 @@ class UserListView extends StatelessWidget {
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(30.0),
                     child: CachedNetworkImage(
-                      imageUrl: "http://quokkamesh-001-site1.etempurl.com/${user.imageCover}",
+                      imageUrl: "http://backend.quokka-mesh.com/${user.imageCover}",
                       placeholder: (context, url) => const CircularProgressIndicator(),
                       errorWidget: (context, url, error) => const Icon(Icons.person_3_sharp),
                       httpHeaders: const {

@@ -26,7 +26,7 @@ class AddCategoryCubit extends Cubit<AddCategoryState> {
   void addCategory(AddCategoryModel request) async {
     emit(AddCategoryLoading());
     try {
-      var uri = Uri.parse('http://quokkamesh-001-site1.etempurl.com/api/Category/Admin/AddCategory');
+      var uri = Uri.parse('http://backend.quokka-mesh.com/api/Category/Admin/AddCategory');
       var requestMultipart = http.MultipartRequest('POST', uri);
 
       // Add text fields

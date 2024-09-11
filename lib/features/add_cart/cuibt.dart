@@ -26,7 +26,7 @@ class AddCartCubit extends Cubit<AddCartState> {
   void addCart(AddCartModel request, int categoryId) async {
     emit(AddCartLoading());
     try {
-      var uri = Uri.parse('http://quokkamesh-001-site1.etempurl.com/api/Cart/Admin/AddCart?categoryId=$categoryId');
+      var uri = Uri.parse('http://backend.quokka-mesh.com/api/Cart/Admin/AddCart?categoryId=$categoryId');
       var requestMultipart = http.MultipartRequest('POST', uri);
 
       // Add text fields

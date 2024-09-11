@@ -38,7 +38,7 @@ class UserCountCubit extends Cubit<UserCountState> {
   UserCountCubit() : super(UserCountInitial());
 
   Future<void> fetchUserCount() async {
-    final String url = 'http://quokkamesh-001-site1.etempurl.com/api/Statistics/Admin/CountAllUser';
+    final String url = 'http://backend.quokka-mesh.com/api/Statistics/Admin/CountAllUser';
 
     try {
       emit(UserCountLoading());

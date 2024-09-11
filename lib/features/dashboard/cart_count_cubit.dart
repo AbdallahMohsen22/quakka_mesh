@@ -38,7 +38,7 @@ class CartCountCubit extends Cubit<CartCountState> {
   CartCountCubit() : super(CartCountInitial());
 
   Future<void> fetchCartCount() async {
-    final String url = 'http://quokkamesh-001-site1.etempurl.com/api/Statistics/Admin/CountAllCart';
+    final String url = 'http://backend.quokka-mesh.com/api/Statistics/Admin/CountAllCart';
 
     try {
       emit(CartCountLoading());

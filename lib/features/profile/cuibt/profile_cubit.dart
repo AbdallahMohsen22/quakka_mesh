@@ -160,7 +160,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     bool isAdmin = false,
     File? imageCover,
   }) async {
-    final String url = 'http://quokkamesh-001-site1.etempurl.com/api/Auth/UpdateSubProfile/$id';
+    final String url = 'http://backend.quokka-mesh.com/api/Auth/UpdateSubProfile/$id';
 
     try {
       emit(ProfileUpdating());

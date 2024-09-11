@@ -31,7 +31,7 @@ class ChatCubit extends Cubit<UserChatState> {
   void fetchUsers(String currentUserId) async {
     emit(UserChatLoading());
     try {
-      final response = await http.get(Uri.parse('http://quokkamesh-001-site1.etempurl.com/api/Auth/GetAllUser'));
+      final response = await http.get(Uri.parse('http://backend.quokka-mesh.com/api/Auth/GetAllUser'));
       if (response.statusCode == 200) {
         List<dynamic> data = json.decode(response.body);
         List<User> users = data.map((userJson) => User.fromJson(userJson)).toList();
@@ -57,7 +57,7 @@ class ChatCubit extends Cubit<UserChatState> {
   //    String? toUserId,
   //    String? message,
   // }) async {
-  //   final url = 'http://quokkamesh-001-site1.etempurl.com/api/Chat/SendMessage';
+  //   final url = 'http://backend.quokka-mesh.com/api/Chat/SendMessage';
   //   final response = await http.post(
   //     Uri.parse(url),
   //     headers: {

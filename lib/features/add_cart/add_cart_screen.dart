@@ -77,7 +77,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
           },
           builder: (context, state) {
             if (state is AddCartLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
             return Padding(
               padding: const EdgeInsets.all(16.0),
@@ -98,7 +98,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Image.file(File(imageDesign!.path)),
                       ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     CustomTextField(
                       borderRadius: 20,
                       borderColor: ColorResources.apphighlightColor,
@@ -116,7 +116,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
                             value);
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     CustomTextField(
                       borderRadius: 20,
@@ -135,7 +135,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
                             value);
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     CustomTextField(
                       borderRadius: 20,
@@ -154,7 +154,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
                             value);
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     CustomTextField(
                       borderRadius: 20,
@@ -173,7 +173,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
                             value);
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     CustomTextField(
                       borderRadius: 20,
@@ -192,7 +192,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
                             value);
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     CustomTextField(
                       borderRadius: 20,
@@ -211,10 +211,10 @@ class _AddCartScreenState extends State<AddCartScreen> {
                       //       value);
                       // },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     CheckboxListTile(
-                      title: Text(
+                      title: const Text(
                           'Is Premium',
                         style: TextStyle(
                             fontSize: 20,
@@ -228,9 +228,9 @@ class _AddCartScreenState extends State<AddCartScreen> {
                         });
                       },
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
 
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
                         if (imageDesign != null && titleController.text.isNotEmpty &&
@@ -275,7 +275,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
                         HomeCubit.get(context).isArabic
                             ? "اضافة كارت"
                             : "Add Cart",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20,
                             color: Colors.white
                         ),
@@ -284,10 +284,10 @@ class _AddCartScreenState extends State<AddCartScreen> {
                     ),
 
                     if (state is AddCartFailure) ...[
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(
                         state.error,
-                        style: TextStyle(color: Colors.red),
+                        style: const TextStyle(color: Colors.red),
                       ),
                     ]
                   ],

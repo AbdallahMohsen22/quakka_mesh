@@ -42,7 +42,7 @@ class SendMessageCubit extends Cubit<SendMessageState> {
   // }) async {
   //   emit(SendMessageLoading());
   //
-  //   final url = 'http://quokkamesh-001-site1.etempurl.com/api/Chat/SendMessage';
+  //   final url = 'http://backend.quokka-mesh.com/api/Chat/SendMessage';
   //   try {
   //     final response = await http.post(
   //       Uri.parse(url),

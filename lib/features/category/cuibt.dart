@@ -42,7 +42,7 @@
 //   void fetchCategories() async {
 //     emit(CategoryLoading());
 //     try {
-//       final response = await http.get(Uri.parse('http://quokkamesh-001-site1.etempurl.com/api/Category/Admin/GetAllCategory'));
+//       final response = await http.get(Uri.parse('http://backend.quokka-mesh.com/api/Category/Admin/GetAllCategory'));
 //       if (response.statusCode == 200) {
 //         final data = json.decode(response.body);
 //
@@ -112,7 +112,7 @@ class CategoryCubit extends Cubit<CategoryState> {
   CategoryCubit() : super(CategoryLoading());
 
   Future<void> fetchCategories() async {
-    final String url = 'http://quokkamesh-001-site1.etempurl.com/api/Category/Admin/GetAllCategory';
+    final String url = 'http://backend.quokka-mesh.com/api/Category/Admin/GetAllCategory';
 
     try {
       emit(CategoryLoading());
@@ -138,7 +138,7 @@ class CategoryCubit extends Cubit<CategoryState> {
     emit(CategoryLoading());
     try {
       final response = await http.delete(
-        Uri.parse('http://quokkamesh-001-site1.etempurl.com/api/Category/Admin/DeleteCategory?id=$id'),
+        Uri.parse('http://backend.quokka-mesh.com/api/Category/Admin/DeleteCategory?id=$id'),
       );
       if (response.statusCode == 200) {
 

@@ -38,7 +38,7 @@ class SendCartCubit extends Cubit<SendCartState> {
   }) async {
     emit(SendCartLoading());
     try {
-      var uri = Uri.parse('http://quokkamesh-001-site1.etempurl.com/api/SendCart/User/SendCart?userId=$userId&ReceiverId=$receiverId&cartId=$cartId');
+      var uri = Uri.parse('http://backend.quokka-mesh.com/api/SendCart/User/SendCart?userId=$userId&ReceiverId=$receiverId&cartId=$cartId');
       var request = http.MultipartRequest('POST', uri);
 
       request.fields['Titel'] = title;

@@ -13,7 +13,7 @@ class _ApiService implements ApiService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://quokkamesh-001-site1.etempurl.com/api/';
+    baseUrl ??= 'http://backend.quokka-mesh.com/api/';
   }
 
   final Dio _dio;

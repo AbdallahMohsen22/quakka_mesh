@@ -251,7 +251,7 @@ class _SendCartScreenState extends State<SendCartScreen> {
                           ),
                           content: Stack(
                             children: [
-                              Image.network('http://quokkamesh-001-site1.etempurl.com/' + state.cartData['imageDesign']),
+                              Image.network('http://backend.quokka-mesh.com/' + state.cartData['imageDesign']),
                               // Text('Title: ${_titleController.text}'),
                               // Text('Content: ${_contentController.text}'),
                               // Text('Sender: ${_senderController.text}'),

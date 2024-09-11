@@ -33,7 +33,7 @@ class EmailCubit extends Cubit<EmailState> {
   EmailCubit() : super(EmailSending());
 
   Future<void> sendEmail(String email) async {
-    final String url = 'http://quokkamesh-001-site1.etempurl.com/api/Email/Send Email/${email}';
+    final String url = 'http://backend.quokka-mesh.com/api/Email/Send Email/${email}';
 
     try {
       emit(EmailSending());

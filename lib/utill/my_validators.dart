@@ -49,12 +49,10 @@ class MyValidators {
   }
 
   static String? phoneValidator(String? value) {
-    const String phonePattern = r'^(?:[+0][1-9])?[0-9]{11}$';
-    final regExp = RegExp(phonePattern);
+    // const String phonePattern = r'^(?:[+0][1-9])?[0-9]{11}$';
+    // final regExp = RegExp(phonePattern);
     if (value == null || value.isEmpty) {
       return "Enter your phone number";
-    } else if (!regExp.hasMatch(value)) {
-      return "Enter a correct number";
     }
     return null;
   }

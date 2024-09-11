@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:new_quakka/basic_constants.dart';
 import 'core/network/message.dart';
 import 'core/routing/app_router.dart';
 import 'core/routing/routes.dart';
@@ -65,7 +66,7 @@ class GuakkoApp extends StatelessWidget {
                     : const Locale('en'), //Locale(settingsProvider.currentLang),
               
                 debugShowCheckedModeBanner: false,
-                initialRoute: Routes.onBoardingScreen,
+                initialRoute: userToken==null ? Routes.onBoardingScreen : Routes.homeScreen,
                 onGenerateRoute: appRouter.generateRoute,
                 navigatorKey: navigatorKey,
                 routes: {

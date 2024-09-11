@@ -37,7 +37,7 @@ class OtpCubit extends Cubit<OtpState> {
   OtpCubit() : super(OtpInitial());
 
   Future<void> verifyOtp(String otp) async {
-    final String url = 'http://quokkamesh-001-site1.etempurl.com/api/Email/Send Confirmation Email/$otp';
+    final String url = 'http://backend.quokka-mesh.com/api/Email/Send Confirmation Email/$otp';
 
     try {
       emit(OtpVerifying());

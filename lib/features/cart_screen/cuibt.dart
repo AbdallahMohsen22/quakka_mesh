@@ -69,7 +69,7 @@ class CartCubit extends Cubit<CartState> {
   Future<void> deleteCategory(int categoryId) async {
     emit(DeleteCategoryLoading());
     try {
-    var url = 'http://quokkamesh-001-site1.etempurl.com/api/Category/Admin/DeleteCategory';
+    var url = 'http://backend.quokka-mesh.com/api/Category/Admin/DeleteCategory';
     final response = await http.delete(
       Uri.parse(url),
 

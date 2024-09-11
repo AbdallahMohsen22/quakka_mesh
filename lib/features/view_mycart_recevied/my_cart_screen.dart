@@ -107,7 +107,7 @@ class _MyCartScreenState extends State<MyCartScreen> with SingleTickerProviderSt
       bloc: cubit,
       builder: (context, state) {
         if (state is CartLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return  Center(child: CircularProgressIndicator());
         } else if (state is CartLoaded) {
           return ListView.builder(
             itemCount: state.carts.length,
@@ -132,7 +132,7 @@ class _MyCartScreenState extends State<MyCartScreen> with SingleTickerProviderSt
                     title: Text(cart['titel'] ?? 'No title'),
                     subtitle: Text(cart['receiver'] ?? 'No content'),
                     leading: cart['imageDesign'] != null
-                        ? Image.network('http://quokkamesh-001-site1.etempurl.com/${cart['imageDesign']}')
+                        ? Image.network('http://backend.quokka-mesh.com/${cart['imageDesign']}')
                         : null,
                   ),
                 ),

@@ -55,7 +55,7 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
               children: [
                 CircleAvatar(
                   radius: 22,
-                  backgroundImage: NetworkImage('http://quokkamesh-001-site1.etempurl.com/${widget.image}'),
+                  backgroundImage: NetworkImage('http://backend.quokka-mesh.com/${widget.image}'),
                 ),
                 const SizedBox(width: 15),
                 Text(
@@ -156,7 +156,89 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
                 ],
               ),
             ),
-            fallback: (context) => const Center(child: CircularProgressIndicator()),
+            fallback: (context) =>
+                SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 100),
+                          child: Image.asset("assets/images/start_chatting.png")
+                        ),
+                  
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 100),
+                          child: Row(
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.image),
+                                onPressed: () async {
+                                  final picker = ImagePicker();
+                                  final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+                                  if (pickedFile != null) {
+                                    context.read<SendMessageCubit>().sendImage(
+                                      receiverId: widget.id,
+                                      dateTime: DateTime.now().toString(),
+                                      imageUrl: pickedFile.path, // Update this to upload image and get URL
+                                    );
+                                  }
+                                },
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.emoji_emotions),
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    builder: (context) {
+                                      return BlocProvider.value(
+                                        value: context.read<SendMessageCubit>(),
+                                        child: StickerPicker(
+                                          onStickerSelected: (stickerUrl) {
+                                            context.read<SendMessageCubit>().sendSticker(
+                                              receiverId: widget.id,
+                                              dateTime: DateTime.now().toString(),
+                                              stickerUrl: stickerUrl,
+                                            );
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                              Expanded(
+                                child: TextFormField(
+                                  controller: messageController,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'Type your message here...',
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.send, color: ColorResources.apphighlightColor),
+                                onPressed: () {
+                                  final message = messageController.text.toString();
+                                  if (message.isNotEmpty) {
+                                    context.read<SendMessageCubit>().sendMessage(
+                                      receiverId: widget.id,
+                                      dateTime: DateTime.now().toString(),
+                                      text: message,
+                                    );
+                                    messageController.clear();
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
           ),
         );
       },

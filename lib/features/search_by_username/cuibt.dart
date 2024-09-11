@@ -24,6 +24,23 @@ class UserFailure extends UserState {
 
   UserFailure(this.error);
 }
+
+
+class UserInitialInfo extends UserState {}
+
+class UserLoadingInfo extends UserState {}
+
+class UserLoadedInfo extends UserState {
+  final dynamic user;
+
+  UserLoadedInfo(this.user);
+}
+
+class UserErrorInfo extends UserState {
+  final String message;
+
+  UserErrorInfo(this.message);
+}
 /////////////////////////////////////////////
 
 // class GetallUserInitial extends UserState {}
@@ -46,10 +63,11 @@ class UserFailure extends UserState {
 class UserCubit extends Cubit<UserState> {
   UserCubit() : super(UserInitial());
 
+  //searchUsers
   void searchUsers(String username) async {
     emit(UserLoading());
     try {
-      var response = await http.get(Uri.parse('http://quokkamesh-001-site1.etempurl.com/api/SendCart/SearchInAllUser/$username'));
+      var response = await http.get(Uri.parse('http://backend.quokka-mesh.com/api/SendCart/SearchInAllUser/$username'));
       if (response.statusCode == 200) {
         Map<String, dynamic> data = json.decode(response.body);
         List<dynamic> userData = data['result'];
@@ -70,7 +88,7 @@ class UserCubit extends Cubit<UserState> {
   // void getUsers() async{
   //   emit(GetallUserLoading());
   //   try {
-  //     var response = await http.get(Uri.parse('http://quokkamesh-001-site1.etempurl.com/api/Auth/GetAllUser'));
+  //     var response = await http.get(Uri.parse('http://backend.quokka-mesh.com/api/Auth/GetAllUser'));
   //     if (response.statusCode == 200) {
   //       Map<String, dynamic> data = json.decode(response.body);
   //       List<dynamic> userData = data['result'];
@@ -86,4 +104,20 @@ class UserCubit extends Cubit<UserState> {
   //   }
   //
   // }
+
+  void fetchUser(String userId) async {
+    emit(UserLoadingInfo());
+    try {
+      final response = await http.get(Uri.parse('http://backend.quokka-mesh.com/api/Auth/GetOneUser?userId=$userId'));
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        emit(UserLoadedInfo(data[0])); // Assuming it's a list with one user
+      } else {
+        emit(UserErrorInfo('Failed to load user'));
+      }
+    } catch (e) {
+      emit(UserErrorInfo('An error occurred'));
+    }
+  }
 }

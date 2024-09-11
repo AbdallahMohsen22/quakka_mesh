@@ -141,7 +141,7 @@ class CategoryCard extends StatelessWidget {
             Expanded(
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: 'http://quokkamesh-001-site1.etempurl.com/${category.image}',
+                imageUrl: 'http://backend.quokka-mesh.com/${category.image}',
                 httpHeaders: const {
                   ApiConstants.tokenTitle:
                   ApiConstants.tokenBody

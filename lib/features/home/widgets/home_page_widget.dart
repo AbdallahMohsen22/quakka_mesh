@@ -33,7 +33,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
               // expandedHeight: 200.0,
               floating: false,
               pinned: true,
-
               elevation: 0,
               centerTitle: false,
               automaticallyImplyLeading: false,
@@ -67,32 +66,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
               child: Column(
                 children:
                 [
-                  //choose your card
-                  // Row(
-                  //   children: [
-                  //     Shimmer.fromColors(
-                  //       period: const Duration(seconds: 5),
-                  //       baseColor: ColorResources.appColor,
-                  //       highlightColor:ColorResources.apphighlightColor,
-                  //       child:  Text(S.of(context).chooseYourCard,style: TextStyle(
-                  //           fontSize: 20,
-                  //           fontWeight: FontWeight.bold
-                  //       ),),
-                  //     ),
-                  //     // InkWell(
-                  //     //   child: Image.asset(
-                  //     //     'assets/images/logo_with_name.png',
-                  //     //     width: 300.w,
-                  //     //     height: 200.h,
-                  //     //   ),
-                  //     // ),
-                  //   ],
-                  // ),
 
-                  // SizedBox(height: 30,),
-
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10,vertical: 15),
                     child: BannerView(),
                   ),
 

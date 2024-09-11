@@ -85,19 +85,34 @@ class _MessageState extends State<Message> {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: payload.length,
-        itemBuilder: (context, index) {
-          final key = payload.keys.elementAt(index);
-          final value = payload[key];
+      // body: ListView.builder(
+      //   itemCount: payload.length,
+      //   itemBuilder: (context, index) {
+      //     final key = payload.keys.elementAt(index);
+      //     final value = payload[key];
+      //
+      //     return Card(
+      //       child: ListTile(
+      //         title: Text(key),
+      //         subtitle: Text(value.toString()),
+      //       ),
+      //     );
+      //   },
+      // ),
 
-          return Card(
-            child: ListTile(
-              title: Text(key),
-              subtitle: Text(value.toString()),
+      body:Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height:60),
+            Image.asset('assets/images/no_notifications.png',height: 340,),
+            const SizedBox(height:20),
+            Text(
+              'No Notification Yet',
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }

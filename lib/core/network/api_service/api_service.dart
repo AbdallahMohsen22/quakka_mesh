@@ -13,7 +13,7 @@ import '../../../features/auth/data/models/user_response.dart';
 import '../api_constants.dart';
 part 'api_service.g.dart';
 
-@RestApi(baseUrl: ApiConstants.baseUrl) //"http://quokkamesh-001-site1.etempurl.com/api/"
+@RestApi(baseUrl: ApiConstants.baseUrl) //"${baseUrl}"
 abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 

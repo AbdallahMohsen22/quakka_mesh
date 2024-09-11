@@ -1,6 +1,7 @@
 class ApiConstants {
-  //api constants >> http://andrewfayez-001-site1.ltempurl.com/api/
-  static const String baseUrl = "http://quokkamesh-001-site1.etempurl.com/api/";
+  //api constants >> http://quokkamesh-001-site1.etempurl.com/api/
+  static const String baseUrl = "http://backend.quokka-mesh.com/api/";
+  static const String baseImageUrl = "http://backend.quokka-mesh.com/";
   //Auth
   static const String register = "Auth/Register/User";
   static const String login = "Auth/Login";

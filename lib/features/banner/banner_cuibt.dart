@@ -31,7 +31,7 @@ class BannerCubit extends Cubit<BannerState> {
   void fetchBanners() async {
     emit(BannerLoading());
     try {
-      final response = await http.get(Uri.parse('http://quokkamesh-001-site1.etempurl.com/api/Banner/GetAllBanner'));
+      final response = await http.get(Uri.parse('http://backend.quokka-mesh.com/api/Banner/GetAllBanner'));
       if (response.statusCode == 200) {
         List<dynamic> data = json.decode(response.body);
         List<Banner> banners = data.map((bannerJson) => Banner.fromJson(bannerJson)).toList();
@@ -50,7 +50,7 @@ class BannerCubit extends Cubit<BannerState> {
     try {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://quokkamesh-001-site1.etempurl.com/api/Banner/AddBanner'),
+        Uri.parse('http://backend.quokka-mesh.com/api/Banner/AddBanner'),
       );
       request.fields['Title'] = title;
       request.files.add(await http.MultipartFile.fromPath('Image', image.path, filename: basename(image.path)));
@@ -72,7 +72,7 @@ class BannerCubit extends Cubit<BannerState> {
     try {
       var request = http.MultipartRequest(
         'PUT',
-        Uri.parse('http://quokkamesh-001-site1.etempurl.com/api/Banner/UpdateNews/$id'),
+        Uri.parse('http://backend.quokka-mesh.com/api/Banner/UpdateNews/$id'),
       );
       request.fields['Title'] = title;
       request.files.add(await http.MultipartFile.fromPath('Image', image.path, filename: basename(image.path)));
@@ -94,7 +94,7 @@ class BannerCubit extends Cubit<BannerState> {
     emit(BannerLoading());
     try {
       final response = await http.delete(
-        Uri.parse('http://quokkamesh-001-site1.etempurl.com/api/Banner/DeleteBanner?id=$id'),
+        Uri.parse('http://backend.quokka-mesh.com/api/Banner/DeleteBanner?id=$id'),
       );
       if (response.statusCode == 200) {
         fetchBanners();
