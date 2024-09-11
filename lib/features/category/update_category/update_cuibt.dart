@@ -40,7 +40,7 @@ class UpdateCategoryCubit extends Cubit<CategoryState> {
     required String title,
     required File image,
   }) async {
-    final String url = 'http://quokkamesh-001-site1.etempurl.com/api/Category/Admin/UpdateCategory?id=$id';
+    final String url = 'http://backend.quokka-mesh.com/api/Category/Admin/UpdateCategory?id=$id';
 
     try {
       emit(CategoryUpdating());

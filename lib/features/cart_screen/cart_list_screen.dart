@@ -48,6 +48,7 @@ class CartListScreen extends StatelessWidget {
           ),
           actions:
           [
+            isAdmin == true ?
             ElevatedButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateCategoryScreen(categoryId: categoryId)));
@@ -72,7 +73,8 @@ class CartListScreen extends StatelessWidget {
             
               ),
             
-            ),
+            ) :
+            const SizedBox(),
             // InkWell(
             //   onTap: (){
             //     print(categoryId);
@@ -127,7 +129,7 @@ class CartListScreen extends StatelessWidget {
                                     height: 400,
                                     width: 400,
                                     fit: BoxFit.cover,
-                                    imageUrl: 'http://quokkamesh-001-site1.etempurl.com/${cart.imageDesign}',
+                                    imageUrl: 'http://backend.quokka-mesh.com/${cart.imageDesign}',
                                     httpHeaders: const {
                                       ApiConstants.tokenTitle:
                                       ApiConstants.tokenBody

@@ -105,7 +105,7 @@ class SearchUserScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(30),
                               child: Container(
                                 child: Image.network(
-                                  'http://quokkamesh-001-site1.etempurl.com/' + user.imageCover,
+                                  'http://backend.quokka-mesh.com/' + user.imageCover,
                                   fit: BoxFit.cover,
 
                                 ),
@@ -121,7 +121,7 @@ class SearchUserScreen extends StatelessWidget {
 
                           ),
                           // leading: Image.network(
-                          //     'http://quokkamesh-001-site1.etempurl.com/' + user.imageCover,
+                          //     'http://backend.quokka-mesh.com/' + user.imageCover,
                           //   fit: BoxFit.cover,
                           //
                           // ),

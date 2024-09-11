@@ -38,7 +38,7 @@ class CategoryCountCubit extends Cubit<CategoryCountState> {
   CategoryCountCubit() : super(CategoryCountInitial());
 
   Future<void> fetchCategoryCount() async {
-    final String url = 'http://quokkamesh-001-site1.etempurl.com/api/Statistics/Admin/CountAllCategory';
+    final String url = 'http://backend.quokka-mesh.com/api/Statistics/Admin/CountAllCategory';
 
     try {
       emit(CategoryCountLoading());

@@ -114,12 +114,8 @@ void main() async{
   isSignIn = prefs.getBool('isAuth');
   isAdmin = prefs.getBool("isAdmin");
   userId = prefs.getString("userId");
-  adsPackageId = prefs.getInt(
-    'adsPackageId',
-  );
-  servicePackageId = prefs.getInt(
-    'servicePackageId',
-  );
+  userToken = prefs.getString("token");
+
   if (kDebugMode) {
     print("isAuth =");
     print(isSignIn);
@@ -127,6 +123,8 @@ void main() async{
     print(isAdmin);
     print("userId =");
     print(userId);
+    print("userToken =");
+    print(userToken);
     // print("adsPackageId =");
     // print(adsPackageId);
     // print("servicePackageId =");
@@ -136,6 +134,8 @@ void main() async{
   await CacheHelper.init();
   uId=CacheHelper.getData(key: "userId");
   print(uId);
+  on_boarding = await CacheHelper.getData( key:"onBoarding") ?? false;
+
 
 
 

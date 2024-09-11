@@ -88,7 +88,12 @@ class _UpdateCategoryScreenState extends State<UpdateCategoryScreen> {
                     _imageDesign == null
                         ? TextButton(
                       onPressed: _pickImage,
-                      child: const Text('Pick Image'),
+                      child: Text(
+                        HomeCubit.get(context).isArabic
+                            ? "التقط صورة الان"
+                            : 'Pick Image ',
+
+                      ),
                     )
                         : Image.file(_imageDesign!),
 
@@ -113,6 +118,9 @@ class _UpdateCategoryScreenState extends State<UpdateCategoryScreen> {
                       },
 
                     ),
+
+                    const SizedBox(height: 25,),
+
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate() && _imageDesign != null) {

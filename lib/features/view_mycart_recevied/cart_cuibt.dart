@@ -40,7 +40,7 @@ class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartLoading());
 
   Future<void> fetchReceivedCarts(String userId) async {
-    final String url = 'http://quokkamesh-001-site1.etempurl.com/api/SendCart/User/ViewMyCartrecevied?userId=$userId';
+    final String url = 'http://backend.quokka-mesh.com/api/SendCart/User/ViewMyCartrecevied?userId=$userId';
 
     try {
       emit(CartLoading());
@@ -60,7 +60,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   Future<void> fetchSentCarts(String userId) async {
-    final String url = 'http://quokkamesh-001-site1.etempurl.com/api/SendCart/User/ViewMyCartsended?userId=$userId';
+    final String url = 'http://backend.quokka-mesh.com/api/SendCart/User/ViewMyCartsended?userId=$userId';
 
     try {
       emit(CartLoading());

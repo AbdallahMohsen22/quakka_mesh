@@ -46,7 +46,7 @@ class UpdateCartCubit extends Cubit<CartState> {
     required int numberOfPoint,
     required bool isPremium,
   }) async {
-    final String url = 'http://quokkamesh-001-site1.etempurl.com/api/Cart/Admin/UpdateCart?id=$id';
+    final String url = 'http://backend.quokka-mesh.com/api/Cart/Admin/UpdateCart?id=$id';
 
     try {
       emit(CartUpdating());

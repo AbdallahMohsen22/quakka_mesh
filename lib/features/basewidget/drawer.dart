@@ -276,39 +276,40 @@ class _MainDrawerState extends State<MainDrawer> {
                 // ),
 
                 ///Credit
-                ListTile(
-                  trailing: Shimmer.fromColors(
-                    baseColor: ColorResources.white,
-                    highlightColor: ColorResources.white,
-                    child: const Icon(
-                      Icons.arrow_right,
-                      size: 30,
-                    ),
-                  ),
-                  leading: Shimmer.fromColors(
-                    baseColor: ColorResources.white,
-                    highlightColor: ColorResources.white,
-                    child: const Icon(
-                      Icons.credit_card,
-                      size: 30,
-                    ),
-                  ),
-                  title:  Text(
-                    HomeCubit.get(context).isArabic?
-                    "الفيزا":
-                    "Credit",
-                    style: const TextStyle(color: Colors.white,),),
-                  onTap: () {
-                    // Navigate to the home page.
-                    //Navigator.push(context, MaterialPageRoute(builder: (context)=>  MyCartViewBody())); // Closes the drawer
-                  },
-                ),
-                Divider(
-                  indent: 20,
-                  endIndent: 20,
-                  thickness: 1,
-                  color: Colors.white.withOpacity(.5),
-                ),
+                // ListTile(
+                //   trailing: Shimmer.fromColors(
+                //     baseColor: ColorResources.white,
+                //     highlightColor: ColorResources.white,
+                //     child: const Icon(
+                //       Icons.arrow_right,
+                //       size: 30,
+                //     ),
+                //   ),
+                //   leading: Shimmer.fromColors(
+                //     baseColor: ColorResources.white,
+                //     highlightColor: ColorResources.white,
+                //     child: const Icon(
+                //       Icons.credit_card,
+                //       size: 30,
+                //     ),
+                //   ),
+                //   title:  Text(
+                //     HomeCubit.get(context).isArabic?
+                //     "الفيزا":
+                //     "Credit",
+                //     style: const TextStyle(color: Colors.white,),),
+                //   onTap: () {
+                //     // Navigate to the home page.
+                //     //Navigator.push(context, MaterialPageRoute(builder: (context)=>  MyCartViewBody())); // Closes the drawer
+                //   },
+                // ),
+                // Divider(
+                //   indent: 20,
+                //   endIndent: 20,
+                //   thickness: 1,
+                //   color: Colors.white.withOpacity(.5),
+                // ),
+
                 ListTile(
                   onTap: () {
                     HomeCubit.get(context).changeAppLanguage();
@@ -411,6 +412,8 @@ class _MainDrawerState extends State<MainDrawer> {
                   color: Colors.white.withOpacity(.5),
                 ),
 
+               ///Privacy and policy
+
                 Center(
                   child: TextButton(
                     onPressed: _launchPrivacyPolicy,
@@ -435,7 +438,7 @@ class _MainDrawerState extends State<MainDrawer> {
     );
   }
   void _launchPrivacyPolicy() async {
-    const url = 'https://www.example.com/privacy-policy';
+    const url = 'http://quokka-mesh.com/privicypolicy.html';
     if (await canLaunch(url)) {
       await launch(url);
     } else {

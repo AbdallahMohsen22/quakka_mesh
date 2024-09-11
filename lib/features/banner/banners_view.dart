@@ -23,7 +23,7 @@ class BannerView extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is BannerLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is BannerLoaded) {
               return CarouselSlider(
                 items: state.banners.map((banner) {
@@ -45,7 +45,7 @@ class BannerView extends StatelessWidget {
                         height: 280,
                         width: 280,
                         fit: BoxFit.cover,
-                        imageUrl: 'http://quokkamesh-001-site1.etempurl.com/${banner.image}',
+                        imageUrl: 'http://backend.quokka-mesh.com/${banner.image}',
                         httpHeaders: const {
                           ApiConstants.tokenTitle:
                           ApiConstants.tokenBody
@@ -70,7 +70,7 @@ class BannerView extends StatelessWidget {
                 ),
               );
             } else {
-              return Center(child: Text('No Banners'));
+              return const Center(child: Text('No Banners'));
             }
           },
         ),

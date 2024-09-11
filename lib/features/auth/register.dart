@@ -135,7 +135,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Column(
                   children: [
                     Stack(children: [
-                      Container(height: 200, decoration: BoxDecoration(color: ColorResources.apphighlightColor)),
+                      Container(height: 200, decoration: const BoxDecoration(color: ColorResources.apphighlightColor)),
                       Image.asset(AppAssets.loginBg,fit: BoxFit.cover,height: 200, opacity : const AlwaysStoppedAnimation(.15)),
                       Padding(
                         padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * .01),
@@ -279,7 +279,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
 
                               state is RegisterLoading ?
-                              Center(child: CircularProgressIndicator()) :
+                              const Center(child: CircularProgressIndicator()) :
                               SizedBox(
                                   width: double.infinity,
                                   child: ElevatedButton.icon(
@@ -297,7 +297,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       HomeCubit.get(context).isArabic
                                           ? "انشاء حساب"
                                           : "Sign Up",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 20,
                                           color: Colors.white
                                       ),

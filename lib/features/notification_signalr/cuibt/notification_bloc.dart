@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 
 
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
-  final String getAllNotificationsUrl = 'http://quokkamesh-001-site1.etempurl.com/api/Notification/GetAllNotification';
+  final String getAllNotificationsUrl = 'http://backend.quokka-mesh.com/api/Notification/GetAllNotification';
   final SignalRService signalRService;
 
   NotificationBloc(this.signalRService) : super(NotificationInitial()) {
@@ -21,7 +21,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   }
 
   Future<void> _initializeSignalR() async {
-    await signalRService.initSignalR('http://quokkamesh-001-site1.etempurl.com/notification');
+    await signalRService.initSignalR('http://backend.quokka-mesh.com/notification');
     signalRService.onReceiveMessage((arguments) {
       add(GetAllNotifications());
     });

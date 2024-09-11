@@ -34,7 +34,7 @@
 //             alignment: Alignment.center,
 //             children: [
 //               Image.network(
-//                 'http://quokkamesh-001-site1.etempurl.com/$imageDesign', // Display imageDesign
+//                 'http://backend.quokka-mesh.com/$imageDesign', // Display imageDesign
 //                 width: 300,
 //                 height: 400,
 //                 fit: BoxFit.cover,
@@ -319,7 +319,7 @@ class _ScreenShotScreenState extends State<ScreenShotScreen> {
             alignment: Alignment.center,
             children: [
               Image.network(
-                'http://quokkamesh-001-site1.etempurl.com/${widget.imageDesign}',
+                'http://backend.quokka-mesh.com/${widget.imageDesign}',
                 width: 300,
                 height: 400,
                 fit: BoxFit.cover,

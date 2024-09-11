@@ -41,7 +41,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     required String newPassword,
     required String confirmPassword,
   }) async {
-    final String url = 'http://quokkamesh-001-site1.etempurl.com/api/Email/ResetPassword';
+    final String url = 'http://backend.quokka-mesh.com/api/Email/ResetPassword';
 
     try {
       emit(ResetPasswordInProgress());
