@@ -85,6 +85,7 @@ class _MessageState extends State<Message> {
           ),
         ),
       ),
+
       // body: ListView.builder(
       //   itemCount: payload.length,
       //   itemBuilder: (context, index) {
@@ -100,7 +101,7 @@ class _MessageState extends State<Message> {
       //   },
       // ),
 
-      body:Center(
+      body:  Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -108,7 +109,7 @@ class _MessageState extends State<Message> {
             const SizedBox(height:60),
             Image.asset('assets/images/no_notifications.png',height: 340,),
             const SizedBox(height:20),
-            Text(
+            const Text(
               'No Notification Yet',
             ),
           ],

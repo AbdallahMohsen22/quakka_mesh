@@ -9,7 +9,6 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../core/shared_constabts.dart';
 import '../../utill/color_resources.dart';
-import '../../utill/my_validators.dart';
 import '../basewidget/custom_textfield.dart';
 import '../home/home_cubit/home_cubit.dart';
 import 'banner_cuibt.dart';
@@ -118,6 +117,9 @@ class _AddBannerFormState extends State<AddBannerForm> {
                               _imageFile!,
                             );
                             context.pop();
+                            Constants.showToast(msg: 'Banner added successfully',
+                                gravity: ToastGravity.BOTTOM,
+                                color: Colors.green);
                           }
                         },
                         style: ElevatedButton.styleFrom(

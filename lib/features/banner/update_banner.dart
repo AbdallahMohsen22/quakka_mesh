@@ -184,6 +184,11 @@ class _UpdateBannerFormState extends State<UpdateBannerForm> {
                             onPressed: () {
                               context.read<BannerCubit>().deleteBanner(widget.bannerId);
                               context.pushNamed(Routes.homeScreen);
+
+                              Constants.showToast(msg: 'Deleting in progress...',
+                                  gravity: ToastGravity.BOTTOM,
+                                  color: Colors.green);
+
                             },
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),

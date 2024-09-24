@@ -1,5 +1,4 @@
 
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +11,7 @@ import 'core/theming/app_theme.dart';
 import 'features/cart_screen/cuibt.dart';
 import 'features/chat/send_massege_cuibt.dart';
 import 'features/home/home_cubit/home_cubit.dart';
+import 'features/profile/delete_user_cuibt/delete_user_cuibt.dart';
 import 'features/search_by_username/cuibt.dart';
 import 'features/send_cart/cuibt.dart';
 import 'generated/l10n.dart';
@@ -41,13 +41,14 @@ class GuakkoApp extends StatelessWidget {
             return MultiBlocProvider(
               providers: [
                 BlocProvider<UserCubit>(create: (context) => UserCubit()),
+                BlocProvider<DeleteUserCubit>(create: (context) => DeleteUserCubit()),
                 BlocProvider<SendCartCubit>(create: (context) => SendCartCubit()),
                 BlocProvider<SendMessageCubit>(create: (context) => SendMessageCubit(),),
                 BlocProvider<CartCubit>(create: (context) => CartCubit(),),
               ],
               child: MaterialApp(
               
-                builder: DevicePreview.appBuilder,
+                // builder: DevicePreview.appBuilder,
                 title: "Quakka Mesh App",
                 theme: appTheme(),
                 supportedLocales: S.delegate.supportedLocales,

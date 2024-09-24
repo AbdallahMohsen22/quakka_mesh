@@ -19,7 +19,7 @@ import '../../injection.dart';
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
     //this arguments to be bassed in any screen like this >> (arguments as ClassName)
-    final args = settings.arguments;
+    // final args = settings.arguments;
     switch (settings.name) {
 
       case Routes.splashScreen:
@@ -30,6 +30,27 @@ class AppRouter {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
           builder: (_) => const OnBoardingPage(),
+        );
+
+      case Routes.homeScreen:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<CategoryCubit>(),
+              ),
+
+              BlocProvider(
+                create: (context) => getIt<BannerCubit>(),
+              ),
+
+            ],
+            child:  const HomeScreen(),
+          ),
+        );
+      case Routes.drawerScreen:
+        return MaterialPageRoute(
+          builder: (_) => MainDrawer(),
         );
 
       case Routes.loginScreen:
@@ -49,22 +70,7 @@ class AppRouter {
         );
 
 
-      case Routes.homeScreen:
-        return MaterialPageRoute(
-          builder: (_) => MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => getIt<CategoryCubit>(),
-              ),
 
-              BlocProvider(
-                create: (context) => getIt<BannerCubit>(),
-              ),
-
-            ],
-            child:  const HomeScreen(),
-          ),
-        );
 
       case Routes.notificationScreen:
         return MaterialPageRoute(
@@ -73,10 +79,7 @@ class AppRouter {
         );
 
 
-      case Routes.drawerScreen:
-        return MaterialPageRoute(
-          builder: (_) => MainDrawer(),
-        );
+
 
       // case Routes.categoriesScreen:
       //   return MaterialPageRoute(

@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 import 'banner_model.dart';
 import 'dart:convert';
 import 'package:path/path.dart';
@@ -10,20 +9,24 @@ import 'package:path/path.dart';
 abstract class BannerState {}
 
 class BannerInitial extends BannerState {}
-
 class BannerLoading extends BannerState {}
-
 class BannerLoaded extends BannerState {
   final List<Banner> banners;
-
   BannerLoaded({required this.banners});
 }
-
 class BannerError extends BannerState {
   final String error;
-
   BannerError({required this.error});
 }
+
+class AddBannerLoading extends BannerState {}
+class AddBannerLoaded extends BannerState {
+}
+class AddBannerError extends BannerState {
+  final String error;
+  AddBannerError({required this.error});
+}
+
 
 class BannerCubit extends Cubit<BannerState> {
   BannerCubit() : super(BannerInitial());
@@ -46,7 +49,7 @@ class BannerCubit extends Cubit<BannerState> {
   }
 
   void addBanner(String title, File image) async {
-    emit(BannerLoading());
+    emit(AddBannerLoading());
     try {
       var request = http.MultipartRequest(
         'POST',
@@ -59,11 +62,12 @@ class BannerCubit extends Cubit<BannerState> {
       if (response.statusCode == 200) {
         fetchBanners();
         print("Api add bannar=====>>>>${response.statusCode}");
+        emit(AddBannerLoaded());
       } else {
-        emit(BannerError(error: 'Failed to add banner'));
+        emit(AddBannerError(error: 'Failed to add banner'));
       }
     } catch (e) {
-      emit(BannerError(error: e.toString()));
+      emit(AddBannerError(error: e.toString()));
     }
   }
 

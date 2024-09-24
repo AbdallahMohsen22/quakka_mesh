@@ -1,29 +1,27 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:new_quakka/core/helpers/extensitions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../basic_constants.dart';
-import '../../core/network/api_constants.dart';
 import '../../core/routing/routes.dart';
-import '../../generated/l10n.dart';
 import '../../utill/app_assets.dart';
 import '../../utill/color_resources.dart';
 import '../../utill/constant.dart';
-import '../../utill/my_validators.dart';
-import '../auth/widgets/pick_image_widget.dart';
+import '../../utill/dialog_utils.dart';
 import '../basewidget/custom_textfield.dart';
 import '../home/home_cubit/home_cubit.dart';
-import '../home/home_screen.dart';
 import '../search_by_username/cuibt.dart';
 import 'cuibt/profile_cubit.dart';
+import 'delete_user_cuibt/delete_user_cuibt.dart';
+import 'delete_user_cuibt/delete_user_state.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String? userId;
@@ -329,42 +327,121 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             }
                           },
                           builder: (context, state) {
-                            return ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  BlocProvider.of<ProfileCubit>(context)
-                                      .updateProfile(
-                                    id: userId!, // Replace with the actual ID
-                                    fullName: _fullNameController.text,
-                                    username: _usernameController.text,
-                                    email: _emailController.text,
-                                    password: _passwordController.text,
-                                    phoneNumber: _phoneNumberController.text,
-                                    isAdmin: _isAdmin,
-                                    imageCover: _imageCover,
-                                  );
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 70, vertical: 12),
-                                backgroundColor:
-                                    ColorResources.apphighlightColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                    30,
+                            return SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    BlocProvider.of<ProfileCubit>(context)
+                                        .updateProfile(
+                                      id: userId!, // Replace with the actual ID
+                                      fullName: _fullNameController.text,
+                                      username: _usernameController.text,
+                                      email: _emailController.text,
+                                      password: _passwordController.text,
+                                      phoneNumber: _phoneNumberController.text,
+                                      isAdmin: _isAdmin,
+                                      imageCover: _imageCover,
+                                    );
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 70, vertical: 12),
+                                  backgroundColor:
+                                      ColorResources.apphighlightColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                      30,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              child: Text(
-                                HomeCubit.get(context).isArabic
-                                    ? "تحديث"
-                                    : "Update Profile",
-                                style: const TextStyle(
-                                    fontSize: 20, color: Colors.white),
+                                child: Text(
+                                  HomeCubit.get(context).isArabic
+                                      ? "تحديث"
+                                      : "Update Profile",
+                                  style: const TextStyle(
+                                      fontSize: 20, color: Colors.white),
+                                ),
                               ),
                             );
                           },
+                        ),
+                    const SizedBox(height: 5,),
+                    BlocConsumer<DeleteUserCubit, DeleteUserState>(
+                    listener: (context, state) {
+                      if (state is DeleteUserSuccess) {
+
+                        Constants.showToast(
+                            msg: 'Account deleted successfully',
+                            gravity: ToastGravity.BOTTOM,
+                            color: Colors.green);
+                        // Navigator.of(context).pop();  // Navigate after deletion
+                      } else if (state is DeleteUserFailure) {
+
+                        Constants.showToast(
+                            msg: state.error,
+                            gravity: ToastGravity.BOTTOM,
+                            color: Colors.red);
+                      }
+                    },
+                    builder: (context, state) {
+                      return SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            DialogUtils.showMessage(
+                                context,
+                                HomeCubit.get(context).isArabic
+                                    ? 'هل أنت متأكد من حذف الحساب؟'
+                                    : 'Are you sure you want to delete your account?',
+                                posActionTitle:
+                                HomeCubit.get(context).isArabic
+                                    ? "نعم"
+                                    : "yes",
+                                posAction: () async {
+                                  context.read<DeleteUserCubit>().deleteUser(userId!);
+                                  var prefs = await SharedPreferences.getInstance();
+                                  setState(() {
+                                    isSignIn = false;
+                                    userId=null;
+                                    userToken=null;
+
+                                  });
+                                  prefs.setBool('isAuth', false);
+                                  prefs.remove('userId');
+                                  prefs.remove('token');
+                                  context
+                                      .pushReplacementNamed(Routes.loginScreen);
+                                },
+                                negActionTitle:
+                                HomeCubit.get(context).isArabic
+                                    ? "لا"
+                                    : "no",
+                                negAction: () {});
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 70, vertical: 12),
+                            backgroundColor:
+                            ColorResources.apphighlightColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                30,
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            HomeCubit.get(context).isArabic
+                                ? "حذف الحساب"
+                                : "Delete Account",
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.white),
+                          ),
+                        ),
+                      );
+                    },
+
                         ),
                       ],
                     ),
