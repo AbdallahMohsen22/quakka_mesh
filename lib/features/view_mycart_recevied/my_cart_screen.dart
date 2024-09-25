@@ -8,6 +8,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../core/routing/routes.dart';
 import '../../utill/color_resources.dart';
 import '../home/home_cubit/home_cubit.dart';
+import '../home/login_widget_cart.dart';
 import 'cart_cuibt.dart';
 
 class MyCartScreen extends StatefulWidget {
@@ -86,7 +87,7 @@ class _MyCartScreenState extends State<MyCartScreen> with SingleTickerProviderSt
           ],
         ),
       ),
-      body: MultiBlocProvider(
+      body: userId != null? MultiBlocProvider(
         providers: [
           BlocProvider<CartCubit>.value(value: _sentCartCubit),
           BlocProvider<CartCubit>.value(value: _receivedCartCubit),
@@ -98,7 +99,7 @@ class _MyCartScreenState extends State<MyCartScreen> with SingleTickerProviderSt
             _buildCartView(context, _receivedCartCubit),
           ],
         ),
-      ),
+      ) : const LoginWidgetCart(),
     );
   }
 

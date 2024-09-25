@@ -8,8 +8,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../basic_constants.dart';
 import '../../core/routing/routes.dart';
-import '../../core/theming/font_weight_helper.dart';
-import '../../core/theming/styles.dart';
 import '../../utill/app_assets.dart';
 import '../../utill/color_resources.dart';
 import '../../utill/dialog_utils.dart';
@@ -18,7 +16,6 @@ import '../banner/add_banner.dart';
 import '../dashboard/dashboard_screen.dart';
 import '../home/home_cubit/home_cubit.dart';
 import '../home/home_screen.dart';
-import '../payment/presentation/views/widgets/my_cart_view_body.dart';
 import '../profile/profile_screen.dart';
 
 class MainDrawer extends StatefulWidget {
@@ -122,12 +119,15 @@ class _MainDrawerState extends State<MainDrawer> {
                     Navigator.push(context, MaterialPageRoute(builder: (context)=> const HomeScreen())); // Closes the drawer
                   },
                 ),
+
+                if(isSignIn==true)
                 Divider(
                   indent: 20,
                   endIndent: 20,
                   thickness: 1,
                   color: Colors.white.withOpacity(.5),
                 ),
+                if(isSignIn==true)
                 ///Account
                 ListTile(
                   trailing: Shimmer.fromColors(
@@ -346,6 +346,7 @@ class _MainDrawerState extends State<MainDrawer> {
                     ],
                   ),
                 ),
+
                 Divider(
                   indent: 20,
                   endIndent: 20,

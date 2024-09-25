@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:new_quakka/features/home/widgets/home_page_widget.dart';
-import 'package:new_quakka/features/login/login_screen.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../utill/color_resources.dart';
-import '../chat/chat.dart';
-import '../profile/profile_screen.dart';
-import '../view_mycart_recevied/my_cart_screen.dart';
-import 'login_widget.dart';
+import 'login_widget_cart.dart';
+import 'login_widget_chat.dart';
+import 'login_widget_profile.dart';
 
 
 class HomeGestScreen extends StatefulWidget {
@@ -18,15 +16,14 @@ class HomeGestScreen extends StatefulWidget {
 }
 
 class _HomeGestScreenState extends State<HomeGestScreen>{
-  final ScrollController _scrollController = ScrollController();
 
   int _selectedIndex = 0;
 
-  static  final List<Widget> _widgetOptions = <Widget>[
-    const LoginWidget(),
-    const LoginWidget(),
-    const LoginWidget(),
-    const LoginWidget(),
+    final List<Widget> _widgetOptions = <Widget>[
+      const HomePageScreen(),
+      const LoginWidgetCart(),
+      const LoginWidgetChat(),
+      const LoginWidgetProfile(),
   ];
 
   void _onItemTapped(int index) {

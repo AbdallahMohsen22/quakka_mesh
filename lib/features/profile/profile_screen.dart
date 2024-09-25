@@ -18,6 +18,7 @@ import '../../utill/constant.dart';
 import '../../utill/dialog_utils.dart';
 import '../basewidget/custom_textfield.dart';
 import '../home/home_cubit/home_cubit.dart';
+import '../home/login_widget_profile.dart';
 import '../search_by_username/cuibt.dart';
 import 'cuibt/profile_cubit.dart';
 import 'delete_user_cuibt/delete_user_cuibt.dart';
@@ -42,11 +43,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool _isAdmin = false;
   File? _imageCover;
 
-  late final FocusNode _nameFocusNode,
-      _emailFocusNode,
-      _phoneFocusNode,
-      _userNameFocusNode,
-      _passwordFocusNode;
+  // late final FocusNode _nameFocusNode,
+  //     _emailFocusNode,
+  //     _phoneFocusNode,
+  //     _userNameFocusNode,
+  //     _passwordFocusNode;
   bool obscureText = true;
   bool isLoading = false;
 
@@ -105,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
         ),
-        body: BlocConsumer<UserCubit, UserState>(
+        body: userId != null? BlocConsumer<UserCubit, UserState>(
           listener: (context, state) {
             if (state is UserErrorInfo) {
               ScaffoldMessenger.of(context)
@@ -454,7 +455,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             }
             return Container();
           },
-        ),
+        ) : const LoginWidgetProfile(),
       ),
     );
   }

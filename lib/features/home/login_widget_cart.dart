@@ -4,8 +4,8 @@ import '../login/login_screen.dart';
 import 'home_cubit/home_cubit.dart';
 import 'widgets/custom_asset_image.dart';
 
-class LoginWidget extends StatelessWidget {
-  const LoginWidget({super.key});
+class LoginWidgetCart extends StatelessWidget {
+  const LoginWidgetCart({super.key});
 
   @override
   Widget build(BuildContext context) {

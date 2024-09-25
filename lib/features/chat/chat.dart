@@ -9,6 +9,7 @@ import '../../core/network/api_constants.dart';
 import '../../core/routing/routes.dart';
 import '../../utill/color_resources.dart';
 import '../home/home_cubit/home_cubit.dart';
+import '../home/login_widget_chat.dart';
 import '../search_by_username/cuibt.dart';
 import 'chat_cuibt.dart';
 import 'chat_details_screen.dart';
@@ -41,10 +42,10 @@ class ChatScreen extends StatelessWidget {
         ),
 
       ),
-      body: BlocProvider(
+      body: userId != null? BlocProvider(
         create: (context) => ChatCubit()..fetchUsers(userId!),
         child: UserListView(),
-      ),
+      ) : const LoginWidgetChat(),
     );
   }
 

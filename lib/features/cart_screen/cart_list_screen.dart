@@ -3,18 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:new_quakka/core/helpers/extensitions.dart';
 import 'package:new_quakka/features/category/update_category/update_category_screen.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../basic_constants.dart';
 import '../../core/network/api_constants.dart';
-import '../../core/routing/routes.dart';
 import '../../utill/color_resources.dart';
 import '../add_cart/add_cart_screen.dart';
-import '../category/cuibt.dart';
 import '../home/home_cubit/home_cubit.dart';
 import '../home/home_screen.dart';
+import '../home/login_widget_home.dart';
 import '../send_cart/send_cart_screen.dart';
 import 'cuibt.dart';
 
@@ -99,7 +97,7 @@ class CartListScreen extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.all(10),
 
-                child: GridView.builder(
+                child: userId !=null? GridView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   physics: const BouncingScrollPhysics(),
@@ -179,7 +177,7 @@ class CartListScreen extends StatelessWidget {
                       ),
                     );
                   },
-                ),
+                ) : const LoginWidgetHome(),
               );
             } else {
               return const Center(child: Text('No carts found.'));

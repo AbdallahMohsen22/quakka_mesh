@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:new_quakka/basic_constants.dart';
 import 'package:new_quakka/core/network/message.dart';
 import '../../../utill/color_resources.dart';
 import '../../banner/banners_view.dart';
 import '../../basewidget/drawer.dart';
 import '../../category/category_model.dart';
-import '../../notification_signalr/notification_screen.dart';
 import '../category_screen.dart';
 import '../home_cubit/home_cubit.dart';
 
@@ -51,13 +51,13 @@ class _HomePageScreenState extends State<HomePageScreen> {
               //   onTap: (){},
               // ),
               const SizedBox(width:15,),
-
+              userId != null ?
               InkWell(
                 child: const Icon(Icons.settings,color: Colors.white,size: 25,),
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (c)=>MainDrawer()));
                 },
-              ),
+              ) : const SizedBox(),
               const SizedBox(width:15,),
             ],),
 
