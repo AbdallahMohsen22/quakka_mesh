@@ -173,7 +173,8 @@ class LoginScreen extends StatelessWidget {
                                 ),
                                 ///login button
                         state is LoginLoading ?
-                           const Center(child: CircularProgressIndicator()) : SizedBox(
+                           const Center(child: CircularProgressIndicator())
+                             : SizedBox(
                                   width: double.infinity,
                                   child: ElevatedButton.icon(
                                     style: ElevatedButton.styleFrom(

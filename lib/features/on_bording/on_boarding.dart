@@ -6,6 +6,7 @@ import 'package:new_quakka/utill/color_resources.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../utill/cache_helper.dart';
 import '../home/home_cubit/home_cubit.dart';
+import '../home/home_gest.dart';
 import 'onBoardingModel.dart';
 
 class OnBoardingPage extends StatefulWidget {
@@ -71,7 +72,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => LoginScreen(),
+                builder: (context) => const HomeGestScreen(),
               ),
               (route) => false);
         },
