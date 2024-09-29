@@ -21,7 +21,14 @@ class LoginWidget extends StatelessWidget {
             height: MediaQuery.of(context).size.height*0.15,
             width: MediaQuery.of(context).size.height*0.5,
           ),
-          const SizedBox(height: 15,),
+          const SizedBox(height: 20,),
+          Text(
+            HomeCubit.get(context).isArabic
+                ? 'عليك تسجيل الدخول اولا'
+                : 'You must log in first',
+            style:const TextStyle(color: ColorResources.apphighlightColor) ,
+          ),
+          const SizedBox(height: 30,),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton.icon(

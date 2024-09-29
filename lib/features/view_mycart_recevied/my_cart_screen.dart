@@ -31,18 +31,23 @@ class _MyCartScreenState extends State<MyCartScreen> with SingleTickerProviderSt
     _sentCartCubit = CartCubit();
     _receivedCartCubit = CartCubit();
 
-    _tabController.addListener(() {
-      if (_tabController.indexIsChanging) {
-        if (_tabController.index == 0) {
-          _sentCartCubit.fetchSentCarts(userId!);
-        } else if (_tabController.index == 1) {
-          _receivedCartCubit.fetchReceivedCarts(userId!);
-        }
-      }
-    });
+    if (userId != null) {
+      _sentCartCubit.fetchSentCarts(userId!);
 
-    // Fetch initial data for the first tab
-    _sentCartCubit.fetchSentCarts(userId!);
+      _tabController.addListener(() {
+        if (_tabController.indexIsChanging) {
+          if (_tabController.index == 0) {
+            _sentCartCubit.fetchSentCarts(userId!);
+          } else if (_tabController.index == 1) {
+            _receivedCartCubit.fetchReceivedCarts(userId!);
+          }
+        }
+      });
+    } else {
+      // Handle null userId (maybe show a login prompt or an error)
+      // You can show a login widget or redirect to a login screen here
+      const LoginWidgetCart();
+    }
   }
 
   @override

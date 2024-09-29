@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:new_quakka/core/theming/colors.dart';
-import 'package:new_quakka/features/login/login_screen.dart';
+import 'package:new_quakka/features/home/home_screen.dart';
 import 'package:new_quakka/utill/color_resources.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../utill/cache_helper.dart';
 import '../home/home_cubit/home_cubit.dart';
-import '../home/home_gest.dart';
 import 'onBoardingModel.dart';
 
 class OnBoardingPage extends StatefulWidget {
@@ -72,7 +70,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => const HomeGestScreen(),
+                builder: (context) => const HomeScreen(),
               ),
               (route) => false);
         },

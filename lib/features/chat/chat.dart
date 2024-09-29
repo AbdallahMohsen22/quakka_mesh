@@ -1,11 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_quakka/core/helpers/extensitions.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../basic_constants.dart';
-import '../../core/network/api_constants.dart';
 import '../../core/routing/routes.dart';
 import '../../utill/color_resources.dart';
 import '../home/home_cubit/home_cubit.dart';
@@ -103,19 +101,27 @@ class UserListView extends StatelessWidget {
                     image: user.imageCover,) ));
                 },
                 child: ListTile(
-                  leading: ClipRRect(
-                    borderRadius: BorderRadius.circular(30.0),
-                    child: CachedNetworkImage(
-                      imageUrl: "http://backend.quokka-mesh.com/${user.imageCover}",
-                      placeholder: (context, url) => const CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => const Icon(Icons.person_3_sharp),
-                      httpHeaders: const {
-                        ApiConstants.tokenTitle:
-                        ApiConstants.tokenBody
-                      },
-                    ),
+                  // leading: ClipRRect(
+                  //   borderRadius: BorderRadius.circular(30.0),
+                  //   child: CachedNetworkImage(
+                  //     imageUrl: "http://backend.quokka-mesh.com/${user.imageCover}",
+                  //     placeholder: (context, url) => const CircularProgressIndicator(),
+                  //     errorWidget: (context, url, error) => const Icon(Icons.person_3_sharp),
+                  //     httpHeaders: const {
+                  //       ApiConstants.tokenTitle:
+                  //       ApiConstants.tokenBody
+                  //     },
+                  //   ),
+                  // ),
+                  leading: CircleAvatar(
+                    radius: 30,
+                    backgroundImage: NetworkImage('http://backend.quokka-mesh.com/${user.imageCover}'),
                   ),
-                  title: Text(user.fullName),
+                  title: Text(
+                    user.fullName,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   // subtitle: Text(user.email),
                 ),
               );

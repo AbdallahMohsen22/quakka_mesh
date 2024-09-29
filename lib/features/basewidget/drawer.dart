@@ -439,9 +439,16 @@ class _MainDrawerState extends State<MainDrawer> {
     );
   }
   void _launchPrivacyPolicy() async {
-    const url = 'http://quokka-mesh.com/privicypolicy.html';
-    if (await canLaunch(url)) {
-      await launch(url);
+    //const Uri url = 'https://quokka-mesh.com/privicypolicy.html';
+    var url = Uri(
+        scheme: 'https',
+        host: 'quokka-mesh.com',
+        path: '/privicypolicy.html',
+        //fragment: 'numbers'
+    );
+
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
     } else {
       throw 'Could not launch $url';
     }

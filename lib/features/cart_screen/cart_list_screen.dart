@@ -97,7 +97,7 @@ class CartListScreen extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.all(10),
 
-                child: userId !=null? GridView.builder(
+                child:  GridView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   physics: const BouncingScrollPhysics(),
@@ -112,7 +112,60 @@ class CartListScreen extends StatelessWidget {
                     final cart = state.carts[index];
                     return InkWell(
                       onTap: (){
-                        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SendCartScreen(userId: userId!, cartId: cart.id,categoryId: categoryId),));
+                        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => userId != null ?
+                        SendCartScreen(userId: userId!, cartId: cart.id,categoryId: categoryId): 
+                         Scaffold(
+                          appBar: AppBar(
+
+                            leading: InkWell(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>  CartListScreen(categoryId: categoryId)));
+                              },
+                              child: const Icon(
+                                  Icons.arrow_back),
+                            ),
+                            actions:
+                            [
+                              isAdmin == true ?
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateCategoryScreen(categoryId: categoryId)));
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                                  backgroundColor: ColorResources.apphighlightColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                      30,
+                                    ),
+                                  ),
+                                ),
+                                child: Text(
+                                  HomeCubit.get(context).isArabic
+                                      ? "تحديث القسم"
+                                      : 'Update Category',
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.white
+                                  ),
+
+                                ),
+
+                              ) :
+                              const SizedBox(),
+                              // InkWell(
+                              //   onTap: (){
+                              //     print(categoryId);
+                              //     context.read<CartCubit>().deleteCategory(categoryId);
+                              //     //context.pop();
+                              //     },
+                              //   child: const Icon(
+                              //       Icons.delete),
+                              // ),
+                            ],
+                          ),
+                            body: LoginWidgetHome())));
+                        
                         print("CartId=====>>>> ${cart.id}");
                       },
                       child: Padding(
@@ -177,7 +230,7 @@ class CartListScreen extends StatelessWidget {
                       ),
                     );
                   },
-                ) : const LoginWidgetHome(),
+                ),
               );
             } else {
               return const Center(child: Text('No carts found.'));

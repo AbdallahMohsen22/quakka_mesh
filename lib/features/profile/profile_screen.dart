@@ -18,6 +18,7 @@ import '../../utill/constant.dart';
 import '../../utill/dialog_utils.dart';
 import '../basewidget/custom_textfield.dart';
 import '../home/home_cubit/home_cubit.dart';
+import '../home/login_widget_cart.dart';
 import '../home/login_widget_profile.dart';
 import '../search_by_username/cuibt.dart';
 import 'cuibt/profile_cubit.dart';
@@ -79,9 +80,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    context
-        .read<UserCubit>()
-        .fetchUser(userId!); // Fetch user info in initState
+    if (userId != null) {
+      context.read<UserCubit>().fetchUser(
+          userId!); // Fetch user info in initState
+    }else {
+      // Handle null userId (maybe show a login prompt or an error)
+      // You can show a login widget or redirect to a login screen here
+      const LoginWidgetCart();
+    }
   }
 
   @override

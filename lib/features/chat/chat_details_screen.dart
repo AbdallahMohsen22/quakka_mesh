@@ -1,19 +1,13 @@
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:new_quakka/features/chat/send_massege_cuibt.dart';
 import '../../basic_constants.dart';
 import '../../utill/color_resources.dart';
-import '../search_by_username/receiver_model.dart';
-import 'chat_cuibt.dart';
 import 'model/chat_model.dart';
-import 'model/user.dart';
 
 
 class ChatDetailsScreen extends StatefulWidget {
@@ -30,8 +24,6 @@ class ChatDetailsScreen extends StatefulWidget {
 class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
   final TextEditingController messageController = TextEditingController();
 
-  final ImagePicker _picker = ImagePicker();
-  bool _isReversed = true;
 
   @override
   void initState() {
@@ -58,10 +50,12 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
                   backgroundImage: NetworkImage('http://backend.quokka-mesh.com/${widget.image}'),
                 ),
                 const SizedBox(width: 15),
-                Text(
-                  widget.fullName,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                Expanded(
+                  child: Text(
+                    widget.fullName,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),

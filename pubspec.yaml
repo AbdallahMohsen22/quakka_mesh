@@ -68,7 +68,7 @@ dependencies:
   device_preview: ^1.1.0
   googleapis_auth: ^1.6.0
   flutter_paypal_payment: ^1.0.6
-  flutter_stripe: ^11.0.0
+#  flutter_stripe: ^11.0.0
   smooth_page_indicator: ^1.2.0+3
   fluttertoast: ^8.2.8
 
@@ -101,7 +101,7 @@ fancy_shimmer_image:
   share_plus:
   iconly:
   json_annotation:
-#  location:
+  #  location:
   lottie:
   pinput:
   pretty_dio_logger:
@@ -159,16 +159,16 @@ flutter:
     - assets/notification.wav
 
   fonts:
-      - family: SF-Pro-Rounded-Regular
-        fonts:
-          - asset: assets/fonts/ubuntu/SF-Pro-Rounded-Regular.ttf
-            weight: 400
-          - asset: assets/fonts/ubuntu/SF-Pro-Rounded-Regular.ttf
-            weight: 500
-          - asset: assets/fonts/ubuntu/SF-Pro-Rounded-Regular.ttf
-            weight: 600
-          - asset: assets/fonts/ubuntu/Bahij_TheSansArabic-Bold.ttf
-            weight: 600
+    - family: SF-Pro-Rounded-Regular
+      fonts:
+        - asset: assets/fonts/ubuntu/SF-Pro-Rounded-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/ubuntu/SF-Pro-Rounded-Regular.ttf
+          weight: 500
+        - asset: assets/fonts/ubuntu/SF-Pro-Rounded-Regular.ttf
+          weight: 600
+        - asset: assets/fonts/ubuntu/Bahij_TheSansArabic-Bold.ttf
+          weight: 600
 
 flutter_intl:
   enabled: true
