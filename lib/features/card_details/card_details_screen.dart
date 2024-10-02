@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../core/widges/custom_bottom.dart';
 import '../basewidget/custom_textfield.dart';
 
 class ImageModel{

@@ -1,8 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
-import 'dart:convert';
 
 import '../../basic_constants.dart';
 import 'model/chat_model.dart';

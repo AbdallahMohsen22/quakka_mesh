@@ -1,6 +1,6 @@
 
-import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
@@ -45,6 +45,9 @@ class AddCategoryCubit extends Cubit<AddCategoryState> {
 
       if (response.statusCode == 200) {
         emit(AddCategorySuccess());
+        if (kDebugMode) {
+          print("responseBody====>>>>$responseBody");
+        }
       } else {
         emit(AddCategoryFailure('Failed to add category'));
       }

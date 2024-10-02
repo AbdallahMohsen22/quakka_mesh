@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_quakka/utill/color_resources.dart';
 
 import '../../core/network/api_constants.dart';
+import '../../core/theming/text_styles.dart';
 import '../cart_screen/cart_list_screen.dart';
 import '../category/category_model.dart';
 import '../category/cuibt.dart';
@@ -37,7 +38,7 @@ class CategoryView extends StatelessWidget {
               },
             );
           } else if (state is CategoryError) {
-            return Center(child: Text(state.error));
+            return const Center(child: Text("Check your connection"));
           }
           return Container();
         },
@@ -79,21 +80,11 @@ class CategoryCard extends StatelessWidget {
                 children: [
                   Text(
                     category.titel,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                    ),
+                    style: AppTextStyles.categoryTextStyle,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
-                  // SizedBox(height: 4.0),
-                  // Text(
-                  //   category.isActive == false ? 'Inactive' : 'Active',
-                  //   style: TextStyle(
-                  //     color: category.isActive == null ? Colors.red : Colors.green,
-                  //   ),
-                  // ),
+
                 ],
               ),
             ),

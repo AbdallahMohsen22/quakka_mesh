@@ -22,81 +22,96 @@ class DashboardScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => UserCountCubit()..fetchUserCount(),
+      body: Stack(
+        children: [
+          Image.asset(
+            'assets/images/background.png',
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.cover,
+
           ),
-          BlocProvider(
-            create: (context) => CategoryCountCubit()..fetchCategoryCount(),
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: const Color(0xFFFFFEBB4).withOpacity(0.8),
           ),
-          BlocProvider(
-            create: (context) => CartCountCubit()..fetchCartCount(),
-          ),
-        ],
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                _buildCountCard<UserCountCubit, UserCountState>(
-                  context,
-                  title: 'Number of Users',
-                  loadingText: 'Loading user count...',
-                  errorText: 'Error loading user count',
-                  builder: (state) {
-                    if (state is UserCountLoaded) {
-                      return Center(
-                        child: Text(
-                          '${state.userCount}',
-                          style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold,color: Colors.white),
-                        ),
-                      );
-                    }
-                    return Container();
-                  },
-                ),
-                SizedBox(height: 20),
-                _buildCountCard<CategoryCountCubit, CategoryCountState>(
-                  context,
-                  title: 'Number of Categories',
-                  loadingText: 'Loading category count...',
-                  errorText: 'Error loading category count',
-                  builder: (state) {
-                    if (state is CategoryCountLoaded) {
-                      return Center(
-                        child: Text(
-                          '${state.categoryCount}',
-                          style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold,color: Colors.white),
-                        ),
-                      );
-                    }
-                    return Container();
-                  },
-                ),
-                SizedBox(height: 20),
-                _buildCountCard<CartCountCubit, CartCountState>(
-                  context,
-                  title: 'Number of Carts',
-                  loadingText: 'Loading cart count...',
-                  errorText: 'Error loading cart count',
-                  builder: (state) {
-                    if (state is CartCountLoaded) {
-                      return Center(
-                        child: Text(
-                          '${state.cartCount}',
-                          style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold,color: Colors.white),
-                        ),
-                      );
-                    }
-                    return Container();
-                  },
-                ),
-              ],
+          MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => UserCountCubit()..fetchUserCount(),
+            ),
+            BlocProvider(
+              create: (context) => CategoryCountCubit()..fetchCategoryCount(),
+            ),
+            BlocProvider(
+              create: (context) => CartCountCubit()..fetchCartCount(),
+            ),
+          ],
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  _buildCountCard<UserCountCubit, UserCountState>(
+                    context,
+                    title: 'Number of Users',
+                    loadingText: 'Loading user count...',
+                    errorText: 'Error loading user count',
+                    builder: (state) {
+                      if (state is UserCountLoaded) {
+                        return Center(
+                          child: Text(
+                            '${state.userCount}',
+                            style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold,color: Colors.white),
+                          ),
+                        );
+                      }
+                      return Container();
+                    },
+                  ),
+                  SizedBox(height: 20),
+                  _buildCountCard<CategoryCountCubit, CategoryCountState>(
+                    context,
+                    title: 'Number of Categories',
+                    loadingText: 'Loading category count...',
+                    errorText: 'Error loading category count',
+                    builder: (state) {
+                      if (state is CategoryCountLoaded) {
+                        return Center(
+                          child: Text(
+                            '${state.categoryCount}',
+                            style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold,color: Colors.white),
+                          ),
+                        );
+                      }
+                      return Container();
+                    },
+                  ),
+                  SizedBox(height: 20),
+                  _buildCountCard<CartCountCubit, CartCountState>(
+                    context,
+                    title: 'Number of Carts',
+                    loadingText: 'Loading cart count...',
+                    errorText: 'Error loading cart count',
+                    builder: (state) {
+                      if (state is CartCountLoaded) {
+                        return Center(
+                          child: Text(
+                            '${state.cartCount}',
+                            style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold,color: Colors.white),
+                          ),
+                        );
+                      }
+                      return Container();
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
+        )],
       ),
     );
   }

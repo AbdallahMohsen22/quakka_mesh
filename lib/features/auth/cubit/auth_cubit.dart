@@ -1,17 +1,12 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../basic_constants.dart';
 import '../../../core/network/api_constants.dart';
-import '../../../utill/cache_helper.dart';
 import '../../../utill/constant.dart';
 import '../../login/model/user_model.dart';
-import '../data/models/user_response.dart';
 import '../model/register_model.dart';
 import 'auth_state.dart';
 import 'package:http/http.dart' as http;

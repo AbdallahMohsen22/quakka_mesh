@@ -19,7 +19,7 @@ class MyCartScreen extends StatefulWidget {
 }
 
 class _MyCartScreenState extends State<MyCartScreen> with SingleTickerProviderStateMixin {
-  //final String userId = '9bc345b1-4d0c-4bca-aedf-761d9e53bcb8';
+
   late TabController _tabController;
   late CartCubit _sentCartCubit;
   late CartCubit _receivedCartCubit;
@@ -44,8 +44,7 @@ class _MyCartScreenState extends State<MyCartScreen> with SingleTickerProviderSt
         }
       });
     } else {
-      // Handle null userId (maybe show a login prompt or an error)
-      // You can show a login widget or redirect to a login screen here
+
       const LoginWidgetCart();
     }
   }
@@ -80,6 +79,12 @@ class _MyCartScreenState extends State<MyCartScreen> with SingleTickerProviderSt
           ),
         ),
         bottom: TabBar(
+          labelColor: ColorResources.apphighlightColor,
+          indicatorColor: ColorResources.apphighlightColor,
+          indicatorWeight: 5,
+          dividerColor: ColorResources.apphighlightColor,
+          unselectedLabelColor: ColorResources.chatIconColor,
+          dividerHeight: 2,
           controller: _tabController,
           tabs: [
             Tab(text: HomeCubit.get(context).isArabic
@@ -92,18 +97,34 @@ class _MyCartScreenState extends State<MyCartScreen> with SingleTickerProviderSt
           ],
         ),
       ),
-      body: userId != null? MultiBlocProvider(
-        providers: [
-          BlocProvider<CartCubit>.value(value: _sentCartCubit),
-          BlocProvider<CartCubit>.value(value: _receivedCartCubit),
-        ],
-        child: TabBarView(
-          controller: _tabController,
-          children: [
-            _buildCartView(context, _sentCartCubit),
-            _buildCartView(context, _receivedCartCubit),
+      body: userId != null?
+      Stack(
+        children: [
+          Image.asset(
+            'assets/images/background.png',
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.cover,
+
+          ),
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+          ),
+          MultiBlocProvider(
+          providers: [
+            BlocProvider<CartCubit>.value(value: _sentCartCubit),
+            BlocProvider<CartCubit>.value(value: _receivedCartCubit),
           ],
-        ),
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              _buildCartView(context, _sentCartCubit),
+              _buildCartView(context, _receivedCartCubit),
+            ],
+          ),
+        )],
       ) : const LoginWidgetCart(),
     );
   }
@@ -115,6 +136,19 @@ class _MyCartScreenState extends State<MyCartScreen> with SingleTickerProviderSt
         if (state is CartLoading) {
           return  Center(child: CircularProgressIndicator());
         } else if (state is CartLoaded) {
+          if (state.carts.isEmpty) {
+            return Center(
+              child: Text(
+                HomeCubit.get(context).isArabic
+                    ? 'لا توجد كروت هنا'
+                    : 'No carts here',
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: ColorResources.apphighlightColor,
+                ),
+              ),
+            );
+          }
           return ListView.builder(
             itemCount: state.carts.length,
             itemBuilder: (context, index) {
@@ -133,10 +167,17 @@ class _MyCartScreenState extends State<MyCartScreen> with SingleTickerProviderSt
                       )));
                 },
                 child: Card(
+                  color: ColorResources.apphighlightColor,
                   margin: const EdgeInsets.all(8.0),
                   child: ListTile(
-                    title: Text(cart['titel'] ?? 'No title'),
-                    subtitle: Text(cart['receiver'] ?? 'No content'),
+                    title: Text(
+                        cart['titel'] ?? 'No title',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    subtitle: Text(
+                        cart['receiver'] ?? 'No content',
+                        style: const TextStyle(color: Colors.white)
+                    ),
                     leading: cart['imageDesign'] != null
                         ? Image.network('http://backend.quokka-mesh.com/${cart['imageDesign']}')
                         : null,
@@ -146,9 +187,9 @@ class _MyCartScreenState extends State<MyCartScreen> with SingleTickerProviderSt
             },
           );
         } else if (state is CartError) {
-          return Center(child: Text('Error: ${state.error}'));
+          return const Center(child: Text('Error: please check your connection'));
         } else {
-          return const Center(child: Text('No data'));
+          return const Center(child: Text('please check your connection'));
         }
       },
     );

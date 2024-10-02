@@ -6,12 +6,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:new_quakka/core/helpers/extensitions.dart';
 import 'package:new_quakka/features/auth/widgets/pick_image_widget.dart';
 import '../../core/routing/routes.dart';
-import '../../core/widges/laoding_manager.dart';
 import '../../core/widges/subtitle_text_widget.dart';
-import '../../core/widges/title_text_widget.dart';
 import '../../generated/l10n.dart';
 import '../../utill/app_assets.dart';
-import '../../utill/app_colors.dart';
 import '../../utill/color_resources.dart';
 import '../../utill/constant.dart';
 import '../../utill/my_validators.dart';
@@ -131,232 +128,248 @@ class _RegisterScreenState extends State<RegisterScreen> {
               FocusScope.of(context).unfocus();
             },
             child: Scaffold(
-              body: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Stack(children: [
-                      Container(height: 200, decoration: const BoxDecoration(color: ColorResources.apphighlightColor)),
-                      Image.asset(AppAssets.loginBg,fit: BoxFit.cover,height: 200, opacity : const AlwaysStoppedAnimation(.15)),
+              body: Stack(
+
+                children: [
+                  Image.asset(
+                    'assets/images/background.png',
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+
+                  ),
+                  Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+                  ),
+                  SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Stack(children: [
+                        Container(height: 200, decoration: const BoxDecoration(color: ColorResources.apphighlightColor)),
+                        Image.asset(AppAssets.loginBg,fit: BoxFit.cover,height: 200, opacity : const AlwaysStoppedAnimation(.15)),
+                        Padding(
+                          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * .01),
+                          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                            Image.asset(AppAssets.splashLogo, width: 350, height: 200)]),
+                        ),
+
+
+                      ]),
                       Padding(
-                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * .01),
-                        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                          Image.asset(AppAssets.splashLogo, width: 350, height: 200)]),
-                      ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 1),
+                        child: Column(
+                          children: [
+                            // const SizedBox(height: 10.0,),
 
-
-                    ]),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 1),
-                      child: Column(
-                        children: [
-                          // const SizedBox(height: 10.0,),
-
-                          // Align(
-                          //   alignment: Alignment.centerLeft,
-                          //   child: Column(
-                          //     crossAxisAlignment: CrossAxisAlignment.start,
-                          //     children: [
-                          //       TitlesTextWidget(label: S.of(context).welcome),
-                          //       SubtitleTextWidget(
-                          //         label: S.of(context).signUpNowToReceive,
-                          //         color: AppColors.grey,
-                          //       )
-                          //     ],
-                          //   ),
-                          // ),
-                          // const SizedBox(
-                          //   height: 16.0,
-                          // ),
-                          ///circle avatar of image
-                          SizedBox(
-                            height: 130,
-                            width: 130,
-                            child: PickImageWidget(
-                              pickedImage: _pickedImage,
-                              function: () async {
-                                await localImagePicker(context);
-                              },
+                            // Align(
+                            //   alignment: Alignment.centerLeft,
+                            //   child: Column(
+                            //     crossAxisAlignment: CrossAxisAlignment.start,
+                            //     children: [
+                            //       TitlesTextWidget(label: S.of(context).welcome),
+                            //       SubtitleTextWidget(
+                            //         label: S.of(context).signUpNowToReceive,
+                            //         color: AppColors.grey,
+                            //       )
+                            //     ],
+                            //   ),
+                            // ),
+                            // const SizedBox(
+                            //   height: 16.0,
+                            // ),
+                            ///circle avatar of image
+                            SizedBox(
+                              height: 130,
+                              width: 130,
+                              child: PickImageWidget(
+                                pickedImage: _pickedImage,
+                                function: () async {
+                                  await localImagePicker(context);
+                                },
+                              ),
                             ),
-                          ),
 
-                          const SizedBox(height: 10.0,),
-                          Form(
-                            key: _formKey,
-                            child: Column(
-                              children: [
+                            const SizedBox(height: 10.0,),
+                            Form(
+                              key: _formKey,
+                              child: Column(
+                                children: [
 
-                                CustomTextField(
-                                  hintText: 'Full name',
-                                  labelText: 'Full name',
-                                  inputType: TextInputType.name,
-                                  required: true,
-                                  focusNode: _nameFocusNode,
-                                  nextFocus: _userNameFocusNode,
-                                  prefixIcon: AppAssets.user,
-                                  //capitalization: TextCapitalization.words,
-                                  controller: fullNameController,
-                                  validator: (value) {
-                                    return MyValidators.displayNameValidator(
-                                        value);
-                                  },
-                                ),
-                                const SizedBox(
-                                  height: 16.0,
-                                ),
-
-                                CustomTextField(
-                                  hintText: 'User name',
-                                  labelText: 'User name',
-                                  inputType: TextInputType.name,
-                                  required: true,
-                                  focusNode: _userNameFocusNode,
-                                  nextFocus: _emailFocusNode,
-                                  prefixIcon: AppAssets.username,
-                                  capitalization: TextCapitalization.words,
-                                  controller: usernameController,
-                                  validator: (value) {
-                                    return MyValidators.displayNameValidator(
-                                        value);
-                                  },                              ),
-                                const SizedBox(
-                                  height: 16.0,
-                                ),
-
-                                CustomTextField(
-                                  hintText: S.of(context).emailAddress,
-                                  labelText: S.of(context).emailAddress,
-                                  controller: emailController,
-                                  focusNode: _emailFocusNode,
-                                  nextFocus: _phoneFocusNode,
-                                  prefixIcon: AppAssets.email,
-                                  required: true,
-                                  showCodePicker: true,
-                                  validator: (value) {
-                                    return MyValidators.emailValidator(value);
-                                  },
-                                  // inputType: TextInputType.emailAddress,
-                                  inputType: TextInputType.emailAddress,
-                                ),
-                                const SizedBox(
-                                  height: 16.0,
-                                ),
-
-                                CustomTextField(
-                                  hintText: 'Enter Mobile Number',
-                                  labelText: 'Enter Mobile Number',
-                                  controller: phoneNumberController,
-                                  focusNode: _phoneFocusNode,
-                                  nextFocus: _passwordFocusNode,
-                                  required: true,
-                                  showCodePicker: true,
-                                  isAmount: true,
-                                  prefixIcon: AppAssets.callIcon,
-                                  validator: (value) {
-                                    return MyValidators.phoneValidator(value);
-                                  },
-                                  inputAction: TextInputAction.next,
-                                  inputType: TextInputType.phone,
-                                ),
-                                const SizedBox(
-                                  height: 16.0,
-                                ),
-
-                                CustomTextField(
-                                  hintText: 'password',
-                                  labelText: 'password',
-                                  controller: passwordController,
-                                  focusNode: _passwordFocusNode,
-                                  isPassword: true,
-                                  required: true,
-                                  inputAction: TextInputAction.next,
+                                  CustomTextField(
+                                    hintText: 'Full name',
+                                    labelText: 'Full name',
+                                    inputType: TextInputType.name,
+                                    required: true,
+                                    focusNode: _nameFocusNode,
+                                    nextFocus: _userNameFocusNode,
+                                    prefixIcon: AppAssets.user,
+                                    //capitalization: TextCapitalization.words,
+                                    controller: fullNameController,
                                     validator: (value) {
-                                      return MyValidators.passwordValidator(value);
-                                    },
-                                  prefixIcon: AppAssets.pass,
-                                ),
-                                const SizedBox(
-                                  height: 30.0,
-                                ),
-
-                              state is RegisterLoading ?
-                              const Center(child: CircularProgressIndicator()) :
-                              SizedBox(
-                                  width: double.infinity,
-                                  child: ElevatedButton.icon(
-                                    style: ElevatedButton.styleFrom(
-                                      padding: const EdgeInsets.all(12),
-                                      backgroundColor: ColorResources.apphighlightColor,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          10,
-                                        ),
-                                      ),
-                                    ),
-                                    icon: const Icon(IconlyLight.addUser,color: Colors.white,),
-                                    label: Text(
-                                      HomeCubit.get(context).isArabic
-                                          ? "انشاء حساب"
-                                          : "Sign Up",
-                                      style: const TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white
-                                      ),
-                                    ),
-                                    onPressed: ()  {
-                                      // _registerFct(context);
-                                      if (imageCover != null) {
-                                        final request = RegisterModel(
-                                          fullName: fullNameController.text,
-                                          username: usernameController.text,
-                                          email: emailController.text,
-                                          password: passwordController.text,
-                                          phoneNumber: phoneNumberController.text,
-                                          imageCover: imageCover!,
-                                        );
-                                        context.read<RegisterCubit>().register(request);
-                                      } else {
-
-                                        Constants.showToast(msg: "Please select an image",
-                                            gravity: ToastGravity.BOTTOM,
-                                            color: Colors.red);
-                                      }
+                                      return MyValidators.displayNameValidator(
+                                          value);
                                     },
                                   ),
-                                ),
+                                  const SizedBox(
+                                    height: 16.0,
+                                  ),
 
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SubtitleTextWidget(
-                                      label:HomeCubit.get(context).isArabic
-                                          ? "لديك حساب بالفعل "
-                                          : "Already have an account",
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        context.pushNamed(Routes.loginScreen);
+                                  CustomTextField(
+                                    hintText: 'User name',
+                                    labelText: 'User name',
+                                    inputType: TextInputType.name,
+                                    required: true,
+                                    focusNode: _userNameFocusNode,
+                                    nextFocus: _emailFocusNode,
+                                    prefixIcon: AppAssets.username,
+                                    capitalization: TextCapitalization.words,
+                                    controller: usernameController,
+                                    validator: (value) {
+                                      return MyValidators.displayNameValidator(
+                                          value);
+                                    },                              ),
+                                  const SizedBox(
+                                    height: 16.0,
+                                  ),
+
+                                  CustomTextField(
+                                    hintText: S.of(context).emailAddress,
+                                    labelText: S.of(context).emailAddress,
+                                    controller: emailController,
+                                    focusNode: _emailFocusNode,
+                                    nextFocus: _phoneFocusNode,
+                                    prefixIcon: AppAssets.email,
+                                    required: true,
+                                    showCodePicker: true,
+                                    validator: (value) {
+                                      return MyValidators.emailValidator(value);
+                                    },
+                                    // inputType: TextInputType.emailAddress,
+                                    inputType: TextInputType.emailAddress,
+                                  ),
+                                  const SizedBox(
+                                    height: 16.0,
+                                  ),
+
+                                  CustomTextField(
+                                    hintText: 'Enter Mobile Number',
+                                    labelText: 'Enter Mobile Number',
+                                    controller: phoneNumberController,
+                                    focusNode: _phoneFocusNode,
+                                    nextFocus: _passwordFocusNode,
+                                    required: true,
+                                    showCodePicker: true,
+                                    isAmount: true,
+                                    prefixIcon: AppAssets.callIcon,
+                                    validator: (value) {
+                                      return MyValidators.phoneValidator(value);
+                                    },
+                                    inputAction: TextInputAction.next,
+                                    inputType: TextInputType.phone,
+                                  ),
+                                  const SizedBox(
+                                    height: 16.0,
+                                  ),
+
+                                  CustomTextField(
+                                    hintText: 'password',
+                                    labelText: 'password',
+                                    controller: passwordController,
+                                    focusNode: _passwordFocusNode,
+                                    isPassword: true,
+                                    required: true,
+                                    inputAction: TextInputAction.next,
+                                      validator: (value) {
+                                        return MyValidators.passwordValidator(value);
                                       },
-                                      child:  SubtitleTextWidget(
-                                        color: ColorResources.apphighlightColor,
-                                        label:HomeCubit.get(context).isArabic
-                                            ? "تسجيل دخول"
-                                            : "Login",
-                                        textDecoration: TextDecoration.underline,
-                                        fontStyle: FontStyle.italic,
+                                    prefixIcon: AppAssets.pass,
+                                  ),
+                                  const SizedBox(
+                                    height: 30.0,
+                                  ),
+
+                                state is RegisterLoading ?
+                                const Center(child: CircularProgressIndicator()) :
+                                SizedBox(
+                                    width: double.infinity,
+                                    child: ElevatedButton.icon(
+                                      style: ElevatedButton.styleFrom(
+                                        padding: const EdgeInsets.all(12),
+                                        backgroundColor: ColorResources.apphighlightColor,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
+                                        ),
                                       ),
+                                      icon: const Icon(IconlyLight.addUser,color: Colors.white,),
+                                      label: Text(
+                                        HomeCubit.get(context).isArabic
+                                            ? "انشاء حساب"
+                                            : "Sign Up",
+                                        style: const TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.white
+                                        ),
+                                      ),
+                                      onPressed: ()  {
+                                        // _registerFct(context);
+                                        if (imageCover != null) {
+                                          final request = RegisterModel(
+                                            fullName: fullNameController.text,
+                                            username: usernameController.text,
+                                            email: emailController.text,
+                                            password: passwordController.text,
+                                            phoneNumber: phoneNumberController.text,
+                                            imageCover: imageCover!,
+                                          );
+                                          context.read<RegisterCubit>().register(request);
+                                        } else {
+
+                                          Constants.showToast(msg: "Please select an image",
+                                              gravity: ToastGravity.BOTTOM,
+                                              color: Colors.red);
+                                        }
+                                      },
                                     ),
+                                  ),
+
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SubtitleTextWidget(
+                                        label:HomeCubit.get(context).isArabic
+                                            ? "لديك حساب بالفعل "
+                                            : "Already have an account",
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          context.pushNamed(Routes.loginScreen);
+                                        },
+                                        child:  SubtitleTextWidget(
+                                          color: ColorResources.apphighlightColor,
+                                          label:HomeCubit.get(context).isArabic
+                                              ? "تسجيل دخول"
+                                              : "Login",
+                                          textDecoration: TextDecoration.underline,
+                                          fontStyle: FontStyle.italic,
+                                        ),
+                                      ),
 
 
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                )],
               ),
             ),
           );

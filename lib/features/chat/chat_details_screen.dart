@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +25,11 @@ class ChatDetailsScreen extends StatefulWidget {
 class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
   final TextEditingController messageController = TextEditingController();
 
+  final AudioPlayer _audioPlayer = AudioPlayer();
+
+  void playSendMessageSound() async {
+    await _audioPlayer.play(AssetSource('sounds/send_message_sound.wav'));
+  }
 
   @override
   void initState() {
@@ -46,8 +52,14 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
             title: Row(
               children: [
                 CircleAvatar(
-                  radius: 22,
+                  radius: 23,
                   backgroundImage: NetworkImage('http://backend.quokka-mesh.com/${widget.image}'),
+                  onBackgroundImageError: (error, stackTrace) {
+                    // Handle image loading errors
+                  },
+                  child: widget.image.isEmpty
+                      ? const Icon(Icons.person) // Fallback icon if image is null
+                      : null,
                 ),
                 const SizedBox(width: 15),
                 Expanded(
@@ -60,179 +72,203 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
               ],
             ),
           ),
-          body: ConditionalBuilder(
-            condition: context.read<SendMessageCubit>().messages.isNotEmpty,
-            builder: (context) => Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView.separated(
-                      //reverse: true,
-                      itemBuilder: (context, index) {
-                        var message = context.read<SendMessageCubit>().messages[index];
-                        if (userId == message.senderId) {
-                          return buildMyMessage(message);
-                        } else {
-                          return buildMessage(message);
-                        }
-                      },
-                      separatorBuilder: (context, index) => const SizedBox(height: 15),
-                      itemCount: context.read<SendMessageCubit>().messages.length,
-                      physics: const BouncingScrollPhysics(),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.image),
-                        onPressed: () async {
-                          final picker = ImagePicker();
-                          final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-                          if (pickedFile != null) {
-                            context.read<SendMessageCubit>().sendImage(
-                              receiverId: widget.id,
-                              dateTime: DateTime.now().toString(),
-                              imageUrl: pickedFile.path, // Update this to upload image and get URL
-                            );
-                          }
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.emoji_emotions),
-                        onPressed: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (context) {
-                              return BlocProvider.value(
-                                value: context.read<SendMessageCubit>(),
-                                child: StickerPicker(
-                                  onStickerSelected: (stickerUrl) {
-                                    context.read<SendMessageCubit>().sendSticker(
-                                      receiverId: widget.id,
-                                      dateTime: DateTime.now().toString(),
-                                      stickerUrl: stickerUrl,
-                                    );
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      ),
-                      Expanded(
-                        child: TextFormField(
-                          controller: messageController,
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Type your message here...',
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.send, color: ColorResources.apphighlightColor),
-                        onPressed: () {
-                          final message = messageController.text.toString();
-                          if (message.isNotEmpty) {
-                            context.read<SendMessageCubit>().sendMessage(
-                              receiverId: widget.id,
-                              dateTime: DateTime.now().toString(),
-                              text: message,
-                            );
-                            messageController.clear();
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ],
+          body: Stack(
+            children: [
+              Image.asset(
+                'assets/images/background.png',
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.cover,
+
               ),
-            ),
-            fallback: (context) =>
-                SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
+              Container(
+                width: double.infinity,
+                height: double.infinity,
+                color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+              ),
+
+              ConditionalBuilder(
+              condition: context.read<SendMessageCubit>().messages.isNotEmpty,
+              builder: (context) => Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ListView.separated(
+                        //reverse: true,
+                        itemBuilder: (context, index) {
+                          var message = context.read<SendMessageCubit>().messages[index];
+                          if (userId == message.senderId) {
+                            return buildMyMessage(message);
+                          } else {
+                            return buildMessage(message);
+                          }
+                        },
+                        separatorBuilder: (context, index) => const SizedBox(height: 15),
+                        itemCount: context.read<SendMessageCubit>().messages.length,
+                        physics: const BouncingScrollPhysics(),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    const Divider(
+                      thickness: 1,
+                      color: ColorResources.apphighlightColor,
+                    ),
+                    Row(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 100),
-                          child: Image.asset("assets/images/start_chatting.png")
+                        IconButton(
+                          icon: const Icon(Icons.image),
+                          onPressed: () async {
+                            final picker = ImagePicker();
+                            final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+                            if (pickedFile != null) {
+                              context.read<SendMessageCubit>().sendImage(
+                                receiverId: widget.id,
+                                dateTime: DateTime.now().toString(),
+                                imageUrl: pickedFile.path, // Update this to upload image and get URL
+                              );
+                            }
+                          },
                         ),
-                  
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 100),
-                          child: Row(
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.image),
-                                onPressed: () async {
-                                  final picker = ImagePicker();
-                                  final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-                                  if (pickedFile != null) {
-                                    context.read<SendMessageCubit>().sendImage(
-                                      receiverId: widget.id,
-                                      dateTime: DateTime.now().toString(),
-                                      imageUrl: pickedFile.path, // Update this to upload image and get URL
-                                    );
-                                  }
-                                },
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.emoji_emotions),
-                                onPressed: () {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    builder: (context) {
-                                      return BlocProvider.value(
-                                        value: context.read<SendMessageCubit>(),
-                                        child: StickerPicker(
-                                          onStickerSelected: (stickerUrl) {
-                                            context.read<SendMessageCubit>().sendSticker(
-                                              receiverId: widget.id,
-                                              dateTime: DateTime.now().toString(),
-                                              stickerUrl: stickerUrl,
-                                            );
-                                            Navigator.pop(context);
-                                          },
-                                        ),
+                        IconButton(
+                          icon: const Icon(Icons.emoji_emotions),
+                          onPressed: () {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return BlocProvider.value(
+                                  value: context.read<SendMessageCubit>(),
+                                  child: StickerPicker(
+                                    onStickerSelected: (stickerUrl) {
+                                      context.read<SendMessageCubit>().sendSticker(
+                                        receiverId: widget.id,
+                                        dateTime: DateTime.now().toString(),
+                                        stickerUrl: stickerUrl,
                                       );
+                                      Navigator.pop(context);
                                     },
-                                  );
-                                },
-                              ),
-                              Expanded(
-                                child: TextFormField(
-                                  controller: messageController,
-                                  decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Type your message here...',
                                   ),
-                                ),
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.send, color: ColorResources.apphighlightColor),
-                                onPressed: () {
-                                  final message = messageController.text.toString();
-                                  if (message.isNotEmpty) {
-                                    context.read<SendMessageCubit>().sendMessage(
-                                      receiverId: widget.id,
-                                      dateTime: DateTime.now().toString(),
-                                      text: message,
-                                    );
-                                    messageController.clear();
-                                  }
-                                },
-                              ),
-                            ],
+                                );
+                              },
+                            );
+                          },
+                        ),
+                        Expanded(
+                          child: TextFormField(
+                            controller: messageController,
+                            decoration: const InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Type your message here...',
+                            ),
                           ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.send, color: ColorResources.apphighlightColor),
+                          onPressed: () {
+                            final message = messageController.text.toString();
+                            if (message.isNotEmpty) {
+                              context.read<SendMessageCubit>().sendMessage(
+                                receiverId: widget.id,
+                                dateTime: DateTime.now().toString(),
+                                text: message,
+                              );
+                              messageController.clear();
+
+                              playSendMessageSound(); // Play the sound here
+                            }
+                          },
                         ),
                       ],
                     ),
-                  ),
-                )
+                  ],
+                ),
+              ),
+              fallback: (context) =>
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 100),
+                            child: Image.asset("assets/images/start_chatting.png")
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 100),
+                            child: Row(
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.image),
+                                  onPressed: () async {
+                                    final picker = ImagePicker();
+                                    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+                                    if (pickedFile != null) {
+                                      context.read<SendMessageCubit>().sendImage(
+                                        receiverId: widget.id,
+                                        dateTime: DateTime.now().toString(),
+                                        imageUrl: pickedFile.path, // Update this to upload image and get URL
+                                      );
+                                    }
+                                  },
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.emoji_emotions),
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      builder: (context) {
+                                        return BlocProvider.value(
+                                          value: context.read<SendMessageCubit>(),
+                                          child: StickerPicker(
+                                            onStickerSelected: (stickerUrl) {
+                                              context.read<SendMessageCubit>().sendSticker(
+                                                receiverId: widget.id,
+                                                dateTime: DateTime.now().toString(),
+                                                stickerUrl: stickerUrl,
+                                              );
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                                Expanded(
+                                  child: TextFormField(
+                                    controller: messageController,
+                                    decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Type your message here...',
+                                    ),
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.send, color: ColorResources.apphighlightColor),
+                                  onPressed: () {
+                                    final message = messageController.text.toString();
+                                    if (message.isNotEmpty) {
+                                      context.read<SendMessageCubit>().sendMessage(
+                                        receiverId: widget.id,
+                                        dateTime: DateTime.now().toString(),
+                                        text: message,
+                                      );
+                                      messageController.clear();
+
+                                      playSendMessageSound(); // Play the sound here
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+            )],
           ),
         );
       },
@@ -242,9 +278,9 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
   Widget buildMessage(MessageModel model) => Align(
     alignment: AlignmentDirectional.centerStart,
     child: Container(
-      decoration: const BoxDecoration(
-        color: Color(0xff2f2f2f),
-        borderRadius: BorderRadiusDirectional.only(
+      decoration:  BoxDecoration(
+        color:  model.stickerUrl != null ?const Color(0xffffffff): const Color(0xffd8c1a3),
+        borderRadius: const BorderRadiusDirectional.only(
           bottomEnd: Radius.circular(10),
           topStart: Radius.circular(10),
           topEnd: Radius.circular(10),
@@ -262,7 +298,7 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
           if (model.imageUrl != null)
             Image.file(File(model.imageUrl!)),
           if (model.stickerUrl != null)
-            Image.asset(model.stickerUrl!), // Assuming stickers are hosted online
+            Image.asset(model.stickerUrl!,fit: BoxFit.cover,width: 100,height: 100,), // Assuming stickers are hosted online
         ],
       ),
     ),
@@ -271,9 +307,9 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
   Widget buildMyMessage(MessageModel model) => Align(
     alignment: AlignmentDirectional.centerEnd,
     child: Container(
-      decoration: const BoxDecoration(
-        color: Color(0xff25d366),
-        borderRadius: BorderRadiusDirectional.only(
+      decoration:  BoxDecoration(
+        color: model.stickerUrl != null ?const Color(0xFFFFFEBB4): const Color(0xFF3e1a24),
+        borderRadius: const BorderRadiusDirectional.only(
           bottomStart: Radius.circular(10),
           topStart: Radius.circular(10),
           topEnd: Radius.circular(10),
@@ -302,6 +338,12 @@ class StickerPicker extends StatelessWidget {
   final Function(String) onStickerSelected;
 
   StickerPicker({required this.onStickerSelected});
+
+  final AudioPlayer _audioPlayer = AudioPlayer();
+
+  void playSendMessageSound() async {
+    await _audioPlayer.play(AssetSource('sounds/send_message_sound.wav'));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -350,6 +392,7 @@ class StickerPicker extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               onStickerSelected(stickerUrls[index]);
+              playSendMessageSound(); // Play the sound here
             },
             //child: CachedNetworkImage(imageUrl: stickerUrls[index]),
             child: Image.asset(stickerUrls[index]),

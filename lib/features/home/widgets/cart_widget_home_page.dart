@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../utill/app_assets.dart';
-import '../../../utill/color_resources.dart';
-import '../../../utill/dimensions.dart';
-import '../../basewidget/custom_themes.dart';
 import '../../basewidget/select_language_bottom_sheet.dart';
-import 'notification_screen.dart';
 
 class CartWidgetHomePage extends StatelessWidget {
   const CartWidgetHomePage({super.key});

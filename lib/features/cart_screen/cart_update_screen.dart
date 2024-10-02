@@ -68,208 +68,229 @@ class _UpdateCartScreenState extends State<UpdateCartScreen> {
             ),
           ),
         ),
-        body: BlocConsumer<UpdateCartCubit, CartState>(
-          listener: (context, state) {
-            if (state is CartUpdated) {
-              //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-              Constants.showToast(msg: state.message,
-                  gravity: ToastGravity.BOTTOM,
-                  color: Colors.green);
-              Navigator.pop(context);
-            } else if (state is CartUpdateError) {
-              //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
-              Constants.showToast(msg: "Failed to update the cart",
-                  gravity: ToastGravity.BOTTOM,
-                  color: Colors.red);
-            }
-          },
-          builder: (context, state) {
+        body: Stack(
 
-              return Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Form(
-                  key: _formKey,
-                  child: ListView(
-                    children: [
-                      _imageDesign == null
-                          ? TextButton(
-                        onPressed: _pickImage,
-                        child: const Text('Pick Image'),
-                      )
-                          : Image.file(_imageDesign!),
+          children: [
+            Image.asset(
+              'assets/images/background.png',
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
 
-                      const SizedBox(height: 10,),
-                      CustomTextField(
-                        borderRadius: 20,
-                        borderColor: ColorResources.apphighlightColor,
-                        hintText: 'Title',
-                        labelText: 'Title',
-                        required: true,
-                        // focusNode: _nameFocusNode,
-                        // nextFocus: _userNameFocusNode,
-                        // prefixIcon: AppAssets.user,
-                        capitalization: TextCapitalization.words,
-                        inputType: TextInputType.text,
-                        controller: _titleController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter a title';
-                          }
-                          return null;
-                        },
+            ),
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+            ),
+            BlocConsumer<UpdateCartCubit, CartState>(
+            listener: (context, state) {
+              if (state is CartUpdated) {
+                //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+                Constants.showToast(msg: state.message,
+                    gravity: ToastGravity.BOTTOM,
+                    color: Colors.green);
+                Navigator.pop(context);
+              } else if (state is CartUpdateError) {
+                //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
+                Constants.showToast(msg: "Failed to update the cart",
+                    gravity: ToastGravity.BOTTOM,
+                    color: Colors.red);
+              }
+            },
+            builder: (context, state) {
 
-                      ),
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Form(
+                    key: _formKey,
+                    child: ListView(
+                      children: [
+                        _imageDesign == null
+                            ? TextButton(
+                          onPressed: _pickImage,
+                          child: Text(
+                            HomeCubit.get(context).isArabic
+                                ? "التقط صورة الان"
+                                : 'Pick Image',
 
-                      const SizedBox(height: 10,),
-                      CustomTextField(
-                        borderRadius: 20,
-                        borderColor: ColorResources.apphighlightColor,
-                        hintText: 'Content',
-                        labelText: 'Content',
-                        required: true,
-                        // focusNode: _nameFocusNode,
-                        // nextFocus: _userNameFocusNode,
-                        // prefixIcon: AppAssets.user,
-                        capitalization: TextCapitalization.words,
-                        inputType: TextInputType.text,
-                        controller: _contentController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter content';
-                          }
-                          return null;
-                        },
-                      ),
+                          ),
+                        )
+                            : Image.file(_imageDesign!),
 
-                      const SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
+                        CustomTextField(
+                          borderRadius: 20,
+                          borderColor: ColorResources.apphighlightColor,
+                          hintText: 'Title',
+                          labelText: 'Title',
+                          required: true,
+                          // focusNode: _nameFocusNode,
+                          // nextFocus: _userNameFocusNode,
+                          // prefixIcon: AppAssets.user,
+                          capitalization: TextCapitalization.words,
+                          inputType: TextInputType.text,
+                          controller: _titleController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a title';
+                            }
+                            return null;
+                          },
 
-                      CustomTextField(
-                        borderRadius: 20,
-                        borderColor: ColorResources.apphighlightColor,
-                        hintText: 'Sender',
-                        labelText: 'Sender',
-                        required: true,
-                        // focusNode: _nameFocusNode,
-                        // nextFocus: _userNameFocusNode,
-                        // prefixIcon: AppAssets.user,
-                        capitalization: TextCapitalization.words,
-                        inputType: TextInputType.name,
-                        controller: _senderController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter a sender';
-                          }
-                          return null;
-                        },
-                      ),
-
-                      const SizedBox(height: 10,),
-
-                      CustomTextField(
-                        borderRadius: 20,
-                        borderColor: ColorResources.apphighlightColor,
-                        hintText: 'Receiver',
-                        labelText: 'Receiver',
-                        required: true,
-                        // focusNode: _nameFocusNode,
-                        // nextFocus: _userNameFocusNode,
-                        // prefixIcon: AppAssets.user,
-                        capitalization: TextCapitalization.words,
-                        inputType: TextInputType.name,
-                        controller: _receiverController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter a receiver';
-                          }
-                          return null;
-                        },
-                      ),
-
-
-                      const SizedBox(height: 10,),
-                      CustomTextField(
-                        borderRadius: 20,
-                        borderColor: ColorResources.apphighlightColor,
-                        hintText: 'Number of Points',
-                        labelText: 'Number of Points',
-                        required: true,
-                        // focusNode: _nameFocusNode,
-                        // nextFocus: _userNameFocusNode,
-                        // prefixIcon: AppAssets.user,
-                        //capitalization: TextCapitalization.words,
-                        inputType: TextInputType.number,
-                        controller: _numberOfPointController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter a number of points';
-                          }
-                          return null;
-                        },
-                      ),
-
-                      SwitchListTile(
-                        title: const Text('Is Premium'),
-                        value: _isPremium,
-                        onChanged: (bool value) {
-                          setState(() {
-                            _isPremium = value;
-                          });
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      if (state is CartUpdateError)
-                        Text(
-                          state.error,
-                          style: const TextStyle(color: Colors.red),
                         ),
-                      ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate() && _imageDesign != null) {
-                            final createdDate = DateTime.now();
-                            context.read<UpdateCartCubit>().updateCart(
-                              id: widget.cartId,
-                              title: _titleController.text,
-                              imageDesign: _imageDesign!,
-                              sender: _senderController.text,
-                              receiver: _receiverController.text,
-                              content: _contentController.text,
-                              created: createdDate,
-                              numberOfPoint: int.parse(_numberOfPointController.text),
-                              isPremium: _isPremium,
-                            );
-                          }else{
-                            Constants.showToast(msg: "Please pick an image and complete all data",
-                                gravity: ToastGravity.BOTTOM,
-                                color: Colors.red);
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 70,vertical: 12),
-                          backgroundColor: ColorResources.apphighlightColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              30,
+
+                        const SizedBox(height: 10,),
+                        CustomTextField(
+                          borderRadius: 20,
+                          borderColor: ColorResources.apphighlightColor,
+                          hintText: 'Content',
+                          labelText: 'Content',
+                          required: true,
+                          // focusNode: _nameFocusNode,
+                          // nextFocus: _userNameFocusNode,
+                          // prefixIcon: AppAssets.user,
+                          capitalization: TextCapitalization.words,
+                          inputType: TextInputType.text,
+                          controller: _contentController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter content';
+                            }
+                            return null;
+                          },
+                        ),
+
+                        const SizedBox(height: 10,),
+
+                        CustomTextField(
+                          borderRadius: 20,
+                          borderColor: ColorResources.apphighlightColor,
+                          hintText: 'Sender',
+                          labelText: 'Sender',
+                          required: true,
+                          // focusNode: _nameFocusNode,
+                          // nextFocus: _userNameFocusNode,
+                          // prefixIcon: AppAssets.user,
+                          capitalization: TextCapitalization.words,
+                          inputType: TextInputType.name,
+                          controller: _senderController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a sender';
+                            }
+                            return null;
+                          },
+                        ),
+
+                        const SizedBox(height: 10,),
+
+                        CustomTextField(
+                          borderRadius: 20,
+                          borderColor: ColorResources.apphighlightColor,
+                          hintText: 'Receiver',
+                          labelText: 'Receiver',
+                          required: true,
+                          // focusNode: _nameFocusNode,
+                          // nextFocus: _userNameFocusNode,
+                          // prefixIcon: AppAssets.user,
+                          capitalization: TextCapitalization.words,
+                          inputType: TextInputType.name,
+                          controller: _receiverController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a receiver';
+                            }
+                            return null;
+                          },
+                        ),
+
+
+                        const SizedBox(height: 10,),
+                        CustomTextField(
+                          borderRadius: 20,
+                          borderColor: ColorResources.apphighlightColor,
+                          hintText: 'Number of Points',
+                          labelText: 'Number of Points',
+                          required: true,
+                          // focusNode: _nameFocusNode,
+                          // nextFocus: _userNameFocusNode,
+                          // prefixIcon: AppAssets.user,
+                          //capitalization: TextCapitalization.words,
+                          inputType: TextInputType.number,
+                          controller: _numberOfPointController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a number of points';
+                            }
+                            return null;
+                          },
+                        ),
+
+                        SwitchListTile(
+                          title: const Text('Is Premium'),
+                          value: _isPremium,
+                          onChanged: (bool value) {
+                            setState(() {
+                              _isPremium = value;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        if (state is CartUpdateError)
+                          Text(
+                            state.error,
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                        ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate() && _imageDesign != null) {
+                              final createdDate = DateTime.now();
+                              context.read<UpdateCartCubit>().updateCart(
+                                id: widget.cartId,
+                                title: _titleController.text,
+                                imageDesign: _imageDesign!,
+                                sender: _senderController.text,
+                                receiver: _receiverController.text,
+                                content: _contentController.text,
+                                created: createdDate,
+                                numberOfPoint: int.parse(_numberOfPointController.text),
+                                isPremium: _isPremium,
+                              );
+                            }else{
+                              Constants.showToast(msg: "Please pick an image and complete all data",
+                                  gravity: ToastGravity.BOTTOM,
+                                  color: Colors.red);
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(horizontal: 70,vertical: 12),
+                            backgroundColor: ColorResources.apphighlightColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                30,
+                              ),
                             ),
                           ),
-                        ),
-                        child: Text(
-                            HomeCubit.get(context).isArabic
-                                ? "تحديث الكارت"
-                                : 'Update Cart',
-                          style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.white
+                          child: Text(
+                              HomeCubit.get(context).isArabic
+                                  ? "تحديث الكارت"
+                                  : 'Update Cart',
+                            style: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.white
+                            ),
+
                           ),
 
                         ),
-
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              );
+                );
 
-          },
+            },
+          )],
         ),
       ),
     );

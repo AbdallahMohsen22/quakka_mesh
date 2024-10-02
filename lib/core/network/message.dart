@@ -101,19 +101,34 @@ class _MessageState extends State<Message> {
       //   },
       // ),
 
-      body:  Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height:60),
-            Image.asset('assets/images/no_notifications.png',height: 340,),
-            const SizedBox(height:20),
-            const Text(
-              'No Notification Yet',
-            ),
-          ],
-        ),
+      body:  Stack(
+        children: [
+          Image.asset(
+            'assets/images/background.png',
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.cover,
+
+          ),
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+          ),
+          Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height:60),
+              Image.asset('assets/images/no_notifications.png',height: 340,),
+              const SizedBox(height:20),
+              const Text(
+                'No Notification Yet',
+              ),
+            ],
+          ),
+        )],
       ),
     );
   }
