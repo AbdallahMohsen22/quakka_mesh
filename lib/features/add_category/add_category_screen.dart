@@ -48,139 +48,155 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
             ),
           ),
         ),
-        body: BlocConsumer<AddCategoryCubit, AddCategoryState>(
-          listener: (context, state) {
-            if (state is AddCategorySuccess) {
-              Constants.showToast(msg: 'Category added successfully',
-                  gravity: ToastGravity.BOTTOM,
-                  color: Colors.green);
+        body: Stack(
 
-              Navigator.pop(context);
-            } else if (state is AddCategoryFailure) {
-              Constants.showToast(msg: 'Failed to add Category',
-                  gravity: ToastGravity.BOTTOM,
-                  color: Colors.red);
-            }
-          },
-          builder: (context, state) {
-            if (state is AddCategoryLoading) {
-              return Center(child: CircularProgressIndicator());
-            }
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  children: [
-                    CustomTextField(
-                      borderRadius: 20,
-                      borderColor: ColorResources.apphighlightColor,
-                      hintText: 'Title',
-                      labelText: 'Title',
-                      required: true,
-                      // focusNode: _nameFocusNode,
-                      // nextFocus: _userNameFocusNode,
-                      // prefixIcon: AppAssets.user,
-                      capitalization: TextCapitalization.words,
-                      inputType: TextInputType.text,
-                      controller: titleController,
-                      validator: (value) {
-                        return MyValidators.displayFieldValidator(
-                            value);
-                      },
-                    ),
-                    // TextField(
-                    //   controller: titleController,
-                    //   decoration: InputDecoration(labelText: 'Title'),
-                    // ),
-                    SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: pickImage,
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(12),
-                        backgroundColor: ColorResources.apphighlightColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            30,
+          children: [
+            Image.asset(
+              'assets/images/background.png',
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
+
+            ),
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+            ),
+            BlocConsumer<AddCategoryCubit, AddCategoryState>(
+            listener: (context, state) {
+              if (state is AddCategorySuccess) {
+                Constants.showToast(msg: 'Category added successfully',
+                    gravity: ToastGravity.BOTTOM,
+                    color: Colors.green);
+
+                Navigator.pop(context);
+              } else if (state is AddCategoryFailure) {
+                Constants.showToast(msg: 'Failed to add Category',
+                    gravity: ToastGravity.BOTTOM,
+                    color: Colors.red);
+              }
+            },
+            builder: (context, state) {
+              if (state is AddCategoryLoading) {
+                return Center(child: CircularProgressIndicator());
+              }
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
+                      CustomTextField(
+                        borderRadius: 20,
+                        borderColor: ColorResources.apphighlightColor,
+                        hintText: 'Title',
+                        labelText: 'Title',
+                        required: true,
+                        // focusNode: _nameFocusNode,
+                        // nextFocus: _userNameFocusNode,
+                        // prefixIcon: AppAssets.user,
+                        capitalization: TextCapitalization.words,
+                        inputType: TextInputType.text,
+                        controller: titleController,
+                        validator: (value) {
+                          return MyValidators.displayFieldValidator(
+                              value);
+                        },
+                      ),
+                      // TextField(
+                      //   controller: titleController,
+                      //   decoration: InputDecoration(labelText: 'Title'),
+                      // ),
+                      SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: pickImage,
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(12),
+                          backgroundColor: ColorResources.apphighlightColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              30,
+                            ),
+                          ),
+                        ),
+                        child: Text(
+                          HomeCubit.get(context).isArabic
+                              ? "التقط صورة"
+                              : 'Pick Image',
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white
                           ),
                         ),
                       ),
-                      child: Text(
-                        HomeCubit.get(context).isArabic
-                            ? "التقط صورة"
-                            : 'Pick Image',
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white
+                      if (image != null)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          child: Image.file(File(image!.path)),
                         ),
-                      ),
-                    ),
-                    if (image != null)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Image.file(File(image!.path)),
-                      ),
-                    SizedBox(height: 20),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(12),
-                        backgroundColor: ColorResources.apphighlightColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            30,
+                      SizedBox(height: 20),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(12),
+                          backgroundColor: ColorResources.apphighlightColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              30,
+                            ),
                           ),
                         ),
-                      ),
-                      child: Text(
-                        HomeCubit.get(context).isArabic
-                            ? "اضافة قسم"
-                            : 'Add Category',
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white
+                        child: Text(
+                          HomeCubit.get(context).isArabic
+                              ? "اضافة قسم"
+                              : 'Add Category',
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white
+                          ),
                         ),
+                        onPressed: () {
+                          if (image != null && titleController.text.isNotEmpty) {
+                            final request = AddCategoryModel(
+                              title: titleController.text,
+                              image: image!,
+                            );
+                            context.read<AddCategoryCubit>().addCategory(request);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Please select an image and enter title')),
+                            );
+                          }
+                        },
                       ),
-                      onPressed: () {
-                        if (image != null && titleController.text.isNotEmpty) {
-                          final request = AddCategoryModel(
-                            title: titleController.text,
-                            image: image!,
-                          );
-                          context.read<AddCategoryCubit>().addCategory(request);
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Please select an image and enter title')),
-                          );
-                        }
-                      },
-                    ),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     if (image != null && titleController.text.isNotEmpty) {
-                    //       final request = AddCategoryModel(
-                    //         title: titleController.text,
-                    //         image: image!,
-                    //       );
-                    //       context.read<AddCategoryCubit>().addCategory(request);
-                    //     } else {
-                    //       ScaffoldMessenger.of(context).showSnackBar(
-                    //         SnackBar(content: Text('Please select an image and enter title')),
-                    //       );
-                    //     }
-                    //   },
-                    //   child: Text('Add Category'),
-                    // ),
-                    if (state is AddCategoryFailure) ...[
-                      SizedBox(height: 10),
-                      Text(
-                        state.error,
-                        style: TextStyle(color: Colors.red),
-                      ),
-                    ]
-                  ],
+                      // ElevatedButton(
+                      //   onPressed: () {
+                      //     if (image != null && titleController.text.isNotEmpty) {
+                      //       final request = AddCategoryModel(
+                      //         title: titleController.text,
+                      //         image: image!,
+                      //       );
+                      //       context.read<AddCategoryCubit>().addCategory(request);
+                      //     } else {
+                      //       ScaffoldMessenger.of(context).showSnackBar(
+                      //         SnackBar(content: Text('Please select an image and enter title')),
+                      //       );
+                      //     }
+                      //   },
+                      //   child: Text('Add Category'),
+                      // ),
+                      if (state is AddCategoryFailure) ...[
+                        SizedBox(height: 10),
+                        Text(
+                          state.error,
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ]
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          )],
         ),
       ),
     );

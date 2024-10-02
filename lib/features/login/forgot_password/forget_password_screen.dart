@@ -41,86 +41,102 @@ class _SendEmailScreenState extends State<SendEmailScreen> {
             ),
           ),
         ),
-        body: BlocConsumer<EmailCubit, EmailState>(
-          listener: (context, state) {
-            if (state is EmailSent) {
-              //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-              Constants.showToast(msg: 'Send OTP Successfully',
-                  gravity: ToastGravity.BOTTOM,
-                  color: Colors.green);
-              if (state.message == 'Send OTP Successfully') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => OtpScreen()),
-                );
+        body: Stack(
+
+          children: [
+            Image.asset(
+              'assets/images/background.png',
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
+
+            ),
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+            ),
+            BlocConsumer<EmailCubit, EmailState>(
+            listener: (context, state) {
+              if (state is EmailSent) {
+                //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+                Constants.showToast(msg: 'Send OTP Successfully',
+                    gravity: ToastGravity.BOTTOM,
+                    color: Colors.green);
+                if (state.message == 'Send OTP Successfully') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => OtpScreen()),
+                  );
+                }
+              } else if (state is EmailSendError) {
+                //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Enter a valid email")));
+                Constants.showToast(msg: "Enter a valid email",
+                    gravity: ToastGravity.BOTTOM,
+                    color: Colors.red);
               }
-            } else if (state is EmailSendError) {
-              //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Enter a valid email")));
-              Constants.showToast(msg: "Enter a valid email",
-                  gravity: ToastGravity.BOTTOM,
-                  color: Colors.red);
-            }
-          },
-          builder: (context, state) {
+            },
+            builder: (context, state) {
 
-              return Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomTextField(
-                      borderRadius: 20,
-                      borderColor: ColorResources.apphighlightColor,
-                      hintText: 'Email',
-                      labelText: 'Email',
-                      required: true,
-                      // focusNode: _nameFocusNode,
-                      // nextFocus: _userNameFocusNode,
-                      // prefixIcon: AppAssets.user,
-                      //capitalization: TextCapitalization.words,
-                      inputType: TextInputType.emailAddress,
-                      controller: _emailController,
-                      validator: (value) {
-                        return MyValidators.emailValidator(
-                            value);
-                      },
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomTextField(
+                        borderRadius: 20,
+                        borderColor: ColorResources.apphighlightColor,
+                        hintText: 'Email',
+                        labelText: 'Email',
+                        required: true,
+                        // focusNode: _nameFocusNode,
+                        // nextFocus: _userNameFocusNode,
+                        // prefixIcon: AppAssets.user,
+                        //capitalization: TextCapitalization.words,
+                        inputType: TextInputType.emailAddress,
+                        controller: _emailController,
+                        validator: (value) {
+                          return MyValidators.emailValidator(
+                              value);
+                        },
 
-                    ),
-
-                    SizedBox(height: 30),
-                    ElevatedButton(
-                      onPressed: () {
-                        final email = _emailController.text;
-                        if (email.isNotEmpty) {
-                          context.read<EmailCubit>().sendEmail(email);
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please enter an email')));
-                        }
-                      },
-                      child: Text(
-                          HomeCubit.get(context).isArabic
-                              ? "تأكيد الايميل"
-                              : "Confirm Email",
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white
                       ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 70,vertical: 12),
-                        backgroundColor: ColorResources.apphighlightColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            30,
+
+                      SizedBox(height: 30),
+                      ElevatedButton(
+                        onPressed: () {
+                          final email = _emailController.text;
+                          if (email.isNotEmpty) {
+                            context.read<EmailCubit>().sendEmail(email);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please enter an email')));
+                          }
+                        },
+                        child: Text(
+                            HomeCubit.get(context).isArabic
+                                ? "تأكيد الايميل"
+                                : "Confirm Email",
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white
+                        ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 70,vertical: 12),
+                          backgroundColor: ColorResources.apphighlightColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              30,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              );
+                    ],
+                  ),
+                );
 
-          },
+            },
+          )],
         ),
       ),
     );

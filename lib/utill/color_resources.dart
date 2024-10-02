@@ -145,6 +145,6 @@ class ColorResources {
   };
 
   static const MaterialColor primaryMaterial = MaterialColor(0xFF1455AC, colorMap);
-  static const MaterialColor appColor = MaterialColor(0xFFE453DC, colorMap);
-  static const MaterialColor apphighlightColor = MaterialColor(0xFF7B71E1, colorMap);
+  static const MaterialColor appColor = MaterialColor(0xFF3e1a24, colorMap);
+  static const MaterialColor apphighlightColor = MaterialColor(0xFF3e1a24, colorMap);
 }

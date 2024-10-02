@@ -2,13 +2,10 @@
 import 'package:flutter/material.dart';
 
 import '../../localization/language_constrants.dart';
-import '../../utill/color_resources.dart';
-import '../../utill/dimensions.dart';
 import '../basewidget/custom_app_bar.dart';
-import '../basewidget/custom_themes.dart';
 
 class AllCategoryScreen extends StatelessWidget {
-  const AllCategoryScreen({Key? key}) : super(key: key);
+  const AllCategoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

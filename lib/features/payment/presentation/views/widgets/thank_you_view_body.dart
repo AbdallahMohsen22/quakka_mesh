@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_quakka/features/payment/presentation/views/widgets/thank_you_card.dart';
 
-import 'custom_check_icon.dart';
 
 class ThankYouViewBody extends StatelessWidget {
   const ThankYouViewBody({super.key});

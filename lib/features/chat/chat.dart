@@ -40,9 +40,25 @@ class ChatScreen extends StatelessWidget {
         ),
 
       ),
-      body: userId != null? BlocProvider(
-        create: (context) => ChatCubit()..fetchUsers(userId!),
-        child: UserListView(),
+      body: userId != null?
+      Stack(
+        children: [
+          Image.asset(
+            'assets/images/background.png',
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.cover,
+
+          ),
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+          ),
+          BlocProvider(
+          create: (context) => ChatCubit()..fetchUsers(userId!),
+          child: UserListView(),
+        )],
       ) : const LoginWidgetChat(),
     );
   }
@@ -101,21 +117,16 @@ class UserListView extends StatelessWidget {
                     image: user.imageCover,) ));
                 },
                 child: ListTile(
-                  // leading: ClipRRect(
-                  //   borderRadius: BorderRadius.circular(30.0),
-                  //   child: CachedNetworkImage(
-                  //     imageUrl: "http://backend.quokka-mesh.com/${user.imageCover}",
-                  //     placeholder: (context, url) => const CircularProgressIndicator(),
-                  //     errorWidget: (context, url, error) => const Icon(Icons.person_3_sharp),
-                  //     httpHeaders: const {
-                  //       ApiConstants.tokenTitle:
-                  //       ApiConstants.tokenBody
-                  //     },
-                  //   ),
-                  // ),
+
                   leading: CircleAvatar(
                     radius: 30,
                     backgroundImage: NetworkImage('http://backend.quokka-mesh.com/${user.imageCover}'),
+                    onBackgroundImageError: (error, stackTrace) {
+                      // Handle image loading errors
+                    },
+                    child: user.imageCover.isEmpty
+                        ? const Icon(Icons.person) // Fallback icon if image is null
+                        : null,
                   ),
                   title: Text(
                     user.fullName,

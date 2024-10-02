@@ -5,7 +5,6 @@ import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../core/theming/colors.dart';
 import '../../core/theming/styles.dart';
 import '../../utill/color_resources.dart';
 import '../home/home_cubit/home_cubit.dart';

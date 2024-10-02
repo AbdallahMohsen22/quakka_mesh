@@ -100,142 +100,158 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             ),
           ),
         ),
-        body: BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
-          listener: (context, state) {
-            if (state is ResetPasswordSuccess) {
-              // Fluttertoast.showToast(msg: state.message);
-              Constants.showToast(msg: state.message,
-                  gravity: ToastGravity.BOTTOM,
-                  color: Colors.green);
-              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen())); // Navigate back or to another screen
-            } else if (state is ResetPasswordFailure) {
-              // Fluttertoast.showToast(msg: state.error);
-              Constants.showToast(msg: state.error,
-                  gravity: ToastGravity.BOTTOM,
-                  color: Colors.red);
-            }
-          },
-          builder: (context, state) {
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomTextField(
-                      borderRadius: 20,
-                      borderColor: ColorResources.apphighlightColor,
-                      hintText: 'Email',
-                      labelText: 'Email',
-                      required: true,
-                      // focusNode: _nameFocusNode,
-                      // nextFocus: _userNameFocusNode,
-                      // prefixIcon: AppAssets.user,
-                      // capitalization: TextCapitalization.words,
-                      inputType: TextInputType.emailAddress,
-                      controller: _emailController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your email';
-                        }
-                        return null;
-                      },
-                    ),
+        body: Stack(
 
-                    const SizedBox(height: Dimensions.paddingSizeDefault,),
-                    ///password field
-                    CustomTextField(
-                      showLabelText: true,
-                      required: true,
-                      labelText: 'New Password',
-                      hintText: "*********",
-                      inputAction: TextInputAction.done,
-                      isPassword: true,
-                      // prefixIcon: AppAssets.pass,
-                      // focusNode: _passwordFocusNode,
-                      controller: _newPasswordController,
-                      validator: (value) {
-                        return MyValidators.passwordValidator(value);
-                      },
+          children: [
+            Image.asset(
+              'assets/images/background.png',
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
 
-                    ),
+            ),
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+            ),
+            BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
+            listener: (context, state) {
+              if (state is ResetPasswordSuccess) {
+                // Fluttertoast.showToast(msg: state.message);
+                Constants.showToast(msg: state.message,
+                    gravity: ToastGravity.BOTTOM,
+                    color: Colors.green);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen())); // Navigate back or to another screen
+              } else if (state is ResetPasswordFailure) {
+                // Fluttertoast.showToast(msg: state.error);
+                Constants.showToast(msg: state.error,
+                    gravity: ToastGravity.BOTTOM,
+                    color: Colors.red);
+              }
+            },
+            builder: (context, state) {
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomTextField(
+                        borderRadius: 20,
+                        borderColor: ColorResources.apphighlightColor,
+                        hintText: 'Email',
+                        labelText: 'Email',
+                        required: true,
+                        // focusNode: _nameFocusNode,
+                        // nextFocus: _userNameFocusNode,
+                        // prefixIcon: AppAssets.user,
+                        // capitalization: TextCapitalization.words,
+                        inputType: TextInputType.emailAddress,
+                        controller: _emailController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          return null;
+                        },
+                      ),
 
-                    const SizedBox(height: Dimensions.paddingSizeDefault,),
-                    ///confirm password field
-                    CustomTextField(
-                      showLabelText: true,
-                      required: true,
-                      labelText: 'Confirm Password',
-                      hintText: "*********",
-                      inputAction: TextInputAction.done,
-                      isPassword: true,
-                      // prefixIcon: AppAssets.pass,
-                      // focusNode: _passwordFocusNode,
-                      controller: _confirmPasswordController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please confirm your password';
-                        }
-                        if (value != _newPasswordController.text) {
-                          return 'Passwords do not match';
-                        }
-                        return null;
-                      },
+                      const SizedBox(height: Dimensions.paddingSizeDefault,),
+                      ///password field
+                      CustomTextField(
+                        showLabelText: true,
+                        required: true,
+                        labelText: 'New Password',
+                        hintText: "*********",
+                        inputAction: TextInputAction.done,
+                        isPassword: true,
+                        // prefixIcon: AppAssets.pass,
+                        // focusNode: _passwordFocusNode,
+                        controller: _newPasswordController,
+                        validator: (value) {
+                          return MyValidators.passwordValidator(value);
+                        },
 
-                    ),
-                    // TextFormField(
-                    //   controller: _confirmPasswordController,
-                    //   decoration: InputDecoration(labelText: 'Confirm Password'),
-                    //   obscureText: true,
-                    //   validator: (value) {
-                    //     if (value == null || value.isEmpty) {
-                    //       return 'Please confirm your password';
-                    //     }
-                    //     if (value != _newPasswordController.text) {
-                    //       return 'Passwords do not match';
-                    //     }
-                    //     return null;
-                    //   },
-                    // ),
+                      ),
 
-                    SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          context.read<ResetPasswordCubit>().resetPassword(
-                            email: _emailController.text,
-                            newPassword: _newPasswordController.text,
-                            confirmPassword: _confirmPasswordController.text,
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 12,horizontal: 50),
-                        backgroundColor: ColorResources.apphighlightColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            30,
+                      const SizedBox(height: Dimensions.paddingSizeDefault,),
+                      ///confirm password field
+                      CustomTextField(
+                        showLabelText: true,
+                        required: true,
+                        labelText: 'Confirm Password',
+                        hintText: "*********",
+                        inputAction: TextInputAction.done,
+                        isPassword: true,
+                        // prefixIcon: AppAssets.pass,
+                        // focusNode: _passwordFocusNode,
+                        controller: _confirmPasswordController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please confirm your password';
+                          }
+                          if (value != _newPasswordController.text) {
+                            return 'Passwords do not match';
+                          }
+                          return null;
+                        },
+
+                      ),
+                      // TextFormField(
+                      //   controller: _confirmPasswordController,
+                      //   decoration: InputDecoration(labelText: 'Confirm Password'),
+                      //   obscureText: true,
+                      //   validator: (value) {
+                      //     if (value == null || value.isEmpty) {
+                      //       return 'Please confirm your password';
+                      //     }
+                      //     if (value != _newPasswordController.text) {
+                      //       return 'Passwords do not match';
+                      //     }
+                      //     return null;
+                      //   },
+                      // ),
+
+                      SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            context.read<ResetPasswordCubit>().resetPassword(
+                              email: _emailController.text,
+                              newPassword: _newPasswordController.text,
+                              confirmPassword: _confirmPasswordController.text,
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 12,horizontal: 50),
+                          backgroundColor: ColorResources.apphighlightColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              30,
+                            ),
+                          ),
+                        ),
+                        child: state is ResetPasswordInProgress
+                            ? CircularProgressIndicator()
+                            : Text(
+                          HomeCubit.get(context).isArabic
+                              ? "تغيير كلمة المرور"
+                              : "Reset Password",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white
                           ),
                         ),
                       ),
-                      child: state is ResetPasswordInProgress
-                          ? CircularProgressIndicator()
-                          : Text(
-                        HomeCubit.get(context).isArabic
-                            ? "تغيير كلمة المرور"
-                            : "Reset Password",
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          )],
         ),
       ),
     );

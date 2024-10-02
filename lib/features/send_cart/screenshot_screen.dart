@@ -162,14 +162,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:new_quakka/features/send_cart/share_dialog.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shimmer/shimmer.dart';
 import 'dart:io';
 import 'dart:typed_data';
 
-import '../../core/helpers/spacing.dart';
 import '../../core/shared_constabts.dart';
 import '../../utill/color_resources.dart';
 import '../home/home_cubit/home_cubit.dart';
@@ -312,99 +310,115 @@ class _ScreenShotScreenState extends State<ScreenShotScreen> {
         // ],
       ),
 
-      body: Center(
-        child: Screenshot(
-          controller: screenshotController,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Image.network(
-                'http://backend.quokka-mesh.com/${widget.imageDesign}',
-                width: 300,
-                height: 400,
-                fit: BoxFit.cover,
-              ),
-              Positioned(
-                bottom: 10,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    children: [
-                      // Text(
-                      //   widget.title,
-                      //   style: const TextStyle(
-                      //     color: Colors.white,
-                      //     fontSize: 24,
-                      //     fontWeight: FontWeight.bold,
-                      //     fontFamily: 'Arial', // Customize the font family if needed
-                      //     shadows: [
-                      //       Shadow(
-                      //         blurRadius: 20.0,
-                      //         color: Colors.grey,
-                      //         offset: Offset(3.0, 3.0),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      // Text(
-                      //   widget.content,
-                      //   style: TextStyle(
-                      //     color: Colors.white,
-                      //     fontSize: 16,
-                      //     fontWeight: FontWeight.bold,
-                      //     fontFamily: 'Arial', // Customize the font family if needed
-                      //     shadows: [
-                      //       Shadow(
-                      //         blurRadius: 10.0,
-                      //         color: Colors.black,
-                      //         offset: Offset(3.0, 3.0),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      // Text(
-                      //   'Sender: ${widget.sender}',
-                      //   style: TextStyle(
-                      //     color: Colors.white,
-                      //     fontSize: 16,
-                      //     fontWeight: FontWeight.bold,
-                      //     fontFamily: 'Arial', // Customize the font family if needed
-                      //     shadows: [
-                      //       Shadow(
-                      //         blurRadius: 10.0,
-                      //         color: Colors.black,
-                      //         offset: Offset(3.0, 3.0),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      Text(
-                        getTextUntilSecondSpace(widget.receiverName.toString()),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Arial', // Customize the font family if needed
-                          shadows: [
-                            Shadow(
-                              blurRadius: 10.0,
-                              color: Colors.black,
-                              offset: Offset(3.0, 3.0),
-                            ),
-                          ],
+      body: Stack(
+
+        children: [
+          Image.asset(
+            'assets/images/background.png',
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.cover,
+
+          ),
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+          ),
+          Center(
+          child: Screenshot(
+            controller: screenshotController,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.network(
+                  'http://backend.quokka-mesh.com/${widget.imageDesign}',
+                  width: 300,
+                  height: 400,
+                  fit: BoxFit.cover,
+                ),
+                Positioned(
+                  bottom: 10,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.3),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      children: [
+                        // Text(
+                        //   widget.title,
+                        //   style: const TextStyle(
+                        //     color: Colors.white,
+                        //     fontSize: 24,
+                        //     fontWeight: FontWeight.bold,
+                        //     fontFamily: 'Arial', // Customize the font family if needed
+                        //     shadows: [
+                        //       Shadow(
+                        //         blurRadius: 20.0,
+                        //         color: Colors.grey,
+                        //         offset: Offset(3.0, 3.0),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        // Text(
+                        //   widget.content,
+                        //   style: TextStyle(
+                        //     color: Colors.white,
+                        //     fontSize: 16,
+                        //     fontWeight: FontWeight.bold,
+                        //     fontFamily: 'Arial', // Customize the font family if needed
+                        //     shadows: [
+                        //       Shadow(
+                        //         blurRadius: 10.0,
+                        //         color: Colors.black,
+                        //         offset: Offset(3.0, 3.0),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        // Text(
+                        //   'Sender: ${widget.sender}',
+                        //   style: TextStyle(
+                        //     color: Colors.white,
+                        //     fontSize: 16,
+                        //     fontWeight: FontWeight.bold,
+                        //     fontFamily: 'Arial', // Customize the font family if needed
+                        //     shadows: [
+                        //       Shadow(
+                        //         blurRadius: 10.0,
+                        //         color: Colors.black,
+                        //         offset: Offset(3.0, 3.0),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        Text(
+                          getTextUntilSecondSpace(widget.receiverName.toString()),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Arial', // Customize the font family if needed
+                            shadows: [
+                              Shadow(
+                                blurRadius: 10.0,
+                                color: Colors.black,
+                                offset: Offset(3.0, 3.0),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+        )],
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,

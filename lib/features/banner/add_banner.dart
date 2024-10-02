@@ -57,97 +57,122 @@ class _AddBannerFormState extends State<AddBannerForm> {
             ),
           ),
         ),
-        body: BlocConsumer<BannerCubit, BannerState>(
-          listener: (context, state) {
-            if (state is BannerError) {
-              //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
-              Constants.showToast(msg: state.error,
-                  gravity: ToastGravity.BOTTOM,
-                  color: Colors.red);
-            } else if (state is BannerLoaded) {
-              //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Banner added successfully')));
-              Constants.showToast(msg: 'Banner added successfully',
-                  gravity: ToastGravity.BOTTOM,
-                  color: Colors.green);
-            }
-          },
-          builder: (context, state) {
-            return Form(
-              key: _formKey,
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: SingleChildScrollView(
+        body: Stack(
+          children: [
+            Image.asset(
+              'assets/images/background.png',
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
 
-                  child: Column(
-                    children: [
+            ),
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+            ),
+            BlocConsumer<BannerCubit, BannerState>(
+            listener: (context, state) {
+              if (state is BannerError) {
+                //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
+                Constants.showToast(msg: state.error,
+                    gravity: ToastGravity.BOTTOM,
+                    color: Colors.red);
+              } else if (state is BannerLoaded) {
+                //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Banner added successfully')));
+                Constants.showToast(msg: 'Banner added successfully',
+                    gravity: ToastGravity.BOTTOM,
+                    color: Colors.green);
+              }
+            },
+            builder: (context, state) {
+              return Form(
+                key: _formKey,
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: SingleChildScrollView(
 
-                      CustomTextField(
-                        borderRadius: 20,
-                        borderColor: ColorResources.apphighlightColor,
-                        hintText: 'Title',
-                        labelText: 'Title',
-                        required: true,
-                        // focusNode: _nameFocusNode,
-                        // nextFocus: _userNameFocusNode,
-                        // prefixIcon: AppAssets.user,
-                        capitalization: TextCapitalization.words,
-                        inputType: TextInputType.text,
-                        controller: _titleController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter a title';
-                          }
-                          return null;
-                        },
-                      ),
+                    child: Column(
+                      children: [
 
-                      const SizedBox(height: 30),
-                      _imageFile != null
-                          ? Image.file(_imageFile!)
-                          : TextButton(
-                        onPressed: _pickImage,
-                        child: const Text('Pick Image'),
-                      ),
-                      const SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate() && _imageFile != null) {
-                            context.read<BannerCubit>().addBanner(
-                              _titleController.text,
-                              _imageFile!,
-                            );
-                            context.pop();
-                            Constants.showToast(msg: 'Banner added successfully',
-                                gravity: ToastGravity.BOTTOM,
-                                color: Colors.green);
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),
-                          backgroundColor: ColorResources.apphighlightColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              30,
+                        CustomTextField(
+                          borderRadius: 20,
+                          borderColor: ColorResources.apphighlightColor,
+                          hintText: 'Title',
+                          labelText: 'Title',
+                          required: true,
+                          // focusNode: _nameFocusNode,
+                          // nextFocus: _userNameFocusNode,
+                          // prefixIcon: AppAssets.user,
+                          capitalization: TextCapitalization.words,
+                          inputType: TextInputType.text,
+                          controller: _titleController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a title';
+                            }
+                            return null;
+                          },
+                        ),
+
+                        const SizedBox(height: 30),
+                        _imageFile != null
+                            ? Image.file(_imageFile!)
+                            :
+                        // TextButton(
+                        //   onPressed: _pickImage,
+                        //   child: const Text('Pick Image'),
+                        // ),
+                        ElevatedButton(
+                          onPressed: _pickImage,
+                          child: Text(
+                            HomeCubit.get(context).isArabic
+                                ? "التقط صورة الان"
+                                : 'Pick Image ',
+
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate() && _imageFile != null) {
+                              context.read<BannerCubit>().addBanner(
+                                _titleController.text,
+                                _imageFile!,
+                              );
+                              context.pop();
+                              Constants.showToast(msg: 'Banner added successfully',
+                                  gravity: ToastGravity.BOTTOM,
+                                  color: Colors.green);
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                            backgroundColor: ColorResources.apphighlightColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                30,
+                              ),
                             ),
                           ),
-                        ),
-                        child:  Text(
-                          HomeCubit.get(context).isArabic
-                              ? "اضافة البانر"
-                              : 'Add Banner',
-                          style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.white
-                          ),
+                          child:  Text(
+                            HomeCubit.get(context).isArabic
+                                ? "اضافة البانر"
+                                : 'Add Banner',
+                            style: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.white
+                            ),
 
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          )],
         ),
       ),
     );

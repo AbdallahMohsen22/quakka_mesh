@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_quakka/features/search_by_username/receiver_model.dart';
 
-import '../chat/model/user.dart';
 
 class UserState {}
 

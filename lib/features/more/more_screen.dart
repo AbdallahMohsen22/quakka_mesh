@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../localization/language_constrants.dart';
-import '../../provider/theme_provider.dart';
-import '../../utill/dimensions.dart';
-import '../basewidget/custom_themes.dart';
-import '../category/all_category_screen.dart';
 
 class MoreScreen extends StatefulWidget {
   const MoreScreen({Key? key}) : super(key: key);

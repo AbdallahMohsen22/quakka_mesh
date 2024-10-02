@@ -37,88 +37,104 @@ class _OtpScreenState extends State<OtpScreen> {
           ),
 
         ),
-        body: BlocConsumer<OtpCubit, OtpState>(
-          listener: (context, state) {
-            if (state is OtpVerified) {
-              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
-              Constants.showToast(msg: state.message,
-                  gravity: ToastGravity.BOTTOM,
-                  color: Colors.green);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ResetPasswordScreen()),
-              );
-            } else if (state is OtpVerificationError) {
-              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
-              Constants.showToast(msg: state.error,
-                  gravity: ToastGravity.BOTTOM,
-                  color: Colors.red);
-            }
-          },
-          builder: (context, state) {
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Pinput(
-                      length: 6,
-                      onCompleted: (pin) {
-                        _otp = pin;
-                        if (_formKey.currentState?.validate() ?? false) {
-                          context.read<OtpCubit>().verifyOtp(_otp);
-                        }
-                      },
-                      validator: (pin) {
-                        if (pin == null || pin.isEmpty) {
-                          return 'Please enter the OTP';
-                        } else if (pin.length < 6) {
-                          return 'OTP must be 6 digits';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 50),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          context.read<OtpCubit>().verifyOtp(_otp);
-                        }
-                      },
-                      child: Text(
-                          HomeCubit.get(context).isArabic
-                              ? "تأكيد OTP"
-                              : 'Verify OTP',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white
-                          ),
+        body: Stack(
 
+          children: [
+            Image.asset(
+              'assets/images/background.png',
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
+
+            ),
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+            ),
+            BlocConsumer<OtpCubit, OtpState>(
+            listener: (context, state) {
+              if (state is OtpVerified) {
+                // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+                Constants.showToast(msg: state.message,
+                    gravity: ToastGravity.BOTTOM,
+                    color: Colors.green);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ResetPasswordScreen()),
+                );
+              } else if (state is OtpVerificationError) {
+                // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
+                Constants.showToast(msg: state.error,
+                    gravity: ToastGravity.BOTTOM,
+                    color: Colors.red);
+              }
+            },
+            builder: (context, state) {
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Pinput(
+                        length: 6,
+                        onCompleted: (pin) {
+                          _otp = pin;
+                          if (_formKey.currentState?.validate() ?? false) {
+                            context.read<OtpCubit>().verifyOtp(_otp);
+                          }
+                        },
+                        validator: (pin) {
+                          if (pin == null || pin.isEmpty) {
+                            return 'Please enter the OTP';
+                          } else if (pin.length < 6) {
+                            return 'OTP must be 6 digits';
+                          }
+                          return null;
+                        },
                       ),
+                      SizedBox(height: 50),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            context.read<OtpCubit>().verifyOtp(_otp);
+                          }
+                        },
+                        child: Text(
+                            HomeCubit.get(context).isArabic
+                                ? "تأكيد OTP"
+                                : 'Verify OTP',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white
+                            ),
 
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 70,vertical: 12),
-                        backgroundColor: ColorResources.apphighlightColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            30,
+                        ),
+
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 70,vertical: 12),
+                          backgroundColor: ColorResources.apphighlightColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              30,
+                            ),
                           ),
                         ),
                       ),
-                    ),
 
-                    if (state is OtpVerifying)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Text('Verifying OTP...'),
-                      ),
-                  ],
+                      if (state is OtpVerifying)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Text('Verifying OTP...'),
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          )],
         ),
       ),
     );

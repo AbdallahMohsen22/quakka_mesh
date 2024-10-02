@@ -4,12 +4,8 @@ import 'package:new_quakka/core/helpers/extensitions.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../core/routing/routes.dart';
-import '../../../localization/language_constrants.dart';
 import '../../../utill/color_resources.dart';
 import '../../../utill/dimensions.dart';
-import '../../basewidget/custom_app_bar.dart';
-import '../../basewidget/custom_image.dart';
-import '../../basewidget/custom_themes.dart';
 import '../home_cubit/home_cubit.dart';
 
 class NotificationScreen extends StatelessWidget {
