@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_quakka/utill/color_resources.dart';
 
 import 'colors.dart';
 
@@ -54,17 +55,21 @@ ThemeData appTheme() {
           fontWeight: FontWeight.bold),
     ),
     appBarTheme: const AppBarTheme(
+        scrolledUnderElevation: 0,
         centerTitle: false,
-        color: Colors.transparent,
+        color: ColorResources.apphighlightColor,
         elevation: 0,
         iconTheme: IconThemeData(
-          color: Colors.black,
+          color: Colors.white,
         ),
+
         titleTextStyle: TextStyle(
             fontFamily: "Tajawal",
-            color: ColorsManager.mainRed,
+            color: Colors.white,
             fontSize: 20,
-            fontWeight: FontWeight.w500)),
+            fontWeight: FontWeight.w500),
+
+    ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: ColorsManager.lightScaffoldBackgroundColor,
         elevation: 0,

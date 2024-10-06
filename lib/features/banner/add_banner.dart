@@ -48,8 +48,8 @@ class _AddBannerFormState extends State<AddBannerForm> {
       child: Scaffold(
         appBar: AppBar(
           title: Shimmer.fromColors(
-            baseColor: ColorResources.apphighlightColor,
-            highlightColor: ColorResources.apphighlightColor,
+            baseColor: Colors.white,
+            highlightColor: Colors.white,
             child: Text(
               HomeCubit.get(context).isArabic
                   ? "اضافة بانر"
@@ -124,12 +124,24 @@ class _AddBannerFormState extends State<AddBannerForm> {
                         //   child: const Text('Pick Image'),
                         // ),
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.all(12),
+                            backgroundColor: ColorResources.apphighlightColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                30,
+                              ),
+                            ),
+                          ),
                           onPressed: _pickImage,
                           child: Text(
                             HomeCubit.get(context).isArabic
-                                ? "التقط صورة الان"
+                                ? "التقط صورة"
                                 : 'Pick Image ',
-
+                            style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.white
+                            ),
                           ),
                         ),
                         const SizedBox(height: 20),

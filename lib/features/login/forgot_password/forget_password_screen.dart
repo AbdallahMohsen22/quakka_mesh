@@ -32,8 +32,8 @@ class _SendEmailScreenState extends State<SendEmailScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Shimmer.fromColors(
-            baseColor: ColorResources.apphighlightColor,
-            highlightColor: ColorResources.apphighlightColor,
+            baseColor: Colors.white,
+            highlightColor: Colors.white,
             child: Text(
               HomeCubit.get(context).isArabic
                   ? "تأكيد الايميل"

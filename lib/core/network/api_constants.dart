@@ -33,6 +33,7 @@ class ApiConstants {
   static const String viewMyCartSend = 'SendCart/User/ViewMyCartsended';
   static const String viewMyCartRecevied = 'SendCart/User/ViewMyCartrecevied';
   static const String searchInAllUser = 'SendCart/SearchInAllUser'; //{userName}
+  static const String searchInAllUserWithPhone = 'SendCart/SearchInAllUserWithPhone'; //{PhoneNumber}
 
   //Statistics
   static const String getAllUser='Statistics/Admin/GetAllUser';

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:new_quakka/core/helpers/extensitions.dart';
+import '../../core/helpers/adaptive_indecator.dart';
 import '../../core/routing/routes.dart';
 import '../../core/widges/laoding_manager.dart';
 import '../../core/widges/subtitle_text_widget.dart';
@@ -78,7 +80,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       Stack(children: [
                         Container(height: 200, decoration: const BoxDecoration(color: ColorResources.apphighlightColor)),
-                        Image.asset(AppAssets.loginBg,fit: BoxFit.cover,height: 200, opacity : const AlwaysStoppedAnimation(.15)),
+                        Image.asset(AppAssets.loginBg,fit: BoxFit.cover,height: 200, opacity : const AlwaysStoppedAnimation(.20)),
                         Padding(
                           padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * .01),
                           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -101,7 +103,7 @@ class LoginScreen extends StatelessWidget {
                             // Image.asset(AppAssets.imagesLogo,width: 250,height: 250,),
                             Align(
                               alignment: checkArabic()?Alignment.centerRight:Alignment.centerLeft,
-                              child: TitlesTextWidget(label: S.of(context).welcomeBack),
+                              child: TitlesTextWidget(label: S.of(context).welcomeBack,fontSize: 20.sp,),
                             ),
                             const SizedBox(
                               height: 1.0,
@@ -109,7 +111,7 @@ class LoginScreen extends StatelessWidget {
                             Align(
                               alignment: checkArabic()?Alignment.centerRight:Alignment.centerLeft,
                               child: SubtitleTextWidget(
-                                  fontSize: 17,
+                                  fontSize: 17.sp,
                                   color: AppColors.grey,
                                   label: HomeCubit.get(context).isArabic
                                       ? "دعنا نسجل دخول لاستكشاف ماهو جديد ومميز لك"
@@ -186,7 +188,7 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                   ///login button
                           state is LoginLoading ?
-                             const Center(child: CircularProgressIndicator())
+                              Center(child: AdaptiveIndicator(os: getOS()))
                                : SizedBox(
                                     width: double.infinity,
                                     child: ElevatedButton.icon(
@@ -204,8 +206,8 @@ class LoginScreen extends StatelessWidget {
                                         HomeCubit.get(context).isArabic
                                             ? "تسجيل دخول"
                                             : "Login",
-                                        style: const TextStyle(
-                                          fontSize: 20,
+                                        style:  TextStyle(
+                                          fontSize: 20.sp,
                                           color: Colors.white
                                         ),
                                       ),

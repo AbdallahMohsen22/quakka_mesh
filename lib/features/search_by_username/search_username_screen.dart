@@ -13,7 +13,7 @@ import 'cuibt.dart';
 
 class SearchUserScreen extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
-
+  final TextEditingController _phoneNumberController = TextEditingController();
   SearchUserScreen({super.key});
 
   @override
@@ -21,8 +21,8 @@ class SearchUserScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Shimmer.fromColors(
-            baseColor: ColorResources.apphighlightColor,
-            highlightColor: ColorResources.apphighlightColor,
+            baseColor: Colors.white,
+            highlightColor: Colors.white,
             child: Text(
               HomeCubit.get(context).isArabic
                   ? "البحث"
@@ -52,9 +52,9 @@ class SearchUserScreen extends StatelessWidget {
               CustomTextField(
                 borderRadius: 20,
                 borderColor: ColorResources.apphighlightColor,
-                hintText: 'Username',
-                labelText: 'Username',
-                required: true,
+                hintText: 'Enter Username',
+                labelText: 'Enter Username',
+                required: false,
                 // focusNode: _nameFocusNode,
                 // nextFocus: _userNameFocusNode,
                 prefixIcon: AppAssets.search,
@@ -68,8 +68,28 @@ class SearchUserScreen extends StatelessWidget {
                   return null;
                 },
               ),
+              const SizedBox(height: 16),
+              CustomTextField(
+                borderRadius: 20,
+                borderColor: ColorResources.apphighlightColor,
+                hintText: 'Enter Phone Number',
+                labelText: 'Enter Phone Number',
+                required: false,
+                // focusNode: _nameFocusNode,
+                // nextFocus: _userNameFocusNode,
+                prefixIcon: AppAssets.search,
+                // capitalization: TextCapitalization.words,
+                inputType: TextInputType.phone,
+                controller: _phoneNumberController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a valid Phone Number';
+                  }
+                  return null;
+                },
+              ),
 
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               ElevatedButton.icon(
                 onPressed: () {
                   final username = _usernameController.text;
@@ -93,16 +113,49 @@ class SearchUserScreen extends StatelessWidget {
                 ),
                 label: Text(
                   HomeCubit.get(context).isArabic
-                      ? "بحث"
-                      : "Search",
-                  style: TextStyle(
+                      ? "بحث باسم المستخدم"
+                      : "Search with phone number",
+                  style: const TextStyle(
                       fontSize: 20,
                       color: Colors.white
                   ),
                 ),
                 icon: const Icon(Icons.search_sharp,color: Colors.white,),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
+              ElevatedButton.icon(
+                onPressed: () {
+                  final phoneNumber = _phoneNumberController.text;
+                  if (phoneNumber.isNotEmpty) {
+                    context.read<UserCubit>().searchUsersWithPhone(phoneNumber);
+                  } else {
+                    Constants.showToast(msg: 'Please enter a username',
+                        gravity: ToastGravity.BOTTOM,
+                        color: Colors.red);
+                    //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please enter a username')),);
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(12),
+                  backgroundColor: ColorResources.apphighlightColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      30,
+                    ),
+                  ),
+                ),
+                label: Text(
+                  HomeCubit.get(context).isArabic
+                      ? " بحث برقم التليفون"
+                      : "Search with phone number",
+                  style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.white
+                  ),
+                ),
+                icon: const Icon(Icons.search_sharp,color: Colors.white,),
+              ),
+              const SizedBox(height: 16),
               Expanded(
                 child: BlocBuilder<UserCubit, UserState>(
                   builder: (context, state) {

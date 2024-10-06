@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DialogUtils{
   static void showLoading(BuildContext context , String message , {bool isDismissible= true}){
@@ -45,7 +46,7 @@ class DialogUtils{
           child: Text(
             posActionTitle,
             style: TextStyle(
-                fontSize: 15.0,
+                fontSize: 15.0.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.black
             ),
@@ -61,7 +62,7 @@ class DialogUtils{
       },
           child: Text(negActionTitle,
             style: TextStyle(
-                fontSize: 15.0,
+                fontSize: 15.0.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.black
             ),
@@ -81,7 +82,7 @@ class DialogUtils{
              */
             content: Text(message,
               style: TextStyle(
-                  fontSize: 15.0,
+                  fontSize: 15.0.sp,
                   fontWeight: FontWeight.bold
               ),
             ),
@@ -113,7 +114,7 @@ class DialogUtils{
           child: Text(
             posActionTitle,
             style: TextStyle(
-                fontSize: 15.0,
+                fontSize: 15.0.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.black
             ),
@@ -129,7 +130,7 @@ class DialogUtils{
       },
           child: Text(negActionTitle,
             style: TextStyle(
-                fontSize: 15.0,
+                fontSize: 15.0.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.black
             ),

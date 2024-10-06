@@ -5,9 +5,11 @@ import 'package:new_quakka/features/category/update_category/update_category_scr
 import 'package:shimmer/shimmer.dart';
 
 import '../../basic_constants.dart';
+import '../../core/helpers/adaptive_indecator.dart';
 import '../../core/network/api_constants.dart';
 import '../../core/theming/text_styles.dart';
 import '../../utill/color_resources.dart';
+import '../../utill/constant.dart';
 import '../add_cart/add_cart_screen.dart';
 import '../home/home_cubit/home_cubit.dart';
 import '../home/home_screen.dart';
@@ -28,8 +30,8 @@ class CartListScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Shimmer.fromColors(
-            baseColor: ColorResources.apphighlightColor,
-            highlightColor: ColorResources.apphighlightColor,
+            baseColor: Colors.white,
+            highlightColor: Colors.white,
             child: Text(
               HomeCubit.get(context).isArabic
                   ? "الكروت"
@@ -100,7 +102,7 @@ class CartListScreen extends StatelessWidget {
               print(" isAdmin >> $isAdmin");
               print(" userId >> $userId");
               if (state is CartLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return  Center(child: AdaptiveIndicator(os: getOS()));
               } else if (state is CartFailure) {
                 return Center(child: Text(state.error));
               } else if (state is CartSuccess) {

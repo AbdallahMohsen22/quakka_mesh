@@ -162,7 +162,6 @@ import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../utill/color_resources.dart';
 import '../home/home_cubit/home_cubit.dart';
 
 class ViewMyCartDetails extends StatefulWidget {
@@ -249,8 +248,8 @@ class _ViewMyCartDetailsState extends State<ViewMyCartDetails> {
     return Scaffold(
       appBar: AppBar(
         title: Shimmer.fromColors(
-            baseColor: ColorResources.apphighlightColor,
-            highlightColor: ColorResources.apphighlightColor,
+            baseColor: Colors.white,
+            highlightColor: Colors.white,
             child: Text(
               HomeCubit.get(context).isArabic
                   ? "كارت التهنئة"

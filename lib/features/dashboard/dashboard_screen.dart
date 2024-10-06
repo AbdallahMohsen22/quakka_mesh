@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
+import '../../core/helpers/adaptive_indecator.dart';
 import '../../utill/color_resources.dart';
+import '../../utill/constant.dart';
 import '../home/home_cubit/home_cubit.dart';
 import 'category_count_cubit.dart';
 import 'cart_count_cubit.dart';
@@ -13,8 +15,8 @@ class DashboardScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Shimmer.fromColors(
-          baseColor: ColorResources.apphighlightColor,
-          highlightColor: ColorResources.apphighlightColor,
+          baseColor: Colors.white,
+          highlightColor: Colors.white,
           child: Text(
             HomeCubit.get(context).isArabic
                 ? "الاحصاءات"
@@ -144,7 +146,7 @@ class DashboardScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 if (state is UserCountLoading || state is CategoryCountLoading || state is CartCountLoading)
-                  Center(child: CircularProgressIndicator())
+                  Center(child: AdaptiveIndicator(os: getOS()))
                 else if (state is UserCountError || state is CategoryCountError || state is CartCountError)
                   Text(
                     errorText,

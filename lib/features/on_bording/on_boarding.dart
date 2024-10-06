@@ -124,50 +124,52 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   },
                   controller: pageindex,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 275.h,
-                            child: Image(
-                              image: AssetImage(
-                                items[index].image,
+                    return SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 275.h,
+                              child: Image(
+                                image: AssetImage(
+                                  items[index].image,
+                                ),
+                                height: 280.h,
                               ),
-                              height: 280.h,
                             ),
-                          ),
-                          Text(
-                            items[index].title,
-                            style: TextStyle(
-                              fontSize: 24.sp,
-                              color: ColorResources.apphighlightColor,
-                              fontWeight: FontWeight.w800,
+                            Text(
+                              items[index].title,
+                              style: TextStyle(
+                                fontSize: 24.sp,
+                                color: ColorResources.apphighlightColor,
+                                fontWeight: FontWeight.w800,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                          SizedBox(height: 10.h),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              height: 150.h,
-                              child: Center(
-                                child: Text(
-                                  items[index].description,
-                                  style: TextStyle(
-                                    fontSize:16.sp,
-                                    color: ColorResources.apphighlightColor,
-                                    fontWeight: FontWeight.w800,
+                            SizedBox(height: 10.h),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 150.h,
+                                child: Center(
+                                  child: Text(
+                                    items[index].description,
+                                    style: TextStyle(
+                                      fontSize:16.sp,
+                                      color: ColorResources.apphighlightColor,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
-                                  textAlign: TextAlign.center,
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 30.h,
-                          ),
-                        ],
+                            SizedBox(
+                              height: 30.h,
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -175,13 +177,22 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 ),
               ),
               Container(
-                height: 40.h,
+                height: 80.h,
                 width: 200.w,
                 decoration: BoxDecoration(
                   color: ColorResources.apphighlightColor,
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                child: TextButton(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding:  EdgeInsets.symmetric(horizontal: 20.w,vertical: 12.h),
+                    backgroundColor: ColorResources.apphighlightColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        30,
+                      ),
+                    ),
+                  ),
                   onPressed: () {
                     if (isLast) {
                       submit();
@@ -220,8 +231,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   spacing: 15.0.w,
                 ),
               ),
-              SizedBox(
-                height: 40.0,
+               SizedBox(
+                height: 40.h,
               )
             ],
           ),

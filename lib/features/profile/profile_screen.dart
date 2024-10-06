@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../basic_constants.dart';
+import '../../core/helpers/adaptive_indecator.dart';
 import '../../core/routing/routes.dart';
 import '../../utill/app_assets.dart';
 import '../../utill/color_resources.dart';
@@ -102,13 +103,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               child: const Icon(Icons.arrow_back)),
           title: Shimmer.fromColors(
-            baseColor: ColorResources.apphighlightColor,
-            highlightColor: ColorResources.apphighlightColor,
+            baseColor: Colors.white,
+            highlightColor: Colors.white,
             child: Text(
               HomeCubit.get(context).isArabic
                   ? 'تحديث البروفايل'
                   : 'Update Profile',
-              style: const TextStyle(color: ColorResources.apphighlightColor),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),
@@ -136,7 +137,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             },
             builder: (context, state) {
               if (state is UserLoadingInfo) {
-                return Center(child: CircularProgressIndicator());
+                return Center(child: AdaptiveIndicator(os: getOS()));
               } else if (state is UserLoadedInfo) {
                 final user = state.user;
 
