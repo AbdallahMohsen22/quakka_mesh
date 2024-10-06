@@ -4,8 +4,9 @@ import 'package:new_quakka/core/helpers/extensitions.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../basic_constants.dart';
+import '../../core/helpers/adaptive_indecator.dart';
 import '../../core/routing/routes.dart';
-import '../../utill/color_resources.dart';
+import '../../utill/constant.dart';
 import '../home/home_cubit/home_cubit.dart';
 import '../home/login_widget_chat.dart';
 import '../search_by_username/cuibt.dart';
@@ -21,13 +22,13 @@ class ChatScreen extends StatelessWidget {
       appBar: AppBar(
 
         title: Shimmer.fromColors(
-          baseColor: ColorResources.apphighlightColor,
-          highlightColor: ColorResources.apphighlightColor,
+          baseColor: Colors.white,
+          highlightColor: Colors.white,
           child: Text(
             HomeCubit.get(context).isArabic
                 ? 'الدردشة'
                 : 'Chat',
-            style:const TextStyle(color: ColorResources.apphighlightColor) ,
+            style:const TextStyle(color: Colors.white) ,
 
           ),
 
@@ -100,7 +101,7 @@ class UserListView extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is UserLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return  Center(child: AdaptiveIndicator(os: getOS()));
         } else if (state is UserChatLoaded) {
           return Padding(
             padding: const EdgeInsets.all(10),
@@ -141,7 +142,7 @@ class UserListView extends StatelessWidget {
                     ),
           );
         } else {
-          return const Center(child: CircularProgressIndicator());
+          return  Center(child: AdaptiveIndicator(os: getOS()));
         }
       },
     );

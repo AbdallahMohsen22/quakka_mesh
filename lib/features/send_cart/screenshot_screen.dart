@@ -281,8 +281,8 @@ class _ScreenShotScreenState extends State<ScreenShotScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Shimmer.fromColors(
-            baseColor: ColorResources.apphighlightColor,
-            highlightColor: ColorResources.apphighlightColor,
+            baseColor: Colors.white,
+            highlightColor: Colors.white,
             child: Text(
                 HomeCubit.get(context).isArabic
                     ? "كارت التهنئة"

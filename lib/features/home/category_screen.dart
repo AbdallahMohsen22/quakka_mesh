@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_quakka/utill/color_resources.dart';
 
+import '../../core/helpers/adaptive_indecator.dart';
 import '../../core/network/api_constants.dart';
 import '../../core/theming/text_styles.dart';
+import '../../utill/constant.dart';
 import '../cart_screen/cart_list_screen.dart';
 import '../category/category_model.dart';
 import '../category/cuibt.dart';
@@ -20,7 +22,7 @@ class CategoryView extends StatelessWidget {
       child: BlocBuilder<CategoryCubit, CategoryState>(
         builder: (context, state) {
            if (state is CategoryLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return  Center(child: AdaptiveIndicator(os: getOS()));
           } else if (state is CategoryLoaded) {
             return GridView.builder(
               shrinkWrap: true,

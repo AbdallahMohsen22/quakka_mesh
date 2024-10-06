@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:new_quakka/core/theming/text_styles.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../features/home/home_cubit/home_cubit.dart';
@@ -78,30 +80,16 @@ class _MessageState extends State<Message> {
     return Scaffold(
       appBar: AppBar(
         title: Shimmer.fromColors(
-          baseColor: ColorResources.apphighlightColor,
-          highlightColor: ColorResources.apphighlightColor,
+          baseColor: Colors.white,
+          highlightColor: Colors.white,
           child: Text(
             HomeCubit.get(context).isArabic ? "الاشعارات" : 'Notification',
           ),
         ),
       ),
 
-      // body: ListView.builder(
-      //   itemCount: payload.length,
-      //   itemBuilder: (context, index) {
-      //     final key = payload.keys.elementAt(index);
-      //     final value = payload[key];
-      //
-      //     return Card(
-      //       child: ListTile(
-      //         title: Text(key),
-      //         subtitle: Text(value.toString()),
-      //       ),
-      //     );
-      //   },
-      // ),
+      body: Stack(
 
-      body:  Stack(
         children: [
           Image.asset(
             'assets/images/background.png',
@@ -115,21 +103,77 @@ class _MessageState extends State<Message> {
             height: double.infinity,
             color: const Color(0xFFFFFEBB4).withOpacity(0.8),
           ),
-          Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height:60),
-              Image.asset('assets/images/no_notifications.png',height: 340,),
-              const SizedBox(height:20),
-              const Text(
-                'No Notification Yet',
+          // Check if there are notifications
+          payload.isEmpty
+              ? Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                   SizedBox(height: 60.h),
+                  Image.asset('assets/images/no_notifications.png', height: 340),
+                   SizedBox(height: 20.h),
+                   Text('No Notification Yet'),
+                ],
               ),
-            ],
+            ),
+          )
+              : ListView.builder(
+            itemCount: payload.length,
+            itemBuilder: (context, index) {
+              final key = payload.keys.elementAt(index);
+              final value = payload[key];
+
+              return Card(
+
+                color: ColorResources.apphighlightColor,
+
+                child: ListTile(
+                  title: Text(
+                    key,
+                    style: AppTextStyles.categoryTextStyle,
+                  ),
+                  subtitle: Text(
+                    value.toString(),
+                    style: AppTextStyles.categoryTextStyle,
+                  ),
+                ),
+              );
+            },
           ),
-        )],
+        ],
       ),
+
+      // body:  Stack(
+      //   children: [
+      //     Image.asset(
+      //       'assets/images/background.png',
+      //       width: double.infinity,
+      //       height: double.infinity,
+      //       fit: BoxFit.cover,
+      //
+      //     ),
+      //     Container(
+      //       width: double.infinity,
+      //       height: double.infinity,
+      //       color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+      //     ),
+      //     Center(
+      //     child: Column(
+      //       mainAxisSize: MainAxisSize.min,
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children: [
+      //         const SizedBox(height:60),
+      //         Image.asset('assets/images/no_notifications.png',height: 340,),
+      //         const SizedBox(height:20),
+      //         const Text(
+      //           'No Notification Yet',
+      //         ),
+      //       ],
+      //     ),
+      //   )],
+      // ),
     );
   }
 }

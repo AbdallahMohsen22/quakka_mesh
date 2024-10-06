@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,7 +16,6 @@ import 'features/send_cart/cuibt.dart';
 import 'generated/l10n.dart';
 import 'main.dart';
 
-
 class GuakkoApp extends StatelessWidget {
   final AppRouter appRouter;
   final bool? isEnglish;
@@ -29,57 +27,66 @@ class GuakkoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(360, 690),
-      minTextAdapt: true,
-      child: BlocProvider(
-        create: (BuildContext context) =>
-        HomeCubit()..changeAppLanguage(fromShared: isEnglish),
-        child: BlocConsumer<HomeCubit, HomeState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            return MultiBlocProvider(
-              providers: [
-                BlocProvider<UserCubit>(create: (context) => UserCubit()),
-                BlocProvider<DeleteUserCubit>(create: (context) => DeleteUserCubit()),
-                BlocProvider<SendCartCubit>(create: (context) => SendCartCubit()),
-                BlocProvider<SendMessageCubit>(create: (context) => SendMessageCubit(),),
-                BlocProvider<CartCubit>(create: (context) => CartCubit(),),
-              ],
-              child: MaterialApp(
-              
-                // builder: DevicePreview.appBuilder,
-                title: "Quakka Mesh App",
-                theme: appTheme(),
-                supportedLocales: S.delegate.supportedLocales,
-                localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-                  S.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                // supportedLocales: const <Locale>[
-                //   Locale('en'), // English
-                //   Locale('ar'), // Spanish
-                // ],
-                locale: HomeCubit.get(context).isArabic
-                    ? const Locale('ar')
-                    : const Locale('en'), //Locale(settingsProvider.currentLang),
-              
-                debugShowCheckedModeBanner: false,
-                initialRoute: userToken==null ? Routes.onBoardingScreen : Routes.homeScreen,
-                onGenerateRoute: appRouter.generateRoute,
-                navigatorKey: navigatorKey,
-                routes: {
-                  //NotificationScreen.route: (context) => NotificationScreen(),
-                  "/message":(context) => const Message(),
-                },
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Set the design size based on screen width. For example:
+        if (constraints.maxWidth >= 768) {
+          // For iPads or larger devices
+          return buildResponsiveApp(context, const Size(768, 1024)); // iPad size
+        } else {
+          // For phones or smaller devices
+          return buildResponsiveApp(context, const Size(375, 812)); // iPhone size
+        }
+      },
+    );
+  }
 
-              ),
-            );
-          },
-        ),
-      ),
+  Widget buildResponsiveApp(BuildContext context, Size designSize) {
+    return ScreenUtilInit(
+      designSize: designSize, // Dynamically set design size
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, __) {
+        return BlocProvider(
+          create: (BuildContext context) =>
+          HomeCubit()..changeAppLanguage(fromShared: isEnglish),
+          child: BlocConsumer<HomeCubit, HomeState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider<UserCubit>(create: (context) => UserCubit()),
+                  BlocProvider<DeleteUserCubit>(create: (context) => DeleteUserCubit()),
+                  BlocProvider<SendCartCubit>(create: (context) => SendCartCubit()),
+                  BlocProvider<SendMessageCubit>(create: (context) => SendMessageCubit(),),
+                  BlocProvider<CartCubit>(create: (context) => CartCubit(),),
+                ],
+                child: MaterialApp(
+                  title: "Quakka Mesh App",
+                  theme: appTheme(),
+                  supportedLocales: S.delegate.supportedLocales,
+                  localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+                    S.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  locale: HomeCubit.get(context).isArabic
+                      ? const Locale('ar')
+                      : const Locale('en'),
+                  debugShowCheckedModeBanner: false,
+                  initialRoute: userToken == null ? Routes.onBoardingScreen : Routes.homeScreen,
+                  onGenerateRoute: appRouter.generateRoute,
+                  navigatorKey: navigatorKey,
+                  routes: {
+                    "/message": (context) => const Message(),
+                  },
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

@@ -5,8 +5,10 @@ import 'package:new_quakka/core/helpers/extensitions.dart';
 import 'package:new_quakka/features/view_mycart_recevied/veiw_mycart_details.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../core/helpers/adaptive_indecator.dart';
 import '../../core/routing/routes.dart';
 import '../../utill/color_resources.dart';
+import '../../utill/constant.dart';
 import '../home/home_cubit/home_cubit.dart';
 import '../home/login_widget_cart.dart';
 import 'cart_cuibt.dart';
@@ -68,18 +70,18 @@ class _MyCartScreenState extends State<MyCartScreen> with SingleTickerProviderSt
             child: const Icon(Icons.arrow_back)
         ),
         title: Shimmer.fromColors(
-          baseColor: ColorResources.apphighlightColor,
-          highlightColor: ColorResources.apphighlightColor,
+          baseColor: Colors.white,
+          highlightColor: Colors.white,
           child: Text(
             HomeCubit.get(context).isArabic
                 ? 'الكروت المرسلة والمستقبلة'
                 : 'My Cart',
-            style:const TextStyle(color: ColorResources.apphighlightColor) ,
+            style:const TextStyle(color: Colors.white) ,
 
           ),
         ),
         bottom: TabBar(
-          labelColor: ColorResources.apphighlightColor,
+          labelColor:  ColorResources.chatIconColor,
           indicatorColor: ColorResources.apphighlightColor,
           indicatorWeight: 5,
           dividerColor: ColorResources.apphighlightColor,
@@ -134,7 +136,7 @@ class _MyCartScreenState extends State<MyCartScreen> with SingleTickerProviderSt
       bloc: cubit,
       builder: (context, state) {
         if (state is CartLoading) {
-          return  Center(child: CircularProgressIndicator());
+          return  Center(child: AdaptiveIndicator(os: getOS()));
         } else if (state is CartLoaded) {
           if (state.carts.isEmpty) {
             return Center(

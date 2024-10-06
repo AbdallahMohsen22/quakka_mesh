@@ -73,7 +73,7 @@ class _SendCartScreenState extends State<SendCartScreen> {
                 print("${widget.cartId}");
               },
              style: ElevatedButton.styleFrom(
-               padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+               padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),
                backgroundColor: ColorResources.apphighlightColor,
                shape: RoundedRectangleBorder(
                  borderRadius: BorderRadius.circular(
@@ -87,14 +87,14 @@ class _SendCartScreenState extends State<SendCartScreen> {
                   : "Update Cart",
               style: const TextStyle(
                 color: Colors.white,
-                  fontSize: 15
+                  fontSize: 18
               ),
             ),
           ):const SizedBox(),
         ],
         title: Shimmer.fromColors(
-          baseColor: ColorResources.apphighlightColor,
-          highlightColor: ColorResources.apphighlightColor,
+          baseColor:Colors.white,
+          highlightColor: Colors.white,
           child: Text(
             HomeCubit.get(context).isArabic
                 ? "ارسال كارت"

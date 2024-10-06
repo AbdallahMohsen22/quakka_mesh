@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pinput/pinput.dart';
 import 'package:shimmer/shimmer.dart';
@@ -27,8 +28,8 @@ class _OtpScreenState extends State<OtpScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Shimmer.fromColors(
-            baseColor: ColorResources.apphighlightColor,
-            highlightColor: ColorResources.apphighlightColor,
+            baseColor: Colors.white,
+            highlightColor: Colors.white,
             child: Text(
               HomeCubit.get(context).isArabic
                   ? "رمز التحقق"
@@ -107,7 +108,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                 ? "تأكيد OTP"
                                 : 'Verify OTP',
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 18.sp,
                                 color: Colors.white
                             ),
 

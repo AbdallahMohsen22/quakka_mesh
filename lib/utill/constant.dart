@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import '../core/widges/title_text_widget.dart';
@@ -19,15 +22,15 @@ class Constants {
         builder: (context) => CupertinoAlertDialog(
           title: Text(
             msg,
-            style: const TextStyle(color: Colors.black, fontSize: 16),
+            style:  TextStyle(color: Colors.black, fontSize: 16.sp),
           ),
           actions: [
             TextButton(
                 onPressed: () => Navigator.pop(context),
                 style: TextButton.styleFrom(
                   //primary: Colors.black,
-                  textStyle: const TextStyle(
-                      fontSize: 14, fontWeight: FontWeight.bold),
+                  textStyle:  TextStyle(
+                      fontSize: 14.sp, fontWeight: FontWeight.bold),
                 ),
                 child: const Text("Ok"))
           ],
@@ -116,4 +119,10 @@ class Constants {
 
 
 
+
+}
+
+
+ String getOS(){
+  return Platform.operatingSystem;
 }

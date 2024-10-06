@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_quakka/features/notification_signalr/signalr_service.dart';
 
+import '../../core/helpers/adaptive_indecator.dart';
+import '../../utill/constant.dart';
 import 'cuibt/bloc_event.dart';
 import 'cuibt/notification_bloc.dart';
 import 'cuibt/notification_state.dart';
@@ -25,7 +27,7 @@ class NotificationScreen extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is NotificationLoading) {
-              return Center(child: CircularProgressIndicator());
+              return Center(child: AdaptiveIndicator(os: getOS()));
             } else if (state is NotificationLoaded) {
               return ListView.builder(
                 itemCount: state.notifications.length,

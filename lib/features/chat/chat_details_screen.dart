@@ -279,7 +279,7 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
     alignment: AlignmentDirectional.centerStart,
     child: Container(
       decoration:  BoxDecoration(
-        color:  model.stickerUrl != null ?const Color(0xffffffff): const Color(0xffd8c1a3),
+        color:  model.stickerUrl != null ?const Color(0xFFFFFEBB4).withOpacity(0.1): const Color(0xffd8c1a3),
         borderRadius: const BorderRadiusDirectional.only(
           bottomEnd: Radius.circular(10),
           topStart: Radius.circular(10),
@@ -298,7 +298,7 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
           if (model.imageUrl != null)
             Image.file(File(model.imageUrl!)),
           if (model.stickerUrl != null)
-            Image.asset(model.stickerUrl!,fit: BoxFit.cover,width: 100,height: 100,), // Assuming stickers are hosted online
+            Image.asset(model.stickerUrl!,fit: BoxFit.cover,width: 150,height: 150,), // Assuming stickers are hosted online
         ],
       ),
     ),
@@ -308,7 +308,7 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
     alignment: AlignmentDirectional.centerEnd,
     child: Container(
       decoration:  BoxDecoration(
-        color: model.stickerUrl != null ?const Color(0xFFFFFEBB4): const Color(0xFF3e1a24),
+        color: model.stickerUrl != null ?const Color(0xFFFFFEBB4).withOpacity(0.1): const Color(0xFF3e1a24),
         borderRadius: const BorderRadiusDirectional.only(
           bottomStart: Radius.circular(10),
           topStart: Radius.circular(10),
@@ -324,10 +324,10 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
         children: [
           if (model.text != null)
             Text(model.text!,style: const TextStyle(color: Colors.white),),
-          if (model.imageUrl != null)
+          if (model.imageUrl != null && File(model.imageUrl!).existsSync())
             Image.file(File(model.imageUrl!)),
           if (model.stickerUrl != null)
-            Image.asset(model.stickerUrl!,fit: BoxFit.cover,width: 100,height: 100,), // Assuming stickers are hosted online
+            Image.asset(model.stickerUrl!,fit: BoxFit.cover,width: 150,height: 150,), // Assuming stickers are hosted online
         ],
       ),
     ),

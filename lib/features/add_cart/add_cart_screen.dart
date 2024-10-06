@@ -50,8 +50,8 @@ class _AddCartScreenState extends State<AddCartScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Shimmer.fromColors(
-            baseColor: ColorResources.apphighlightColor,
-            highlightColor: ColorResources.apphighlightColor,
+            baseColor: Colors.white,
+            highlightColor: Colors.white,
             child: Text(
               HomeCubit.get(context).isArabic
                   ? "اضافة كارت"
@@ -92,7 +92,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
             },
             builder: (context, state) {
               if (state is AddCartLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return  Center(child: CircularProgressIndicator());
               }
               return Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -100,11 +100,24 @@ class _AddCartScreenState extends State<AddCartScreen> {
                   child: Column(
                     children: [
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+                          backgroundColor: ColorResources.apphighlightColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              30,
+                            ),
+                          ),
+                        ),
                         onPressed: pickImage,
                         child: Text(
                           HomeCubit.get(context).isArabic
-                              ? "التقط صورة الان"
+                              ? "التقط صورة"
                               : 'Pick Image ',
+                          style: const TextStyle(
+                              fontSize: 18,
+                              color: Colors.white
+                          ),
 
                         ),
                       ),

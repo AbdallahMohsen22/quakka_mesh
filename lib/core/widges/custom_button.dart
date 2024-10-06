@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../utill/color_resources.dart';
 
@@ -37,7 +38,7 @@ class CustomButton extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 25,
+              fontSize: 25.sp,
               fontFamily: 'Inter',
               fontWeight: FontWeight.w500,
               height: 0,

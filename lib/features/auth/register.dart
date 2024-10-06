@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:new_quakka/core/helpers/extensitions.dart';
 import 'package:new_quakka/features/auth/widgets/pick_image_widget.dart';
+import '../../core/helpers/adaptive_indecator.dart';
 import '../../core/routing/routes.dart';
 import '../../core/widges/subtitle_text_widget.dart';
 import '../../generated/l10n.dart';
@@ -291,7 +293,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
 
                                 state is RegisterLoading ?
-                                const Center(child: CircularProgressIndicator()) :
+                                 Center(child: AdaptiveIndicator(os: getOS())) :
                                 SizedBox(
                                     width: double.infinity,
                                     child: ElevatedButton.icon(
@@ -309,8 +311,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         HomeCubit.get(context).isArabic
                                             ? "انشاء حساب"
                                             : "Sign Up",
-                                        style: const TextStyle(
-                                            fontSize: 20,
+                                        style:  TextStyle(
+                                            fontSize: 20.sp,
                                             color: Colors.white
                                         ),
                                       ),

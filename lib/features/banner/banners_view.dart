@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_quakka/core/helpers/adaptive_indecator.dart';
 import 'package:new_quakka/features/banner/update_banner.dart';
+import 'package:new_quakka/utill/constant.dart';
 
 import '../../basic_constants.dart';
 import '../../core/network/api_constants.dart';
@@ -23,7 +25,7 @@ class BannerView extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is BannerLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return AdaptiveIndicator(os: getOS());
             } else if (state is BannerLoaded) {
               return CarouselSlider(
                 items: state.banners.map((banner) {

@@ -16,6 +16,8 @@ import 'model_add_category.dart';
 
 
 class AddCategoryScreen extends StatefulWidget {
+  const AddCategoryScreen({super.key});
+
   @override
   _AddCategoryScreenState createState() => _AddCategoryScreenState();
 }
@@ -39,8 +41,8 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Shimmer.fromColors(
-            baseColor: ColorResources.apphighlightColor,
-            highlightColor: ColorResources.apphighlightColor,
+            baseColor: Colors.white,
+            highlightColor: Colors.white,
             child: Text(
               HomeCubit.get(context).isArabic
                   ? "اضافة قسم"
@@ -107,7 +109,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                       //   controller: titleController,
                       //   decoration: InputDecoration(labelText: 'Title'),
                       // ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: pickImage,
                         style: ElevatedButton.styleFrom(
@@ -123,7 +125,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                           HomeCubit.get(context).isArabic
                               ? "التقط صورة"
                               : 'Pick Image',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 20,
                               color: Colors.white
                           ),
@@ -134,7 +136,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                           padding: const EdgeInsets.symmetric(vertical: 10.0),
                           child: Image.file(File(image!.path)),
                         ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.all(12),
@@ -149,7 +151,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                           HomeCubit.get(context).isArabic
                               ? "اضافة قسم"
                               : 'Add Category',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 20,
                               color: Colors.white
                           ),
@@ -163,7 +165,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                             context.read<AddCategoryCubit>().addCategory(request);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Please select an image and enter title')),
+                              const SnackBar(content: Text('Please select an image and enter title')),
                             );
                           }
                         },
@@ -185,10 +187,10 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                       //   child: Text('Add Category'),
                       // ),
                       if (state is AddCategoryFailure) ...[
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text(
                           state.error,
-                          style: TextStyle(color: Colors.red),
+                          style: const TextStyle(color: Colors.red),
                         ),
                       ]
                     ],
