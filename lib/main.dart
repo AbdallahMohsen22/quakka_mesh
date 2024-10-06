@@ -24,8 +24,8 @@ Future<void> _firebaseMessagingBackgroundMessage (RemoteMessage message) async{
   if(message.notification != null){
     print("Some notification received onBackground success");
   }
-  print("onBackground message success");
-  print(message.data.toString());
+  // print("onBackground message success");
+  // print(message.data.toString());
   Constants.showToast(msg: "onBackground message success",
       gravity: ToastGravity.BOTTOM,
       color: Colors.green);
@@ -34,19 +34,17 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await Firebase.initializeApp(
-      options: const FirebaseOptions(
-        apiKey: 'AIzaSyA6ruJRfrXdAjToK5yxL8b_dAZMmN9dffE',
-        appId: '1:1057163177680:android:820c841d09ed86dd3d38d5',
-        messagingSenderId: '1057163177680',
-        projectId: 'quakkomesh',
-        storageBucket: 'quakkomesh.appspot.com',
-      )
+      // options:  FirebaseOptions(
+      //   apiKey: 'AIzaSyA6ruJRfrXdAjToK5yxL8b_dAZMmN9dffE',
+      //   appId: '1:1057163177680:android:820c841d09ed86dd3d38d5',
+      //   messagingSenderId: '1057163177680',
+      //   projectId: 'quakkomesh',
+      //   storageBucket: 'quakkomesh.appspot.com',
+      // )
   );
-  // var token = await FirebaseMessaging.instance.getToken();
-  // print("Token====>>> ${token}");
 
   await PushNotifications.init();  //initialize firebase messaging
-  await PushNotifications.localNotiInit(); //initialize local notifications
+ // await PushNotifications.localNotiInit(); //initialize local notifications
 
 
   // background fcm
@@ -55,7 +53,7 @@ void main() async{
   //on background notification tapped
   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
     if(message.notification != null){
-      print("onMessageOpenedApp success");
+      // print("onMessageOpenedApp success");
       navigatorKey.currentState!.pushNamed("/message",arguments: message);
     }
   });

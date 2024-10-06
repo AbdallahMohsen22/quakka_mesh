@@ -11,37 +11,37 @@ ThemeData appTheme() {
     brightness: Brightness.light,
     scaffoldBackgroundColor: Colors.white,
     primaryTextTheme: const TextTheme(
-      headline1: TextStyle(
+      displayLarge: TextStyle(
           fontSize: 28, color: Colors.black, fontWeight: FontWeight.w900),
-      headline2: TextStyle(
+      displayMedium: TextStyle(
           fontSize: 24, color: Colors.black, fontWeight: FontWeight.w900),
-      headline3: TextStyle(
+      displaySmall: TextStyle(
           fontSize: 20, color: Colors.black, fontWeight: FontWeight.w700),
-      headline4: TextStyle(
+      headlineMedium: TextStyle(
           fontSize: 18, color: Colors.black, fontWeight: FontWeight.w700),
-      headline5: TextStyle(
+      headlineSmall: TextStyle(
           fontSize: 16, color: Colors.black, fontWeight: FontWeight.w700),
-      headline6: TextStyle(
+      titleLarge: TextStyle(
         fontSize: 14,
         color: Colors.black,
       ),
-      subtitle1: TextStyle(
+      titleMedium: TextStyle(
         fontSize: 16,
         color: Colors.black,
       ),
-      subtitle2: TextStyle(
+      titleSmall: TextStyle(
         fontSize: 16,
         color: Colors.black,
       ),
-      bodyText1: TextStyle(
+      bodyLarge: TextStyle(
         fontSize: 16,
         color: Colors.black,
       ),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
         fontSize: 14,
         color: Colors.black,
       ),
-      button: TextStyle(
+      labelLarge: TextStyle(
           fontSize: 20, color: Colors.black, fontWeight: FontWeight.w700),
     ),
 

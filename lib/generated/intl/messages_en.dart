@@ -21,41 +21,5 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "chooseYourCard":
-            MessageLookupByLibrary.simpleMessage("choose Your Card"),
-        "code": MessageLookupByLibrary.simpleMessage("Code "),
-        "confirm": MessageLookupByLibrary.simpleMessage("confirm"),
-        "dateOfMeet": MessageLookupByLibrary.simpleMessage("date of meet"),
-        "dateOfReservation":
-            MessageLookupByLibrary.simpleMessage("date of reservation"),
-        "description": MessageLookupByLibrary.simpleMessage("description"),
-        "dontHaveAccount":
-            MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
-        "dontReciveAnyCode":
-            MessageLookupByLibrary.simpleMessage("Don\'t Receive Any Code?"),
-        "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
-        "forgotPassword":
-            MessageLookupByLibrary.simpleMessage("Forgot Password"),
-        "fullName": MessageLookupByLibrary.simpleMessage("Full name"),
-        "letsGetYourLoggedIn": MessageLookupByLibrary.simpleMessage(
-            "Let\'s get your logged in so you can start explore"),
-        "login": MessageLookupByLibrary.simpleMessage("Login"),
-        "notes": MessageLookupByLibrary.simpleMessage("notes"),
-        "password": MessageLookupByLibrary.simpleMessage("password"),
-        "petType": MessageLookupByLibrary.simpleMessage("pet type"),
-        "phone": MessageLookupByLibrary.simpleMessage("phone"),
-        "requestLink": MessageLookupByLibrary.simpleMessage("Request link"),
-        "sentToTheEmail":
-            MessageLookupByLibrary.simpleMessage("sent To The Email"),
-        "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
-        "signUpNowToReceive": MessageLookupByLibrary.simpleMessage(
-            "Sign up now to receive special offers and updates from our app "),
-        "textOfForgetPassword": MessageLookupByLibrary.simpleMessage(
-            "Please enter the email address you\'d like your password reset information sent to"),
-        "timeOfMeet": MessageLookupByLibrary.simpleMessage("time of meet"),
-        "username": MessageLookupByLibrary.simpleMessage("user name"),
-        "welcome": MessageLookupByLibrary.simpleMessage("Welcome"),
-        "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back")
-      };
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
 }
