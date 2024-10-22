@@ -320,11 +320,11 @@ class _ScreenShotScreenState extends State<ScreenShotScreen> {
             fit: BoxFit.cover,
 
           ),
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: const Color(0xFFFFFEBB4).withOpacity(0.8),
-          ),
+          // Container(
+          //   width: double.infinity,
+          //   height: double.infinity,
+          //   color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+          // ),
           Center(
           child: Screenshot(
             controller: screenshotController,

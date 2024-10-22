@@ -5,6 +5,8 @@ class MessageModel {
   String? text;
   String? imageUrl;
   String? stickerUrl;
+  String? filePath;
+  //String? fileName; // New field to store file name
 
   MessageModel({
     this.senderId,
@@ -13,6 +15,8 @@ class MessageModel {
     this.text,
     this.imageUrl,
     this.stickerUrl,
+    this.filePath,
+    //this.fileName
   });
 
   Map<String, dynamic> toMap() {
@@ -23,6 +27,8 @@ class MessageModel {
       'text': text,
       'imageUrl': imageUrl,
       'stickerUrl': stickerUrl,
+      'filePath': filePath,   // Add file URL to the map
+      //'fileName': fileName, // Add file name to the map
     };
   }
 
@@ -34,6 +40,8 @@ class MessageModel {
       text: json['text'],
       imageUrl: json['imageUrl'],
       stickerUrl: json['stickerUrl'],
+      filePath: json['filePath'],   // Parse file URL
+      //fileName: json['fileName'], // Parse file name
     );
   }
 }

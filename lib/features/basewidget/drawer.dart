@@ -47,7 +47,7 @@ class _MainDrawerState extends State<MainDrawer> {
                   ),
                   child: Stack(children: [
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Image.asset(AppAssets.splashLogo, width: 300, height: 400,fit: BoxFit.cover,),
+                      Image.asset(AppAssets.splashLogo,),
 
                     ]),
 

@@ -30,7 +30,7 @@ class AppTextStyles {
   static const TextStyle cartTextStyle = TextStyle(
       fontFamily: englishFontFamily,
       fontWeight: FontWeight.w600,
-      fontSize: 18,
+      fontSize: 15,
       //color: ColorResources.apphighlightColor
   );
 }

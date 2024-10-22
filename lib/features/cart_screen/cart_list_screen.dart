@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_quakka/features/category/update_category/update_category_screen.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -91,11 +92,11 @@ class CartListScreen extends StatelessWidget {
               fit: BoxFit.cover,
 
             ),
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              color: const Color(0xFFFFFEBB4).withOpacity(0.8),
-            ),
+            // Container(
+            //   width: double.infinity,
+            //   height: double.infinity,
+            //   color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+            // ),
             BlocBuilder<CartCubit, CartState>(
             builder: (context, state) {
               print(" isSignIn >> $isSignIn");
@@ -113,11 +114,12 @@ class CartListScreen extends StatelessWidget {
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     physics: const BouncingScrollPhysics(),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3, // Number of columns in the grid
-                      crossAxisSpacing: 2.0,
+                    gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, // Number of columns in the grid
+                      crossAxisSpacing: 3,
                       mainAxisSpacing: 10.0,
                       childAspectRatio: 0.60, // Aspect ratio of the grid items
+                      mainAxisExtent: 200.h
                     ),
                     itemCount: state.carts.length,
                     itemBuilder: (context, index) {
@@ -125,7 +127,7 @@ class CartListScreen extends StatelessWidget {
                       return InkWell(
                         onTap: (){
                           Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => userId != null ?
-                          SendCartScreen(userId: userId!, cartId: cart.id,categoryId: categoryId):
+                          SendCartScreen(userId: userId!, cartId: cart.id,categoryId: categoryId,image:cart.imageDesign):
                            Scaffold(
                             appBar: AppBar(
 
@@ -185,13 +187,13 @@ class CartListScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               Expanded(
-                                flex: 3,
+                                flex: 2,
                                 child: Stack(
                                   children: [
                                     CachedNetworkImage(
-                                      height: 400,
-                                      width: 400,
-                                      fit: BoxFit.cover,
+                                      height: 400.h,
+                                      width: 400.w,
+                                       fit: BoxFit.contain,
                                       imageUrl: 'http://backend.quokka-mesh.com/${cart.imageDesign}',
                                       httpHeaders: const {
                                         ApiConstants.tokenTitle:

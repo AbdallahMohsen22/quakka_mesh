@@ -71,11 +71,11 @@ class _UpdateCategoryScreenState extends State<UpdateCategoryScreen> {
               fit: BoxFit.cover,
 
             ),
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              color: const Color(0xFFFFFEBB4).withOpacity(0.8),
-            ),
+            // Container(
+            //   width: double.infinity,
+            //   height: double.infinity,
+            //   color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+            // ),
             BlocConsumer<UpdateCategoryCubit, CategoryState>(
             listener: (context, state) {
               if (state is CategoryUpdated) {

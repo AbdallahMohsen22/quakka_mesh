@@ -118,6 +118,25 @@ class SendMessageCubit extends Cubit<SendMessageState> {
     _sendMessage(model, receiverId);
   }
 
+  void sendFile({
+    String? receiverId,
+    String? dateTime,
+    String? filePath,  // File URL to be sent
+    //String? fileName, // File name to be sent
+  }) {
+    MessageModel model = MessageModel(
+      senderId: userId,
+      receiverId: receiverId,
+      dateTime: dateTime,
+      filePath: filePath,
+      //fileName: fileName,
+    );
+
+    _sendMessage(model, receiverId);
+  }
+
+
+
   void _sendMessage(MessageModel model, String? receiverId) {
     FirebaseFirestore.instance
         .collection('users')

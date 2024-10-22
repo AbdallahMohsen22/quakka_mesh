@@ -67,11 +67,11 @@ class LoginScreen extends StatelessWidget {
                   fit: BoxFit.cover,
 
                 ),
-                Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  color: const Color(0xFFFFFEBB4).withOpacity(0.8),
-                ),
+                // Container(
+                //   width: double.infinity,
+                //   height: double.infinity,
+                //   color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+                // ),
                 LoadingManager(
                 isLoading: isLoading,
                 child: SingleChildScrollView(

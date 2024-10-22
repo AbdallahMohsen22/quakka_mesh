@@ -69,9 +69,11 @@ dependencies:
   device_preview: ^1.1.0
   googleapis_auth: ^1.6.0
   flutter_paypal_payment: ^1.0.6
-#  flutter_stripe: ^11.0.0
+  #  flutter_stripe: ^11.0.0
   smooth_page_indicator: ^1.2.0+3
   fluttertoast: ^8.2.8
+  file_picker: ^8.0.5
+  line_awesome_flutter: ^3.0.1
 
 cupertino_icons:
 shimmer:

@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_quakka/utill/color_resources.dart';
 
 import '../../core/helpers/adaptive_indecator.dart';
 import '../../core/network/api_constants.dart';
-import '../../core/theming/text_styles.dart';
 import '../../utill/constant.dart';
 import '../cart_screen/cart_list_screen.dart';
 import '../category/category_model.dart';
@@ -59,37 +59,59 @@ class CategoryCard extends StatelessWidget {
 
     return InkWell(
       child: Card(
-
-        elevation: 20,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20), // Rounded corners for the card
+        ),
+        elevation: 8,
+        shadowColor: Colors.grey.withOpacity(0.3),
         color: ColorResources.apphighlightColor,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Stack(
+
           children: [
-            Expanded(
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20), // Same borderRadius as card
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
                 imageUrl: 'http://backend.quokka-mesh.com/${category.image}',
                 httpHeaders: const {
-                  ApiConstants.tokenTitle:
-                  ApiConstants.tokenBody
+                  ApiConstants.tokenTitle: ApiConstants.tokenBody,
                 },
+                placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+                 width: 500.w,
+                height: 500.h,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    category.titel,
-                    style: AppTextStyles.categoryTextStyle,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20), // Rounded corners for overlay
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.grey.withOpacity(0.1), // Light fade at the top
+                    Colors.black.withOpacity(0.1), // Darker fade at the bottom
+                  ],
+                ),
+              ),
+            ),
 
-                ],
-              ),
-            ),
+            // Category title text
+            // Positioned(
+            //   bottom: 10,
+            //   left: 10,
+            //   right: 10,
+            //   child: Text(
+            //     category.titel,
+            //     style: AppTextStyles.categoryTextStyle.copyWith(
+            //       color: Colors.white,
+            //       fontWeight: FontWeight.bold,
+            //       fontSize: 18,
+            //     ),
+            //     overflow: TextOverflow.ellipsis,
+            //     maxLines: 2,
+            //   ),
+            // ),
           ],
         ),
 
