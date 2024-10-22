@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:new_quakka/features/home/widgets/home_page_widget.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../utill/color_resources.dart';
@@ -44,18 +44,18 @@ class _HomeScreenState extends State<HomeScreen>{
 
         // selectedFontSize:0,
         // unselectedFontSize: 20,
-        // iconSize: 30,
+        // iconSize: 20,
         // showSelectedLabels: true,
         // showUnselectedLabels: true,
         // unselectedItemColor: ColorResources.apphighlightColor,
-        // backgroundColor: Colors.white.withOpacity(.5),
+        // backgroundColor: Colors.white.withOpacity(.1),
         items:  <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Shimmer.fromColors(
                 period: const Duration(seconds: 5),
                 baseColor: ColorResources.appColor,
                 highlightColor:ColorResources.apphighlightColor,
-                child: const Icon(Icons.home,)),
+                child: const FaIcon(FontAwesomeIcons.house,)),
             label: '',
           ),
           BottomNavigationBarItem(
@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen>{
                 period: const Duration(seconds: 500),
                 baseColor: ColorResources.appColor,
                 highlightColor:ColorResources.apphighlightColor,
-                child: const Icon(IconlyBold.chat,)),
+                child: const FaIcon(FontAwesomeIcons.commentDots)),
             label: '',
           ),
 

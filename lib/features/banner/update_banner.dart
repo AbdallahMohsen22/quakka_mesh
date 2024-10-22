@@ -84,11 +84,11 @@ class _UpdateBannerFormState extends State<UpdateBannerForm> {
               fit: BoxFit.cover,
 
             ),
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              color: const Color(0xFFFFFEBB4).withOpacity(0.8),
-            ),
+            // Container(
+            //   width: double.infinity,
+            //   height: double.infinity,
+            //   color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+            // ),
             BlocConsumer<BannerCubit, BannerState>(
             listener: (context, state) {
               if (state is BannerError) {

@@ -109,11 +109,11 @@ class _MyCartScreenState extends State<MyCartScreen> with SingleTickerProviderSt
             fit: BoxFit.cover,
 
           ),
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: const Color(0xFFFFFEBB4).withOpacity(0.8),
-          ),
+          // Container(
+          //   width: double.infinity,
+          //   height: double.infinity,
+          //   color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+          // ),
           MultiBlocProvider(
           providers: [
             BlocProvider<CartCubit>.value(value: _sentCartCubit),

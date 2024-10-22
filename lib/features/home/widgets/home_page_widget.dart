@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:new_quakka/basic_constants.dart';
 import 'package:new_quakka/core/network/message.dart';
 import 'package:new_quakka/core/theming/text_styles.dart';
@@ -26,8 +27,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
 
     return Scaffold(
+      extendBody: true,
       resizeToAvoidBottomInset: false,
       body:  SafeArea(
+        top: false,
+
         child: Stack(
           children: [
             Image.asset(
@@ -37,18 +41,18 @@ class _HomePageScreenState extends State<HomePageScreen> {
               fit: BoxFit.cover,
 
             ),
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              color: const Color(0xFFFFFEBB4).withOpacity(0.8),
-            ),
+            // Container(
+            //   width: double.infinity,
+            //   height: double.infinity,
+            //   color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+            // ),
 
 
 
             CustomScrollView(
             slivers: <Widget>[
               SliverAppBar(
-                // expandedHeight: 200.0,
+                expandedHeight: 60.0,
                 floating: false,
                 pinned: true,
                 elevation: 0,
@@ -57,7 +61,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 backgroundColor: ColorResources.apphighlightColor,
                 title: Image.asset('assets/images/logo_with_name.png', height: 50), actions:  [
                   InkWell(
-                    child: const Icon(Icons.notifications,color: Colors.white,size: 25,),
+                    child: const Icon(FontAwesomeIcons.bell,color: Colors.white,size: 25,),
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context) => const Message() ));  //Notification Screen from Firebase
                       // context.pushNamed(Routes.notificationScreen);
@@ -67,7 +71,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 const SizedBox(width:15,),
                 userId != null ?
                 InkWell(
-                  child: const Icon(Icons.settings,color: Colors.white,size: 25,),
+                  child: const Icon(FontAwesomeIcons.cog,color: Colors.white,size: 25,),
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (c)=>MainDrawer()));
                   },

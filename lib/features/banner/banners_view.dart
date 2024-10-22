@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_quakka/core/helpers/adaptive_indecator.dart';
 import 'package:new_quakka/features/banner/update_banner.dart';
 import 'package:new_quakka/utill/constant.dart';
-
 import '../../basic_constants.dart';
 import '../../core/network/api_constants.dart';
 import 'banner_cuibt.dart';
@@ -20,7 +20,7 @@ class BannerView extends StatelessWidget {
       child: BlocConsumer<BannerCubit, BannerState>(
           listener: (context, state) {
             if (state is BannerError) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Try Connect with internet")));
             }
           },
           builder: (context, state) {
@@ -60,7 +60,7 @@ class BannerView extends StatelessWidget {
                   aspectRatio: 4 / 1,
                   viewportFraction: 0.9,
                   enlargeFactor: 0.1,
-                  height: 220,
+                  height: 220.h,
                   initialPage: 0,
                   enableInfiniteScroll: true,
                   reverse: false,
@@ -72,7 +72,7 @@ class BannerView extends StatelessWidget {
                 ),
               );
             } else {
-              return const Center(child: Text('No Banners'));
+              return const Center(child: Text('Try Connect with internet'));
             }
           },
         ),

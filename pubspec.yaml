@@ -48,9 +48,7 @@ dependencies:
   device_preview: ^1.1.0
   googleapis_auth: ^1.6.0
   flutter_paypal_payment: ^1.0.6
-  smooth_page_indicator: ^1.2.0+3
-  fluttertoast: ^8.2.8
-  carousel_slider_plus: ^7.0.1
+
 
 cupertino_icons:
 shimmer:

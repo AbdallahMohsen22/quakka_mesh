@@ -1,9 +1,12 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../basic_constants.dart';
+import '../../core/network/api_constants.dart';
 import '../../utill/color_resources.dart';
 import '../../utill/my_validators.dart';
 import '../basewidget/custom_textfield.dart';
@@ -21,8 +24,9 @@ class SendCartScreen extends StatefulWidget {
   final String userId;
   final int cartId;
   final int categoryId;
+  final String image;
 
-  SendCartScreen({required this.userId, required this.cartId, required this.categoryId});
+  SendCartScreen({required this.userId, required this.cartId, required this.categoryId, required this.image});
 
   @override
   _SendCartScreenState createState() => _SendCartScreenState();
@@ -121,17 +125,36 @@ class _SendCartScreenState extends State<SendCartScreen> {
             fit: BoxFit.cover,
 
           ),
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: const Color(0xFFFFFEBB4).withOpacity(0.8),
-          ),
+          // Container(
+          //   width: double.infinity,
+          //   height: double.infinity,
+          //   color: const Color(0xFFFFFEBB4).withOpacity(0.8),
+          // ),
           Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30,horizontal: 16),
+          padding:  EdgeInsets.symmetric(vertical: 30,horizontal: 10.h),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 10,),
+                // const SizedBox(height: 10,),
+
+                Stack(
+                    children: [
+                      CachedNetworkImage(
+                        height: 500.h,
+                        width: double.infinity,
+                        // fit: BoxFit.cover,
+                        imageUrl: 'http://backend.quokka-mesh.com/${widget.image}',
+                        httpHeaders: const {
+                          ApiConstants.tokenTitle:
+                          ApiConstants.tokenBody
+                        },
+                      ),
+
+                    ]
+                ),
+
+                // SizedBox(height: 10.h,),
+
                 CustomTextField(
                   borderRadius: 20,
                   borderColor: ColorResources.apphighlightColor,
@@ -151,7 +174,7 @@ class _SendCartScreenState extends State<SendCartScreen> {
 
                 ),
 
-                const SizedBox(height: 10,),
+                 SizedBox(height: 10.h,),
                 CustomTextField(
                   borderRadius: 20,
                   borderColor: ColorResources.apphighlightColor,

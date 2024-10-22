@@ -9,6 +9,7 @@ import 'package:new_quakka/features/chat/send_massege_cuibt.dart';
 import '../../basic_constants.dart';
 import '../../utill/color_resources.dart';
 import 'model/chat_model.dart';
+import 'package:file_picker/file_picker.dart';
 
 
 class ChatDetailsScreen extends StatefulWidget {
@@ -153,6 +154,20 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
                             );
                           },
                         ),
+                        IconButton(
+                          icon: const Icon(Icons.attach_file),
+                          onPressed: () async {
+                            FilePickerResult? result = await FilePicker.platform.pickFiles();
+                            if (result != null && result.files.single.path != null) {
+                              String filePath = result.files.single.path!;
+                              context.read<SendMessageCubit>().sendFile(
+                                receiverId: widget.id,
+                                dateTime: DateTime.now().toString(),
+                                filePath: filePath, // Pass the file path to the cubit
+                              );
+                            }
+                          },
+                        ),
                         Expanded(
                           child: TextFormField(
                             controller: messageController,
@@ -234,6 +249,20 @@ class _ChatDetailsScreenState extends State<ChatDetailsScreen> {
                                         );
                                       },
                                     );
+                                  },
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.attach_file),
+                                  onPressed: () async {
+                                    FilePickerResult? result = await FilePicker.platform.pickFiles();
+                                    if (result != null && result.files.single.path != null) {
+                                      String filePath = result.files.single.path!;
+                                      context.read<SendMessageCubit>().sendFile(
+                                        receiverId: widget.id,
+                                        dateTime: DateTime.now().toString(),
+                                        filePath: filePath, // Pass the file path to the cubit
+                                      );
+                                    }
                                   },
                                 ),
                                 Expanded(
