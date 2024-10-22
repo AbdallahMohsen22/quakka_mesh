@@ -1,36 +1,15 @@
 name: new_quakka
 description: "A new Flutter project."
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# In Android, build-name is used as versionName while build-number used as versionCode.
-# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
-# Read more about iOS versioning at
-# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-# In Windows, build-name is used as the major, minor, and patch parts
-# of the product and file versions while build-number is used as the build suffix.
 version: 1.0.6+7
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
 
-# Dependencies specify other packages that your package needs in order to work.
-# To automatically upgrade your package dependencies to the latest versions
-# consider running `flutter pub upgrade --major-versions`. Alternatively,
-# dependencies can be manually updated by changing the version numbers below to
-# the latest version available on pub.dev. To see which dependencies have newer
-# versions available, run `flutter pub outdated`.
 dependencies:
   audioplayers: ^6.1.0
   cached_network_image: ^3.3.1
-  carousel_slider: ^4.2.1
+#  carousel_slider: ^4.2.1
   cloud_firestore: ^5.2.0
   conditional_builder_null_safety: ^0.0.6
   dartz: ^0.10.1
@@ -51,15 +30,15 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   freezed: ^2.5.2
   freezed_annotation: ^2.4.4
-  get_it: ^7.7.0
+  get_it: ^8.0.0
   http: ^1.2.2
   image_gallery_saver: ^2.0.3
   image_picker: ^1.1.2
-  intl: ^0.18.1
+  intl:
   pinput: ^5.0.0
   pretty_dio_logger: ^1.4.0
   provider: ^6.1.2
-  screenshot: ^2.5.0
+  screenshot: ^3.0.0
   share_plus: ^10.0.0
   shared_preferences: ^2.2.3
   shimmer: ^3.0.0
@@ -69,11 +48,7 @@ dependencies:
   device_preview: ^1.1.0
   googleapis_auth: ^1.6.0
   flutter_paypal_payment: ^1.0.6
-  #  flutter_stripe: ^11.0.0
-  smooth_page_indicator: ^1.2.0+3
-  fluttertoast: ^8.2.8
-  file_picker: ^8.0.5
-  line_awesome_flutter: ^3.0.1
+
 
 cupertino_icons:
 shimmer:
@@ -83,7 +58,6 @@ fancy_shimmer_image:
   flutter_localizations:
     sdk: flutter
   intl:
-  carousel_slider:
   cached_network_image:
   font_awesome_flutter:
   flutter_screenutil:
@@ -129,7 +103,7 @@ fancy_shimmer_image:
 
 
 dev_dependencies:
-  retrofit_generator: ^8.1.0
+  retrofit_generator: ^9.1.2
   build_runner: ^2.3.3
   flutter_test:
     sdk: flutter
@@ -138,7 +112,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

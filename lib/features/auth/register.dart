@@ -237,8 +237,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
 
                                   CustomTextField(
-                                    hintText: S.of(context).emailAddress,
-                                    labelText: S.of(context).emailAddress,
+                                    hintText:HomeCubit.get(context).isArabic
+                                        ? "البريد الالكتروني"
+                                        : "emailAddress",
+                                    labelText: HomeCubit.get(context).isArabic
+                                        ? "البريد الالكتروني"
+                                        : "emailAddress",
                                     controller: emailController,
                                     focusNode: _emailFocusNode,
                                     nextFocus: _phoneFocusNode,

@@ -103,7 +103,12 @@ class LoginScreen extends StatelessWidget {
                             // Image.asset(AppAssets.imagesLogo,width: 250,height: 250,),
                             Align(
                               alignment: checkArabic()?Alignment.centerRight:Alignment.centerLeft,
-                              child: TitlesTextWidget(label: S.of(context).welcomeBack,fontSize: 20.sp,),
+                              child: TitlesTextWidget(
+                                label: HomeCubit.get(context).isArabic
+                                    ? "اهلا بعودتك"
+                                    : "Welcome backً",
+                                fontSize: 20.sp,
+                              ),
                             ),
                             const SizedBox(
                               height: 1.0,
@@ -128,8 +133,12 @@ class LoginScreen extends StatelessWidget {
                                 children: [
                                   /// email field
                                   CustomTextField(
-                                    hintText: S.of(context).emailAddress,
-                                    labelText: S.of(context).emailAddress,
+                                    hintText: HomeCubit.get(context).isArabic
+                                        ? "البريد الالكتروني"
+                                        : "emailAddress",
+                                    labelText: HomeCubit.get(context).isArabic
+                                        ? "البريد الالكتروني"
+                                        : "emailAddress",
                                     controller: emailController,
                                     focusNode: _emailFocusNode,
                                     nextFocus: _passwordFocusNode,
